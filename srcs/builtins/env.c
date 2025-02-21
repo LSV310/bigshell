@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/19 15:23:28 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/21 14:56:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include "builtins.h"
-# include <stdio.h>
-# include <unistd.h>
+int	env(void)
+{
+	int	i;
 
-#endif
+	i = 0;
+	if (!__environ)
+		return (1);
+	while (__environ[i])
+		ft_printf("%s\n", __environ[i++]);
+	return (0);
+}

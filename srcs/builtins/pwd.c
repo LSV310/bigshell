@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/19 15:23:28 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/19 14:36:40 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/19 15:21:14 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include "builtins.h"
-# include <stdio.h>
-# include <unistd.h>
+int	pwd(void)
+{
+	char	*cwd;
 
-#endif
+	cwd = getcwd(NULL, 0);
+	ft_printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}

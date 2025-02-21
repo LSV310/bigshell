@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/19 15:23:28 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/19 15:25:51 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/19 15:49:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include "builtins.h"
-# include <stdio.h>
-# include <unistd.h>
+int	echo(char **args, int param)
+{
+	int	i;
 
-#endif
+	i = 1;
+	if (!args)
+		return (0);
+	while (args[i] && args[i + 1])
+		ft_printf("%s ", args[i++]);
+	if (args[i])
+		ft_printf("%s", args[i]);
+	if (!param)
+		ft_printf("\n");
+	return (0);
+}
