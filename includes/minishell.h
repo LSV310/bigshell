@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/23 23:45:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:59:26 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include "lexer.h"
 # include "libft.h"
+# include "lexer.h"
+# include "pipex.h"
+# include "builtins.h"
+# include <unistd.h>
+# include <stdio.h>
 # include <stdbool.h>
 
 int	ft_isspace(char c);
