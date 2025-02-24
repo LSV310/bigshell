@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 14:08:39 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:24:29 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	special_token_cpy(t_lexer *lex, t_token *tok, t_token cpy)
 			tok->type = INVALID;
 			return ;
 		}
+		skip_spaces(lex);
 		fill_token(lex, tok, cpy.type);
 	}
 	else
@@ -50,7 +51,8 @@ void	special_token(t_lexer *lex, t_token *tok)
 	int				i;
 
 	i = 0;
-	while (i < 8)
+	printf("n special: %d\n", (int)(sizeof(specials) / sizeof(t_token)));
+	while (i < sizeof(specials) / sizeof(t_token))
 	{
 		if (ft_strncmp(lex->cur, specials[i].p, ft_strlen(specials[i].p)) == 0)
 			return (special_token_cpy(lex, tok, specials[i]));
