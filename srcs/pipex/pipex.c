@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/24 15:58:54 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:03:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	pipex(char **cmds, int infile, int outfile)
 	i = 0;
 	while (cmds[i])
 	{
-		// open REDIN / REDOUT of the current function
+		// open REDIN / REDOUT of the current command
 		dup2(pipefd[0], STDIN_FILENO); //conditional: either pipefd[0] or redin or nothing (if first)
 		(close(pipefd[0]), close(pipefd[1])); // only if i > 0
 		pipe(pipefd);
