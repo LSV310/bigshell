@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 14:47:40 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 18:57:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,19 @@ t_dlltok	*context_free_tokens(t_lexer *lex)
 	print_tokens(tks);
 	return (tks);
 }
+
 int	main(int ac, char *av[])
 {
+	t_dlltok	*tks;
+
 	if (ac == 2)
 	{
 		t_lexer	lex;
 
 		lex = init_lexer(av[1]);
-		context_free_tokens(&lex);
+		tks = context_free_tokens(&lex);
+		if (!valid_par(tks))
+			printf("bad parenthesis\n");
+
 	}
 }

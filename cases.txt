@@ -1,0 +1,10 @@
+echo hello >out.txt | cat
+-> the output go to out.txt and pipe EOF
+
+<a >c cat <b >d
+-> the last redin and redout is used
+
+echo '"$ARG"'"$ARG" #ARG="hello" 
+res>"$ARG"hello
+-> quotes are removed unless quoted, multiple successive quotes are possible
+-> when quotes: interpret char as literal unless $ARG
