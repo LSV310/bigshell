@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:28:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/23 18:44:36 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:49:34 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	char_in_set(char c, const char *set)
 }
 int	is_special(char c)
 {
-	return(char_in_set(c, "|<>&"));
+	return(char_in_set(c, "|<>&()"));
 }

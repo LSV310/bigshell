@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 14:24:29 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:47:40 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	special_token(t_lexer *lex, t_token *tok)
 	int				i;
 
 	i = 0;
-	printf("n special: %d\n", (int)(sizeof(specials) / sizeof(t_token)));
 	while (i < sizeof(specials) / sizeof(t_token))
 	{
 		if (ft_strncmp(lex->cur, specials[i].p, ft_strlen(specials[i].p)) == 0)
@@ -90,7 +89,7 @@ t_dlltok	*context_free_tokens(t_lexer *lex)
 		dll_addback(&tks, tmp);
 		if (!tks || !tmp)
 			return (NULL);
-		if (tmp->type == ENDT)
+		if (tmp->type == ENDT || tmp->type == INVALID)
 			break ;
 	}
 	print_tokens(tks);
