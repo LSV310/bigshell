@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/23 23:59:08 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/24 12:56:01 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum type_token
 	APPEN,
 	LPAR,
 	RPAR,
+	HEREDOC,
 	ENDT
 } token_type;
 
@@ -55,5 +56,10 @@ void	dll_addback(t_dlltok **head, t_token *new);
 int		is_special(char c);
 void	print_token(t_token tok);
 void	print_tokens(t_dlltok *tks);
+t_lexer	init_lexer(char *rdl);
+void	skip_spaces(t_lexer *lex);
+void	fill_token(t_lexer *lex, t_token *tok, token_type type);
+void	make_end_token(t_lexer *lex, t_token *tok);
+void	bad_token(t_lexer *lex, t_token *tok);
 
 #endif
