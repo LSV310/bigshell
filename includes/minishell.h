@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 12:48:36 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:57:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include "libft.h"
 # include "lexer.h"
 # include "pipex.h"
-# include <unistd.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_kv
 {
@@ -26,18 +28,20 @@ typedef struct s_kv
 	char	*value;
 }	t_kv;
 
-typedef struct	s_mini
+typedef struct s_mini
 {
 	t_list	*env;
 }	t_mini;
 
 // tristan
-int			ft_isspace(char c);
-int			char_in_set(char c, const char *set);
-const char	*get_env_variable(char *key, void *env);
+int		ft_isspace(char c);
+int		char_in_set(char c, const char *set);
+
+// readline
+void	start_reading(t_mini *minishell);
 
 // signals
-void	create_signals(t_mini *minishell);
+void	create_signals(void);
 
 // builtins
 int		echo(char **args, int param);

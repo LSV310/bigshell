@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_cmd.c                                           :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 16:03:42 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:50 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/25 16:03:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-int	valid_par(t_dlltok *tks)
+void	start_reading(t_mini *minishell)
 {
-	int	open_par;
+	char	*input;
 
-	open_par = 0;
-	while (tks && tks->token->type != ENDT)
+	(void)minishell;
+	while (1)
 	{
-		if (tks->token->type == LPAR)
-			open_par++;
-		else if (tks->token->type == RPAR)
-			open_par--;
-		if (open_par < 0)
-			return (false);
-		tks = tks->next;
+		input = readline("> ");
+		if (input == NULL)
+			break ;
+		if (*input)
+			add_history(input);
+		init_lexer(input);
+		free(input);
 	}
-	if (open_par == 0)
-		return (true);
-	return (false);
 }

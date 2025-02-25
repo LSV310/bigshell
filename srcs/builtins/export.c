@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 11:50:26 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:58:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	export(t_mini *minishell, char *var)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = ft_lstnew(var);
 	if (!new)

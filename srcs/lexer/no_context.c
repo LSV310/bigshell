@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_context.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 18:57:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:03:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_dlltok	*context_free_tokens(t_lexer *lex)
 	return (tks);
 }
 
-int	main(int ac, char *av[])
+/* int	main(int ac, char *av[])
 {
 	t_dlltok	*tks;
 
@@ -110,4 +110,4 @@ int	main(int ac, char *av[])
 			printf("bad parenthesis\n");
 
 	}
-}
+} */

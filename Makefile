@@ -1,5 +1,5 @@
 CC			= cc
-CFLAGS		= -g3 -Wall -Werror -Wextra
+CFLAGS		= -g3 #-Wall -Werror -Wextra
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -9,9 +9,11 @@ SRC_DIR		= srcs/
 OBJ_DIR		= objs/
 
 CFLAGS		+= -I$(INCLUDES)
+LIBS		= -lreadline
 
 SRC			= builtins/pwd.c builtins/echo.c builtins/exit.c builtins/env.c builtins/export.c builtins/unset.c \
-				signals/signals.c utils/env_utils.c main.c
+				signals/signals.c utils/env_utils.c readline/readline.c main.c \
+				lexer/dll.c lexer/dummy.c lexer/is_utils.c lexer/no_context.c lexer/no_context2.c lexer/to_cmd.c lexer/token_trans.c lexer/token.c
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= minishell
@@ -19,7 +21,7 @@ NAME		= minishell
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -sC $(LIBFT_DIR)

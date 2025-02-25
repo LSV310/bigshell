@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 18:57:00 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:56:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 typedef enum type_token
 {
@@ -29,28 +29,28 @@ typedef enum type_token
 	RPAR,
 	HEREDOC,
 	ENDT
-} token_type;
+}	t_token_type;
 
 typedef struct s_lexer
 {
 	const char	*start;
 	const char	*cur;
 	size_t		len;
-} t_lexer;
+}	t_lexer;
 
 typedef struct s_token
 {
-	const char	*p;
-	size_t		len;
-	token_type	type;
-	char		*str;
+	const char		*p;
+	size_t			len;
+	t_token_type	type;
+	char			*str;
 }	t_token;
 
 typedef struct s_dlltok
 {
 	t_token			*token;
 	struct s_dlltok	*prev;
-	struct s_dlltok *next;
+	struct s_dlltok	*next;
 }	t_dlltok;
 
 typedef struct s_cmd

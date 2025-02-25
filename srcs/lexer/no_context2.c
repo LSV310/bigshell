@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   no_context2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 18:57:09 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:02:44 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_lexer	init_lexer(char *rdl)
 	lex.len = ft_strlen(rdl);
 	return (lex);
 }
+
 void	skip_spaces(t_lexer *lex)
 {
 	while (ft_isspace(*lex->cur))

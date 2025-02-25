@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 00:33:21 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 16:01:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_token(t_token tok)
 
 void	print_tokens(t_dlltok *tks)
 {
-	while(tks)
+	while (tks)
 	{
 		print_token(*tks->token);
 		tks = tks->next;

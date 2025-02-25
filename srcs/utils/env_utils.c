@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 12:34:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:03:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_env_var(t_mini *minishell, char *var)
 {
-	t_list *current;
+	t_list	*current;
 	char	*chr;
 
 	if (ft_strchr(var, '='))
@@ -24,7 +24,7 @@ char	*get_env_var(t_mini *minishell, char *var)
 	{
 		chr = ft_strchr((char *)current->content, '=');
 		if (!ft_strncmp((char *)current->content, var,
-			chr - (char *)current->content))
+				chr - (char *)current->content))
 			return (chr + 1);
 		current = current->next;
 	}
