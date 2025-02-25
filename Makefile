@@ -10,7 +10,8 @@ OBJ_DIR		= objs/
 
 CFLAGS		+= -I$(INCLUDES)
 
-SRC			= builtins/pwd.c builtins/echo.c builtins/exit.c builtins/env.c
+SRC			= builtins/pwd.c builtins/echo.c builtins/exit.c builtins/env.c builtins/export.c builtins/unset.c \
+				signals/signals.c utils/env_utils.c main.c
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= minishell

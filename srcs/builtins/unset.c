@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 12:32:04 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/25 11:31:31 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/25 12:23:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit2(t_mini *minishell, int exit_code)
+int	unset(t_mini *minishell, char *var)
 {
-	ft_lstclear(&minishell->env, &free_content);
-	exit(exit_code);
+	t_list *current;
+
+	if (ft_strchr(var, '='))
+		return (1);
+	current = minishell->env;
+	while (current)
+	{
+		if (!ft_strncmp((char *)current->content, var,
+			ft_strchr((char *)current->content, '=') - (char *)current->content))
+			return (lst_remove_node(&minishell->env, current, &free_content), 0);
+		current = current->next;
+	}
+	return (1);
 }

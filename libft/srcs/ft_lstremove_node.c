@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_lstremove_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 11:16:10 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/25 11:59:15 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/25 12:19:55 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	env(t_mini *minishell)
+void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*))
 {
 	t_list	*current;
+	t_list	*previous;
 
-	if (!minishell->env)
-		return (1);
-	current = minishell->env;
+	if (!lst || !*lst || !node)
+		return ;
+	current = *lst;
+	previous = *lst;
 	while (current)
 	{
-		ft_printf("%s\n", (char *)current->content);
+		if (current == node)
+		{
+			if (current == previous)
+				*lst = node->next;
+			else
+				previous->next = node->next;
+			ft_lstdelone(node, del);
+			return ;
+		}
+		previous = current;
 		current = current->next;
 	}
-	return (0);
 }

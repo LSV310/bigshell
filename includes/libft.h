@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/07 12:26:29 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:43:20 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <signal.h>
 
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"
@@ -83,6 +84,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	free_content(void *content);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
+void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 

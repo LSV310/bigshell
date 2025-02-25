@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:21:32 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/19 16:15:11 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/25 12:34:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-int	echo(char **args, int param);
-int	pwd(void);
-int	env(void);
-int	exit2(int exit_code);
+char	*get_env_var(t_mini *minishell, char *var)
+{
+	t_list *current;
+	char	*chr;
 
-#endif
+	if (ft_strchr(var, '='))
+		return (NULL);
+	current = minishell->env;
+	while (current)
+	{
+		chr = ft_strchr((char *)current->content, '=');
+		if (!ft_strncmp((char *)current->content, var,
+			chr - (char *)current->content))
+			return (chr + 1);
+		current = current->next;
+	}
+	return (NULL);
+}
