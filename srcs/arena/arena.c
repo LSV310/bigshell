@@ -6,35 +6,41 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 20:28:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 23:19:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "arena.h"
+#include "../../includes/arena.h"
 
-Chunk *region_create(size_t capacity)
+t_chunk *region_create(size_t capacity)
 {
-	Chunk	*region;
+	t_chunk	*region;
 
-	region = (Chunk *) malloc(sizeof(Chunk) + capacity * sizeof(uintptr_t));
+	region = (t_chunk *) malloc(sizeof(t_chunk) + capacity * sizeof(uintptr_t));
 	if (region == NULL)
-		return NULL;
+		return (NULL);
 	region->next = NULL;
 	region->count = 0;
 	region->capacity = capacity;
 	return (region);
 }
 
-void	arena_init(Arena *arena)
+t_arena	*arena_init()
 {
+	t_arena	*arena;
+
+	arena = malloc(sizeof(t_arena));
+	if (!arena)
+		return (NULL);
 	arena->begin = region_create(CHUNK_SIZE);
 	arena->end = arena->begin;
+	return (arena);
 }
 
-void	arena_free(Arena *arena)
+void	*arena_free(t_arena *arena)
 {
-	Chunk *region;
-	Chunk *next;
+	t_chunk *region;
+	t_chunk *next;
 
 	region = arena->begin;
 	while (region != NULL) {
@@ -44,12 +50,14 @@ void	arena_free(Arena *arena)
 	}
 	arena->begin = NULL;
 	arena->end = NULL;
+	free(arena);
+	return (NULL);
 }
 
-void *arena_alloc(Arena *arena, size_t size)
+void	*arena_alloc(t_arena *arena, size_t size)
 {
 	size_t	capacity;
-	Chunk	*new_chunk;
+	t_chunk	*new_chunk;
 	void	*res;
 
 	if (!arena || !arena->end || !arena->begin)
@@ -62,11 +70,22 @@ void *arena_alloc(Arena *arena, size_t size)
 			capacity = size;
 		new_chunk = region_create(capacity);
 		if (new_chunk == NULL)
-			return (NULL);
+			return (arena_free(arena));
 		arena->end->next = new_chunk;
 		arena->end = new_chunk;
 	}
 	res = (void *)(arena->end->data + arena->end->count);
 	arena->end->count += size;
+	return (res);
+}
+
+void	*arena_calloc(t_arena *arena, size_t size)
+{
+	void	*res;
+
+	res = arena_alloc(arena, size);
+	if (!res)
+		return (NULL);
+	ft_memset(res, 0, size);
 	return (res);
 }

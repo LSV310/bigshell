@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   lst_arena.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 15:01:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 23:16:34 by tgallet          ###   ########.fr       */
+/*   Created: 2025/02/25 23:01:47 by tgallet           #+#    #+#             */
+/*   Updated: 2025/02/25 23:02:50 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-int	cd(char *dir)
+t_list	*ar_lstnew(void *content, t_arena *arena)
 {
-	(void)dir;
-	return (1);
+	t_list	*new;
+
+	new = arena_alloc(arena, sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

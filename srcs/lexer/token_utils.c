@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:07:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 22:55:00 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	print_token(t_token tok)
 		printf("NULL (%s)\n", toktype_to_string(tok.type));
 }
 
-void	print_tokens(t_dlltok *tks)
+void	print_tokens(t_list *tks)
 {
 	while (tks)
 	{
-		print_token(*tks->token);
+		print_token(*(t_token *)tks->content);
 		tks = tks->next;
 	}
 }
