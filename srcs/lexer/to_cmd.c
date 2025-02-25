@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   to_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/24 19:48:23 by tgallet          ###   ########.fr       */
+/*   Created: 2025/02/24 16:03:42 by tgallet           #+#    #+#             */
+/*   Updated: 2025/02/24 18:57:35 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include "libft.h"
-# include "lexer.h"
-# include "pipex.h"
-# include "builtins.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdbool.h>
-
-int			ft_isspace(char c);
-int			char_in_set(char c, const char *set);
-const char	*get_env_variable(char *key, void *env);
-typedef struct s_kv
+int	valid_par(t_dlltok *tks)
 {
-	char	*key;
-	char	*value;
-}	t_kv;
+	int	open_par;
 
-#endif
+	open_par = 0;
+	while (tks && tks->token->type != ENDT)
+	{
+		if (tks->token->type == LPAR)
+			open_par++;
+		else if (tks->token->type == RPAR)
+			open_par--;
+		if (open_par < 0)
+			return (false);
+		tks = tks->next;
+	}
+	if (open_par == 0)
+		return (true);
+	return (false);
+}
+
+
+

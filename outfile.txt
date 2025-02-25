@@ -1,0 +1,8 @@
+cases.txt
+includes
+lexer
+libft
+Makefile
+my.todo
+outfile.txt
+srcs
