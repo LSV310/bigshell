@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 15:37:13 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:47:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	handle_signals(int sig, siginfo_t *info, void *context)
 {
-	ft_printf("\n> ");
+	ft_printf("\nminishell$> ");
+    rl_replace_line("", 0);
 	(void)sig;
 	(void)info;
 	(void)context;
