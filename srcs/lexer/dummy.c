@@ -6,14 +6,14 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:36 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:08:30 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //dummy function
-const char	*get_env_variable(char *key, void *env)
+char	*get_env_variable(char *key, void *env)
 {
 	const t_kv	dummy[] = {
 	{.key = "goat", .value = "tristan"},

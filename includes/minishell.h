@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 15:57:17 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:08:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_mini
 // tristan
 int		ft_isspace(char c);
 int		char_in_set(char c, const char *set);
+char	*get_env_variable(char *key, void *env);
 
 // readline
 void	start_reading(t_mini *minishell);

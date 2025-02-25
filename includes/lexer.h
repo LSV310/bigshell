@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 15:56:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:07:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_token(t_token tok);
 void	print_tokens(t_dlltok *tks);
 t_lexer	init_lexer(char *rdl);
 void	skip_spaces(t_lexer *lex);
-void	fill_token(t_lexer *lex, t_token *tok, token_type type);
+void	fill_token(t_lexer *lex, t_token *tok, t_token_type type);
 void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_dlltok *tks);

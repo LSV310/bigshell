@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:44 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:07:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	skip_spaces(t_lexer *lex)
 		lex->cur++;
 }
 
-void	fill_token(t_lexer *lex, t_token *tok, token_type type)
+void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 {
 	char	quote;
 

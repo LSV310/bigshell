@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:01:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:07:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-const char	*toktype_to_string(token_type type)
+const char	*toktype_to_string(t_token_type type)
 {
 	if (type == ENDT)
 		return ("END");
