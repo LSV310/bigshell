@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   dummy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:06:36 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:08:30 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 16:03:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //dummy function
-char	*get_env_variable(char *key, void *env)
+char	*get_env_variable(const char *key, size_t n, void *env)
 {
 	const t_kv	dummy[] = {
 	{.key = "goat", .value = "tristan"},

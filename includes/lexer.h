@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 23:16:03 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:28:50 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,6 @@ typedef struct s_token
 	t_token_type	type;
 	char			*str;
 }	t_token;
-
-typedef struct s_cmd
-{
-	char	*file_in;
-	char	*cmd;
-	char	**args;
-	char	*file_out;
-}	t_cmd;
 
 int		is_special(char c);
 void	print_token(t_token tok);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 14:26:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 15:57:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_mini
 // tristan
 int		ft_isspace(char c);
 int		char_in_set(char c, const char *set);
-char	*get_env_variable(char *key, void *env);
+char	*get_env_variable(const char *key, size_t n, void *env);
 
 // env
 int		create_env(t_mini *minishell);
