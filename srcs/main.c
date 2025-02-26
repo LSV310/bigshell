@@ -6,34 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 16:57:10 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:45:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	create_env(t_mini *minishell)
-{
-	size_t	i;
-	t_list	*current;
-	t_list	*previous;
-
-	minishell->env = ft_lstnew(ft_strdup(__environ[0]));
-	if (!minishell->env)
-		return (0);
-	i = 1;
-	previous = minishell->env;
-	while (__environ[i])
-	{
-		current = ft_lstnew(ft_strdup(__environ[i]));
-		if (!current)
-			return (ft_lstclear(&minishell->env, &free_content), 0);
-		ft_lstadd_back(&previous, current);
-		previous = current;
-		i++;
-	}
-	return (1);
-}
 
 int	main(void)
 {
@@ -41,8 +18,11 @@ int	main(void)
 
 	if (!create_env(&minishell))
 		return (EXIT_FAILURE);
+	env(&minishell);
+	export(&minishell, "PWD=salut");
+	env(&minishell);
 	create_signals();
 	start_reading(&minishell);
-	ft_lstclear(&minishell.env, &free_content);
+	ft_mapclear(&minishell.env);
 	return (EXIT_SUCCESS);
 }

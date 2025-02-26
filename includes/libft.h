@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 13:14:08 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 13:48:56 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,20 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// maps
+typedef struct s_map
+{
+	char			*key;
+	char			*value;
+	struct s_map	*next;
+}	t_map;
+
+t_map	*newmap(char *key, char *value);
+t_map	*ft_maplast(t_map *map);
+void	ft_addmap(t_map **map, t_map *new);
+void	ft_mapclear(t_map **map);
+void	map_remove_node(t_map **map, t_map *node);
 
 // printf
 int		ft_printf(const char *s, ...);

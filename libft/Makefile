@@ -19,7 +19,7 @@ SRC			= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c	\
 			ft_lstlast.c ft_lstadd_back.c ft_lstfree_content.c ft_lstdelone.c	\
 			ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_printf.c ft_printf_utils.c\
 			ft_printf_utils2.c ft_fprintf.c get_next_line.c ft_str_equals.c		\
-			tab_len.c q_rsqrt.c ft_realloc.c ft_lstremove_node.c
+			tab_len.c q_rsqrt.c ft_realloc.c ft_lstremove_node.c ft_maps.c
 
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 

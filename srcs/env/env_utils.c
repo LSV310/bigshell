@@ -6,26 +6,21 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 16:03:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:58:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_env_var(t_mini *minishell, char *var)
+t_map	*get_env(t_mini *minishell, char *var, size_t len)
 {
-	t_list	*current;
-	char	*chr;
+	t_map	*current;
 
-	if (ft_strchr(var, '='))
-		return (NULL);
 	current = minishell->env;
 	while (current)
 	{
-		chr = ft_strchr((char *)current->content, '=');
-		if (!ft_strncmp((char *)current->content, var,
-				chr - (char *)current->content))
-			return (chr + 1);
+		if (!ft_strncmp(current->key, var, len))
+			return (current);
 		current = current->next;
 	}
 	return (NULL);

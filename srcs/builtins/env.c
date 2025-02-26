@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 11:16:10 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:13:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	env(t_mini *minishell)
 {
-	t_list	*current;
+	t_map	*current;
 
 	if (!minishell->env)
 		return (1);
 	current = minishell->env;
 	while (current)
 	{
-		ft_printf("%s\n", (char *)current->content);
+		ft_printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}
 	return (0);

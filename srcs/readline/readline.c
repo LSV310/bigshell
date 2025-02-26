@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/25 17:13:50 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:52 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	start_reading(t_mini *minishell)
 {
 	char		*input;
-	t_lexer		lex;
-	t_dlltok	*tks;
+	// t_lexer		lex;
 
 	(void)minishell;
 	while (1)
@@ -29,10 +28,7 @@ void	start_reading(t_mini *minishell)
 			ft_printf("%s\n", input);
 			add_history(input);
 		}
-		lex = init_lexer(input);
-		tks = context_free_tokens(&lex);
-		if (!valid_par(tks))
-			printf("bad parenthesis\n");
+		// lex = init_lexer(input);
 		free(input);
 	}
 }
