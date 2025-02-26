@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   no_context.c                                       :+:      :+:    :+:   */
+/*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 15:03:53 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 00:05:56 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	special_token_cpy(t_lexer *lex, t_token *tok, t_token cpy)
 {
@@ -60,11 +60,11 @@ void	special_token(t_lexer *lex, t_token *tok)
 	return (bad_token(lex, tok));
 }
 
-t_token	*get_next_token(t_lexer *lex)
+t_token	*get_next_token(t_lexer *lex, t_arena *arena)
 {
 	t_token	*tok;
 
-	tok = ft_calloc(1, sizeof(t_token));
+	tok = arena_calloc(arena, sizeof(t_token));
 	if (!tok)
 		return (NULL);
 	skip_spaces(lex);
@@ -77,16 +77,16 @@ t_token	*get_next_token(t_lexer *lex)
 	return (tok);
 }
 
-t_dlltok	*context_free_tokens(t_lexer *lex)
+t_list	*context_free_tokens(t_lexer *lex, t_arena *arena)
 {
-	t_dlltok	*tks;
+	t_list		*tks;
 	t_token		*tmp;
 
 	tks = NULL;
-	while (1)
+	while (true)
 	{
-		tmp = get_next_token(lex);
-		dll_addback(&tks, tmp);
+		tmp = get_next_token(lex, arena);
+		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
 		if (!tks || !tmp)
 			return (NULL);
 		if (tmp->type == ENDT || tmp->type == INVALID)
@@ -96,18 +96,19 @@ t_dlltok	*context_free_tokens(t_lexer *lex)
 	return (tks);
 }
 
-/* int	main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	t_dlltok	*tks;
+	t_list	*tks;
+	t_lexer	lex;
+	t_arena	*arena;
 
+	arena = arena_init();
 	if (ac == 2)
 	{
-		t_lexer	lex;
 
 		lex = init_lexer(av[1]);
-		tks = context_free_tokens(&lex);
+		tks = context_free_tokens(&lex, arena);
 		if (!valid_par(tks))
 			printf("bad parenthesis\n");
-
 	}
-} */
+}

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/24 20:06:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/25 22:57:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void	quoting(t_token *tok)
 	}
 }
 
-void	token_transform(t_dlltok *tks)
+void	token_transform(t_list *tks)
 {
-	t_dlltok	*cur;
+	t_list	*cur;
 
 	cur = tks;
 	while (cur)
 	{
-		quoting(cur->token);
+		quoting(cur->content);
 		cur = cur->next;
 	}
 }
