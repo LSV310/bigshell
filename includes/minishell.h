@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 14:26:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/26 18:26:44 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -42,9 +43,13 @@ char	*get_env_variable(char *key, void *env);
 // env
 int		create_env(t_mini *minishell);
 int		assign_kv(char *var, t_map *map);
+t_map	*get_env(t_mini *minishell, char *var, size_t len);
 
 // readline
-void	start_reading(t_mini *minishell);
+int		start_reading(t_mini *minishell);
+int		read_key(void);
+void	set_raw_mode(void);
+void	reset_terminal_mode(void);
 
 // signals
 void	create_signals(void);
@@ -56,8 +61,5 @@ int		exit2(t_mini *minishell, int exit_code);
 int		export(t_mini *minishell, char *var);
 int		pwd(void);
 int		unset(t_mini *minishell, char *var);
-
-// utils
-t_map	*get_env(t_mini *minishell, char *var);
 
 #endif
