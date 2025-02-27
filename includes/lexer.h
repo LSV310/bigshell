@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 16:46:48 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:38:30 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_list *tks);
 t_list	*init_tokens(t_lexer *lex, t_arena *arena);
-int		expend_token(t_token *tok, t_arena *arena);
-int		expend_token_list(t_list *tks, t_arena *arena);
-t_list	*make_tokens(const char	*line_read, t_arena *arena);
+
 
 #endif

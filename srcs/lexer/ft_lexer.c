@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 17:52:05 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:25:16 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	skip_spaces(t_lexer *lex)
 		lex->cur++;
 }
 
-t_list	*make_tokens(const char	*line_read, t_arena *arena)
+t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env)
 {
 	t_list	*tks;
 	t_lexer	lex;
@@ -57,7 +57,7 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena)
 	tks = init_tokens(&lex, arena);
 	if (!valid_par(tks))
 		printf("bad parenthesis\n");
-	expend_token_list(tks, arena);
+	expend_token_list(tks, arena, env);
 	print_tokens(tks, false);
 	return (tks);
 }

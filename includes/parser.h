@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 16:51:25 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:48:50 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef enum node_type
 {
+	ND_NULL = 0,
 	ND_CMD,
 	PIPELINE,
 	ND_AND,
@@ -32,13 +33,14 @@ typedef struct s_cmd
 	char	*file_out;
 }	t_cmd;
 
-typedef struct s_ast
+typedef struct s_ast t_ast;
+
+struct s_ast
 {
 	t_node_type		type;
-	char			**command;
-	size_t			n_childs;
-	struct s_ast	**childs;
-
-}	t_ast;
+	t_ast			*left;
+	t_ast			*right;
+	t_cmd			*cmds;
+};
 
 #endif

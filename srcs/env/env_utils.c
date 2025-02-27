@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 15:07:38 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 18:37:59 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_map	*get_env(t_mini *minishell, char *var, size_t len)
+t_map	*get_env(t_mini *minishell, const char *var, size_t len)
 {
 	t_map	*current;
 
