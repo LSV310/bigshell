@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_expend.c                                     :+:      :+:    :+:   */
+/*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 17:23:17 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:48:26 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,7 @@ size_t	size_envar(const char *cur, int *i)
 		return (0);
 	envar = get_env_variable(cur + *i - n, n, NULL);
 	len = ft_strlen(envar);
-	return (len + 1);
-}
-
-size_t	tokenstr_size(t_token *tok)
-{
-	size_t	n;
-	int		i;
-	char	quote;
-
-	i = 0;
-	n = 0;
-	quote = 0;
-	while (i < tok->len)
-	{
-		if (!quote && char_in_set(tok->p[i], "\"'"))
-			quote = tok->p[i];
-		else if (tok->p[i] == quote)
-			quote = 0;
-		else if ((!quote || quote == '"') && tok->p[i] == '$')
-			n += size_envar(tok->p, &i);
-		else
-		{
-			n++;
-			i++;
-		}
-	}
-	return (n);
+	return (len);
 }
 
 void	write_envar(char *here, const char *cur, int *i, int *j)
@@ -86,12 +60,38 @@ void	expend_token_fill(t_token *tok, size_t len, int i, char quote)
 		if (!quote && char_in_set(tok->p[i], "\"'"))
 			quote = tok->p[i];
 		else if (tok->p[i] == quote)
-			quote = 0;
+		quote = 0;
 		else if ((!quote || quote == '"') && tok->p[i] == '$')
 			write_envar(tok->str + j, tok->p, &i, &j);
 		else
 			tok->str[j++] = tok->p[i++];
 	}
+}
+
+size_t	tokenstr_size(t_token *tok)
+{
+	size_t	n;
+	int		i;
+	char	quote;
+
+	i = 0;
+	n = 0;
+	quote = 0;
+	while (i < tok->len)
+	{
+		if (!quote && char_in_set(tok->p[i], "\"'"))
+			quote = tok->p[i];
+		else if (tok->p[i] == quote)
+			quote = 0;
+		else if ((!quote || quote == '"') && tok->p[i] == '$')
+			n += size_envar(tok->p, &i);
+		else
+		{
+			n++;
+			i++;
+		}
+	}
+	return (n + 1);
 }
 
 int	expend_token(t_token *tok, t_arena *arena)

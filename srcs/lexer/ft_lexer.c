@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 17:27:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:52:05 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(void)
 	arena = arena_init();
 	if (!arena)
 	return (0);
-	tokens = make_tokens("  >$GOAT$GOAT >abc$OUT   ", arena);
+	tokens = make_tokens("> Makefile cat | wc -l  ", arena);
 	(void) tokens;
 }
 */
