@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 14:45:19 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 14:07:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 
 int	main(void)
 {
-	t_mini	minishell;
+	t_mini		minishell;
+	t_history	history;
+	char		*input;
 
 	if (!create_env(&minishell))
 		return (EXIT_FAILURE);
-	env(&minishell);
-	export(&minishell, "PWD=salut");
-	env(&minishell);
 	create_signals();
-	start_reading(&minishell);
-	ft_mapclear(&minishell.env);
+	minishell.history = &history;
+	if (!init_history(minishell.history))
+		return (ft_mapclear(&minishell.env), EXIT_FAILURE);
+	while (1)
+	{
+		input = read_line("minishell$> ", minishell.history);
+		if (!input)
+			break ;
+		ft_printf("%s\n", input);
+		// send the line to the lexer
+		free(input);
+	}
+	exit2(&minishell, 1);
 	return (EXIT_SUCCESS);
 }

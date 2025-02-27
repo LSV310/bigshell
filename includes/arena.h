@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 15:49:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:15:55 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define CHUNK_SIZE 1024
 
-typedef struct s_chunk t_chunk;
+typedef struct s_chunk	t_chunk;
 
 struct s_chunk {
 	t_chunk		*next;
@@ -36,7 +36,7 @@ typedef struct s_arena{
 }	t_arena;
 
 t_chunk	*region_create(size_t capacity);
-t_arena	*arena_init();
+t_arena	*arena_init(void);
 void	*arena_free(t_arena *arena);
 void 	*arena_alloc(size_t size, t_arena *arena);
 t_list	*ar_lstnew(void *content, t_arena *arena);

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 15:57:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:16:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -31,7 +32,8 @@ typedef struct s_kv
 
 typedef struct s_mini
 {
-	t_map	*env;
+	t_map		*env;
+	t_history	*history;
 }	t_mini;
 
 // tristan
@@ -42,9 +44,7 @@ char	*get_env_variable(const char *key, size_t n, void *env);
 // env
 int		create_env(t_mini *minishell);
 int		assign_kv(char *var, t_map *map);
-
-// readline
-void	start_reading(t_mini *minishell);
+t_map	*get_env(t_mini *minishell, char *var, size_t len);
 
 // signals
 void	create_signals(void);
@@ -56,8 +56,5 @@ int		exit2(t_mini *minishell, int exit_code);
 int		export(t_mini *minishell, char *var);
 int		pwd(void);
 int		unset(t_mini *minishell, char *var);
-
-// utils
-t_map	*get_env(t_mini *minishell, char *var);
 
 #endif

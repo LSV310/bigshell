@@ -6,13 +6,13 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 15:35:55 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:16:46 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/arena.h"
 
-t_chunk *region_create(size_t capacity)
+t_chunk	*region_create(size_t capacity)
 {
 	t_chunk	*region;
 
@@ -25,7 +25,7 @@ t_chunk *region_create(size_t capacity)
 	return (region);
 }
 
-t_arena	*arena_init()
+t_arena	*arena_init(void)
 {
 	t_arena	*arena;
 
@@ -39,11 +39,12 @@ t_arena	*arena_init()
 
 void	*arena_free(t_arena *arena)
 {
-	t_chunk *region;
-	t_chunk *next;
+	t_chunk	*region;
+	t_chunk	*next;
 
 	region = arena->begin;
-	while (region != NULL) {
+	while (region != NULL)
+	{
 		next = region->next;
 		free(region);
 		region = next;

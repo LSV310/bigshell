@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   ft_strstr_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 15:07:38 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/27 12:45:51 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/27 12:58:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_map	*get_env(t_mini *minishell, char *var, size_t len)
+int	ft_strstr_tab(char **tab, char *str)
 {
-	t_map	*current;
+	int	i;
 
-	current = minishell->env;
-	while (current)
+	i = 0;
+	while (tab[i])
 	{
-		if (!ft_strncmp(current->key, var, len))
-		{
-			if (current->key[len] == 0)
-				return (current);
-		}
-		current = current->next;
+		if (ft_strcmp(tab[i], str) == 0)
+			return (i);
+		i++;
 	}
-	return (NULL);
+	return (-1);
 }
