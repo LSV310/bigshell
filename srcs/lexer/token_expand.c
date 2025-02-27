@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 18:03:08 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:23:17 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 size_t	size_envar(const char *cur, int *i)
 {
-	size_t	len;
-	size_t	n;
+	size_t		len;
+	size_t		n;
+	const char	*envar;
 
 	n = 0;
 	(*i)++;
@@ -26,8 +27,9 @@ size_t	size_envar(const char *cur, int *i)
 	}
 	if (n == 0)
 		return (0);
-	len = ft_strlen(get_env_variable(cur + *i - n, n, NULL));
-	return (len);
+	envar = get_env_variable(cur + *i - n, n, NULL);
+	len = ft_strlen(envar);
+	return (len + 1);
 }
 
 size_t	tokenstr_size(t_token *tok)
@@ -48,13 +50,15 @@ size_t	tokenstr_size(t_token *tok)
 		else if ((!quote || quote == '"') && tok->p[i] == '$')
 			n += size_envar(tok->p, &i);
 		else
+		{
 			n++;
-		i++;
+			i++;
+		}
 	}
 	return (n);
 }
 
-void	write_envar(char *here, const char *cur, int *i)
+void	write_envar(char *here, const char *cur, int *i, int *j)
 {
 	size_t		len;
 	size_t		n;
@@ -67,8 +71,9 @@ void	write_envar(char *here, const char *cur, int *i)
 		(*i)++;
 		n++;
 	}
-	envar = get_env_variable(cur, n, NULL);
+	envar = get_env_variable(cur + *i - n, n, NULL);
 	ft_memcpy(here, envar, ft_strlen(envar));
+	*j += strlen(envar);
 }
 
 void	expend_token_fill(t_token *tok, size_t len, int i, char quote)
@@ -83,10 +88,9 @@ void	expend_token_fill(t_token *tok, size_t len, int i, char quote)
 		else if (tok->p[i] == quote)
 			quote = 0;
 		else if ((!quote || quote == '"') && tok->p[i] == '$')
-			write_envar(tok->str + j, tok->p + i, &i);
+			write_envar(tok->str + j, tok->p, &i, &j);
 		else
-			tok->str[j] = tok->str[i];
-		i++;
+			tok->str[j++] = tok->p[i++];
 	}
 }
 
@@ -100,26 +104,5 @@ int	expend_token(t_token *tok, t_arena *arena)
 		return (0);
 	tok->str[len] = 0;
 	expend_token_fill(tok, len, 0, 0);
-	return (1);
-}
-
-int	token_transform(t_list *tks, t_arena *arena)
-{
-	t_list	*cur;
-	t_token	*tok;
-
-	cur = tks;
-	while (cur)
-	{
-		tok = cur->content;
-		if (tok == NULL)
-			return (0);
-		if (tok->type == NAME || tok->type == REDIN
-			|| tok->type == REDOUT || tok->type == APPEN)
-			expend_token(tok, arena);
-		else
-			tok->str = ar_strndup(tok->p, tok->len, arena);
-		cur = cur->next;
-	}
 	return (1);
 }

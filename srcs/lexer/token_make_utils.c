@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   no_context2.c                                      :+:      :+:    :+:   */
+/*   token_make_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 16:07:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 16:37:03 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-t_lexer	init_lexer(char *rdl)
-{
-	t_lexer	lex;
-
-	lex.start = rdl;
-	lex.cur = rdl;
-	lex.len = ft_strlen(rdl);
-	return (lex);
-}
-
-void	skip_spaces(t_lexer *lex)
-{
-	while (ft_isspace(*lex->cur))
-		lex->cur++;
-}
 
 void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 {

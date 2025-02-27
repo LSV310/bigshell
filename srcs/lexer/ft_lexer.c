@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_cmd.c                                           :+:      :+:    :+:   */
+/*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 16:03:42 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/25 23:54:53 by tgallet          ###   ########.fr       */
+/*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
+/*   Updated: 2025/02/27 17:27:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,46 @@ int	valid_par(t_list *tks)
 		return (true);
 	return (false);
 }
+
+t_lexer	init_lexer(const char *rdl)
+{
+	t_lexer	lex;
+
+	lex.start = rdl;
+	lex.cur = rdl;
+	lex.len = ft_strlen(rdl);
+	return (lex);
+}
+
+void	skip_spaces(t_lexer *lex)
+{
+	while (ft_isspace(*lex->cur))
+		lex->cur++;
+}
+
+t_list	*make_tokens(const char	*line_read, t_arena *arena)
+{
+	t_list	*tks;
+	t_lexer	lex;
+
+	lex = init_lexer(line_read);
+	tks = init_tokens(&lex, arena);
+	if (!valid_par(tks))
+		printf("bad parenthesis\n");
+	expend_token_list(tks, arena);
+	print_tokens(tks, false);
+	return (tks);
+}
+/*
+int	main(void)
+{
+	t_arena	*arena;
+	t_list	*tokens;
+
+	arena = arena_init();
+	if (!arena)
+	return (0);
+	tokens = make_tokens("  >$GOAT$GOAT >abc$OUT   ", arena);
+	(void) tokens;
+}
+*/

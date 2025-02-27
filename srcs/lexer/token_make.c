@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 00:05:56 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 16:42:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_token	*get_next_token(t_lexer *lex, t_arena *arena)
 	return (tok);
 }
 
-t_list	*context_free_tokens(t_lexer *lex, t_arena *arena)
+t_list	*init_tokens(t_lexer *lex, t_arena *arena)
 {
 	t_list		*tks;
 	t_token		*tmp;
@@ -92,9 +92,10 @@ t_list	*context_free_tokens(t_lexer *lex, t_arena *arena)
 		if (tmp->type == ENDT || tmp->type == INVALID)
 			break ;
 	}
-	print_tokens(tks);
 	return (tks);
 }
+
+/*
 
 int	main(int ac, char *av[])
 {
@@ -105,10 +106,15 @@ int	main(int ac, char *av[])
 	arena = arena_init();
 	if (ac == 2)
 	{
-
-		lex = init_lexer(av[1]);
-		tks = context_free_tokens(&lex, arena);
+		lex = init_lexer("(<$IN $GOAT >$OUT) && ls");
+		tks = init_tokens(&lex, arena);
+		print_tokens(tks, true);
 		if (!valid_par(tks))
-			printf("bad parenthesis\n");
+		printf("bad parenthesis\n");
+		token_transform(tks, arena);
+		printf("\n");
+		print_tokens(tks, false);
 	}
 }
+
+*/
