@@ -6,26 +6,25 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 18:24:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 10:55:29 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	start_reading(t_mini *minishell)
+int	read_line(char *prompt)
 {
 	int		key;
 	char	*current_line;
 	int		size_allocated;
 	int		cursor_pos;
 
-	(void)minishell;
 	cursor_pos = 0;
 	size_allocated = 1024;
 	current_line = malloc(sizeof(char) * size_allocated);
 	if (!current_line)
 		return (0);
-	ft_fprintf(0, "minishell$> ");
+	ft_fprintf(0, prompt);
 	set_raw_mode();
 	while (1)
 	{

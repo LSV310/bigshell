@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 13:48:56 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 10:50:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,13 @@ t_map	*ft_maplast(t_map *map);
 void	ft_addmap(t_map **map, t_map *new);
 void	ft_mapclear(t_map **map);
 void	map_remove_node(t_map **map, t_map *node);
+
+// readline
+typedef struct s_history
+{
+	char	**history;
+	size_t	index;
+}	t_history;
 
 // printf
 int		ft_printf(const char *s, ...);

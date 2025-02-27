@@ -8,18 +8,64 @@ OBJ_DIR		= objs/
 
 CFLAGS		+= -I../$(INLCUDES)
 
-SRC			= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c	\
-			ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c			\
-			ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c		\
-			ft_strrchr.c ft_strcmp.c ft_strncmp.c ft_memchr.c ft_memcmp.c		\
-			ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c			\
-			ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c			\
-			ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c		\
-			ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c			\
-			ft_lstlast.c ft_lstadd_back.c ft_lstfree_content.c ft_lstdelone.c	\
-			ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_printf.c ft_printf_utils.c\
-			ft_printf_utils2.c ft_fprintf.c get_next_line.c ft_str_equals.c		\
-			tab_len.c q_rsqrt.c ft_realloc.c ft_lstremove_node.c ft_maps.c
+SRC			=	libc/ft_atoi.c				\
+				libc/ft_bzero.c				\
+				libc/ft_calloc.c			\
+				libc/ft_isalnum.c			\
+				libc/ft_isalpha.c			\
+				libc/ft_isascii.c			\
+				libc/ft_isdigit.c			\
+				libc/ft_isprint.c			\
+				libc/ft_itoa.c				\
+				libc/ft_memchr.c			\
+				libc/ft_memcmp.c			\
+				libc/ft_memcpy.c			\
+				libc/ft_memmove.c			\
+				libc/ft_memset.c			\
+				libc/ft_putchar_fd.c		\
+				libc/ft_putendl_fd.c		\
+				libc/ft_putnbr_fd.c			\
+				libc/ft_putstr_fd.c			\
+				libc/ft_realloc.c			\
+				libc/ft_split.c				\
+				libc/ft_str_equals.c		\
+				libc/ft_strchr.c			\
+				libc/ft_strcmp.c			\
+				libc/ft_strdup.c			\
+				libc/ft_striteri.c			\
+				libc/ft_strjoin.c			\
+				libc/ft_strlcat.c			\
+				libc/ft_strlcpy.c			\
+				libc/ft_strlen.c			\
+				libc/ft_strmapi.c			\
+				libc/ft_strncmp.c			\
+				libc/ft_strnstr.c			\
+				libc/ft_strrchr.c			\
+				libc/ft_strtrim.c			\
+				libc/ft_substr.c			\
+				libc/ft_tolower.c			\
+				libc/ft_toupper.c			\
+				libc/tab_len.c				\
+				data/ft_lstadd_back.c		\
+				data/ft_lstadd_front.c		\
+				data/ft_lstclear.c			\
+				data/ft_lstdelone.c			\
+				data/ft_lstfree_content.c	\
+				data/ft_lstiter.c			\
+				data/ft_lstlast.c			\
+				data/ft_lstmap.c			\
+				data/ft_lstnew.c			\
+				data/ft_lstremove_node.c	\
+				data/ft_lstsize.c			\
+				data/ft_maps.c				\
+				printf/ft_printf.c			\
+				printf/ft_fprintf.c			\
+				printf/ft_printf_utils.c	\
+				printf/ft_printf_utils2.c	\
+				readfile/get_next_line.c	\
+				maths/q_rsqrt.c				\
+				readline/readline.c			\
+				readline/terminal.c
 
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
@@ -32,7 +78,7 @@ $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
