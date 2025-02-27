@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   min.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 12:27:55 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/27 12:47:52 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/27 12:48:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	exit2(t_mini *minishell, int exit_code)
+int	min(int a, int b)
 {
-	ft_mapclear(&minishell->env);
-	free_tab(minishell->history->history, 0);
-	exit(exit_code);
+	if (a < b)
+		return (a);
+	return (b);
 }

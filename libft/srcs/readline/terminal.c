@@ -6,13 +6,12 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 17:28:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 11:55:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Function to set the terminal to raw mode
 void set_raw_mode(void)
 {
 	struct termios	term;
@@ -21,7 +20,6 @@ void set_raw_mode(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
-// Function to restore the terminal to normal mode
 void reset_terminal_mode(void)
 {
 	struct termios term;

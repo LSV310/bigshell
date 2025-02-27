@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 10:50:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:51:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_str_equals(const char *s1, const char *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+int		ft_strstr_tab(char **tab, char *str);
 int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_realloc(void *old_ptr, size_t size, size_t old_size);
@@ -66,7 +67,24 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 size_t	tab_len(char **tab);
+void	shift_elem_up(char **tab, char *elem);
+void	shift_elem_down(char **tab, char *elem);
+
+// maths
 double	q_rsqrt(double number);
+int		max(int a, int b);
+int		min(int a, int b);
+
+// printf
+int		ft_printf(const char *s, ...);
+int		ft_fprintf(int fd, const char *s, ...);
+int		ft_putchar_len_fd(int c, int fd);
+int		ft_putstr_len_fd(char *s, int fd);
+int		ft_putnbr_base_fd(unsigned int n, char *base, int base_len, int fd);
+int		ft_putnbr_base_len_fd(int n, char *base, int base_len, int fd);
+int		ft_putnbr_double_fd(double n, int accuracy, int fd);
+int		ft_printptr_fd(unsigned long long ptr, int fd);
+int		ft_putnbr_long_fd(long n, int fd);
 
 // linked lists
 typedef struct s_list
@@ -102,24 +120,28 @@ void	ft_mapclear(t_map **map);
 void	map_remove_node(t_map **map, t_map *node);
 
 // readline
+typedef struct s_readline
+{
+	char		*current_line;
+	size_t		size;
+	size_t		cursor;
+}	t_readline;
+
 typedef struct s_history
 {
 	char	**history;
 	size_t	index;
+	size_t	size;
 }	t_history;
 
-// printf
-int		ft_printf(const char *s, ...);
-int		ft_fprintf(int fd, const char *s, ...);
-int		ft_putchar_len_fd(int c, int fd);
-int		ft_putstr_len_fd(char *s, int fd);
-int		ft_putnbr_base_fd(unsigned int n, char *base, int base_len, int fd);
-int		ft_putnbr_base_len_fd(int n, char *base, int base_len, int fd);
-int		ft_putnbr_double_fd(double n, int accuracy, int fd);
-int		ft_printptr_fd(unsigned long long ptr, int fd);
-int		ft_putnbr_long_fd(long n, int fd);
+char	*read_line(char *prompt, t_history *history);
+int		read_key(void);
+void	set_raw_mode(void);
+void	reset_terminal_mode(void);
+int		init_history(t_history *history);
+int		cmd_add_history(t_history *history, char *cmd);
 
-// get_next_line
+// readfile
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif

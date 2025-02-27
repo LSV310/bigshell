@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 18:26:44 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 12:18:27 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef struct s_kv
 
 typedef struct s_mini
 {
-	t_map	*env;
+	t_map		*env;
+	t_history	*history;
 }	t_mini;
 
 // tristan
@@ -44,12 +45,6 @@ char	*get_env_variable(char *key, void *env);
 int		create_env(t_mini *minishell);
 int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_mini *minishell, char *var, size_t len);
-
-// readline
-int		start_reading(t_mini *minishell);
-int		read_key(void);
-void	set_raw_mode(void);
-void	reset_terminal_mode(void);
 
 // signals
 void	create_signals(void);

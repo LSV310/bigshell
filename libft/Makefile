@@ -27,6 +27,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_putnbr_fd.c			\
 				libc/ft_putstr_fd.c			\
 				libc/ft_realloc.c			\
+				libc/ft_shift_elem.c		\
 				libc/ft_split.c				\
 				libc/ft_str_equals.c		\
 				libc/ft_strchr.c			\
@@ -41,6 +42,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
 				libc/ft_strrchr.c			\
+				libc/ft_strstr_tab.c		\
 				libc/ft_strtrim.c			\
 				libc/ft_substr.c			\
 				libc/ft_tolower.c			\
@@ -63,7 +65,10 @@ SRC			=	libc/ft_atoi.c				\
 				printf/ft_printf_utils.c	\
 				printf/ft_printf_utils2.c	\
 				readfile/get_next_line.c	\
+				maths/max.c					\
+				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/history.c			\
 				readline/readline.c			\
 				readline/terminal.c
 

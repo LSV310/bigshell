@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strstr_tab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 12:27:55 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/27 12:45:51 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/27 12:58:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exit2(t_mini *minishell, int exit_code)
+int	ft_strstr_tab(char **tab, char *str)
 {
-	ft_mapclear(&minishell->env);
-	free_tab(minishell->history->history, 0);
-	exit(exit_code);
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_strcmp(tab[i], str) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
