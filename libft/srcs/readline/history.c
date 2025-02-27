@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:09:30 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 14:00:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 14:07:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	cmd_add_history(t_history *history, char *cmd)
 	search_history = ft_strstr_tab(history->history, cmd);
 	if (search_history >= 0)
 		return (shift_elem_up(history->history,
-			history->history[search_history]), 1);
+				history->history[search_history]), 1);
 	while (history->index < history->size - 5
-			&& history->history[history->index] != 0)
+		&& history->history[history->index] != 0)
 		history->index++;
 	if (history->index >= history->size - 5)
 	{

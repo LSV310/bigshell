@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 12:59:44 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 14:04:41 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	new_buffer(t_readline *line)
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
-	return(1);
+	return (1);
 }
 
 static int	signal_received(t_readline *line, char *prompt)
@@ -36,7 +36,7 @@ static int	line_too_long(t_readline *line)
 	if (line->cursor + 1 >= line->size)
 	{
 		line->current_line = ft_realloc(line->current_line,
-			line->size * 2, line->size);
+				line->size * 2, line->size);
 		if (!line->current_line)
 			return (0);
 		line->size *= 2;
