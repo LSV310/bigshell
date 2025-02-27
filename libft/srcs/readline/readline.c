@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 14:04:41 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 17:49:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	line_too_long(t_readline *line)
 	return (1);
 }
 
-static int	other_key(int key, t_readline *line, char *prompt)
+static int	other_key(int key, t_readline *line, char *prompt, t_history *hist)
 {
 	if (key == 4 && line->cursor == 0)
 	{
@@ -52,6 +52,19 @@ static int	other_key(int key, t_readline *line, char *prompt)
 		return (write(0, "\n", 1), 0);
 	}
 	else if (key == -1 && !signal_received(line, prompt))
+		return (0);
+	else if (key == 127)
+	{
+		if (line->cursor > 0)
+		{
+			line->cursor--;
+			line->current_line[line->cursor] = '\0';
+			ft_fprintf(0, "\b \b");
+		}
+	}
+	else if (hist && key == -12 && !up_arrow(line, hist, prompt))
+		return (0);
+	else if (hist && key == -13 && !down_arrow(line, hist, prompt))
 		return (0);
 	return (1);
 }
@@ -75,7 +88,7 @@ char	*read_line(char *prompt, t_history *history)
 			write(STDOUT_FILENO, &key, 1);
 			line.current_line[line.cursor++] = key;
 		}
-		else if (!other_key(key, &line, prompt))
+		else if (!other_key(key, &line, prompt, history))
 			return (reset_terminal_mode(), NULL);
 		if (!line_too_long(&line))
 			return (reset_terminal_mode(), NULL);

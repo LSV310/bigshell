@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 18:31:27 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:55:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(void)
 		input = read_line("minishell$> ", minishell.history);
 		if (!input)
 			break ;
-		ft_printf("%s\n", input);
-		// send the line to the lexer
+		make_tokens(input, arena_init());
 		free(input);
 	}
 	exit2(&minishell, 1);

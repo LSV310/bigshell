@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 13:51:36 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/27 17:47:15 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,19 @@ typedef struct s_readline
 typedef struct s_history
 {
 	char	**history;
-	size_t	index;
 	size_t	size;
+	int		index;
 }	t_history;
 
 char	*read_line(char *prompt, t_history *history);
 int		read_key(void);
 void	set_raw_mode(void);
 void	reset_terminal_mode(void);
+int		up_arrow(t_readline *line, t_history *history, char *prompt);
+int		down_arrow(t_readline *line, t_history *history, char *prompt);
 int		init_history(t_history *history);
+char	*history_up(t_history *history);
+char	*history_down(t_history *history);
 int		cmd_add_history(t_history *history, char *cmd);
 
 // readfile

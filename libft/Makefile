@@ -68,6 +68,7 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/additional_keys.c	\
 				readline/history.c			\
 				readline/readline.c			\
 				readline/terminal.c
