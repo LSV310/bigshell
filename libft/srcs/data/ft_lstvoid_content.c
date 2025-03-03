@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_lstfree_content copy.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 12:56:34 by agruet           ###   ########.fr       */
+/*   Created: 2024/12/19 11:23:19 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/28 13:18:26 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exit2(t_mini *minishell, int exit_code)
+void	void_content(void *content)
 {
-	ft_mapclear(&minishell->env);
-	ft_dlstclear(&minishell->history, &free_content);
-	ft_printf("exit\n");
-	exit(exit_code);
+	(void)content;
 }

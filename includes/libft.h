@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 17:47:15 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:29:55 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,37 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_dlist
+{
+	void			*content;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
+}	t_dlist;
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	free_content(void *content);
+void	void_content(void *content);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_dlist	*ft_dlstnew(void *content);
+void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
+void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
+t_dlist	*ft_dlstlast(t_dlist *lst);
+void	ft_dlst_top(t_dlist **lst);
+void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
+void	ft_dlstclear(t_dlist **lst, void (*del)(void*));
+void	dlst_remove_node(t_dlist **lst, t_dlist *node, void (*del)(void*));
+void	ft_dlst_shift_up(t_dlist **lst, t_dlist *node);
+void	ft_dlst_shift_down(t_dlist **lst, t_dlist *node);
+t_dlist	*ft_strstr_dlst(t_dlist *lst, char *str);
+void	ft_dlstprint(t_dlist *lst);
 
 // maps
 typedef struct s_map
@@ -122,28 +142,25 @@ void	map_remove_node(t_map **map, t_map *node);
 // readline
 typedef struct s_readline
 {
-	char		*current_line;
-	size_t		size;
-	size_t		cursor;
+	char	*current_line;
+	size_t	size;
+	size_t	cursor;
 }	t_readline;
 
-typedef struct s_history
-{
-	char	**history;
-	size_t	size;
-	int		index;
-}	t_history;
-
-char	*read_line(char *prompt, t_history *history);
+char	*read_line(char *prompt, t_dlist **history);
+void	clear_line(t_readline *line, t_dlist **history, int current);
+int		signal_received(t_readline *line, t_dlist **history, char *prompt);
 int		read_key(void);
 void	set_raw_mode(void);
 void	reset_terminal_mode(void);
-int		up_arrow(t_readline *line, t_history *history, char *prompt);
-int		down_arrow(t_readline *line, t_history *history, char *prompt);
-int		init_history(t_history *history);
-char	*history_up(t_history *history);
-char	*history_down(t_history *history);
-int		cmd_add_history(t_history *history, char *cmd);
+int		reset_line(t_readline *line, char *prompt);
+int		printkey(int key, t_readline *line);
+int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
+int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
+int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
+char	*history_up(t_dlist **history);
+char	*history_down(t_dlist **history);
+int		cmd_add_history(t_dlist **history, char *cmd);
 
 // readfile
 # ifndef BUFFER_SIZE

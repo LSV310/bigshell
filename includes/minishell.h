@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 18:38:53 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/02/28 11:34:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_kv
 
 typedef struct s_mini
 {
-	t_map		*env;
-	t_history	*history;
+	t_map	*env;
+	t_dlist	*history;
 }	t_mini;
 
 // tristan

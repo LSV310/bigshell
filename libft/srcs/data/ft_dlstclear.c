@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_dlstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 12:56:34 by agruet           ###   ########.fr       */
+/*   Created: 2024/11/18 15:49:54 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/28 12:52:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exit2(t_mini *minishell, int exit_code)
+void	ft_dlstclear(t_dlist **lst, void (*del)(void*))
 {
-	ft_mapclear(&minishell->env);
-	ft_dlstclear(&minishell->history, &free_content);
-	ft_printf("exit\n");
-	exit(exit_code);
+	t_dlist	*next;
+
+	if (!lst)
+		return ;
+	ft_dlst_top(lst);
+	while (*lst)
+	{
+		next = (*lst)->next;
+		ft_dlstdelone(*lst, del);
+		*lst = next;
+	}
 }
