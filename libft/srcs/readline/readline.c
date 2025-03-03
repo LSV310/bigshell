@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 11:42:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:53:00 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	new_buffer(t_readline *line, t_dlist **history)
 
 	line->cursor = 0;
 	line->size = 1024;
+	line->end = 0;
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);

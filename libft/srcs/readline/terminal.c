@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 17:03:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:55:55 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ void	reset_terminal_mode(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
+int	find_sequence(char *seq)
+{
+	if (seq[1] == 'A')
+		return (-12);
+	else if (seq[1] == 'B')
+		return (-13);
+	else if (seq[1] == 'C')
+		return (-14);
+	else if (seq[1] == 'D')
+		return (-15);
+	else if (seq[1] == 'H')
+		return (-16);
+	else if (seq[1] == 'F')
+		return (-17);
+	else if (seq[1] == '3')
+		return (-18);
+	return (0);
+}
+
 int	read_key(void)
 {
 	char	ch;
@@ -43,12 +62,7 @@ int	read_key(void)
 			|| read(STDIN_FILENO, &seq[1], 1) != 1)
 			return (-1);
 		if (seq[0] == '[')
-		{
-			if (seq[1] == 'A')
-				return (-12);
-			else if (seq[1] == 'B')
-				return (-13);
-		}
+			return (find_sequence(seq));
 	}
 	return (ch);
 }

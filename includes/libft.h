@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 11:29:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:00:56 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,19 +145,22 @@ typedef struct s_readline
 	char	*current_line;
 	size_t	size;
 	size_t	cursor;
+	size_t	end;
 }	t_readline;
 
 char	*read_line(char *prompt, t_dlist **history);
-void	clear_line(t_readline *line, t_dlist **history, int current);
 int		signal_received(t_readline *line, t_dlist **history, char *prompt);
-int		read_key(void);
+void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);
 void	reset_terminal_mode(void);
+int		read_key(void);
 int		reset_line(t_readline *line, char *prompt);
 int		printkey(int key, t_readline *line);
+int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
 int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
 int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
-int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
+void	home_key(t_readline *line);
+void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
