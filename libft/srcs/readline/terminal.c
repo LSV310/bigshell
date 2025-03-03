@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 14:55:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:47:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	find_sequence(char *seq)
 	else if (seq[1] == 'F')
 		return (-17);
 	else if (seq[1] == '3')
+	{
+		read(STDIN_FILENO, &seq[1], 1);
 		return (-18);
+	}
 	return (0);
 }
 

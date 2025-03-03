@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:02:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:41:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	printkey(int key, t_readline *line)
 	return (0);
 }
 
-void	move_key(t_readline *line, int key)
+static void	move_key(t_readline *line, int key)
 {
 	if (key == -14 && line->cursor < line->end)
 	{
@@ -47,7 +47,7 @@ void	move_key(t_readline *line, int key)
 	}
 }
 
-void	del_key(t_readline *line)
+void	back_space(t_readline *line)
 {
 	size_t	len;
 	size_t	i;
@@ -86,7 +86,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 	else if (key == -1 && !signal_received(line, history, prompt))
 		return (0);
 	else if (key == 127)
-		del_key(line);
+		back_space(line);
 	else if (history && key == -12 && !up_arrow(line, history, prompt))
 		return (0);
 	else if (history && key == -13 && !down_arrow(line, history, prompt))
@@ -97,5 +97,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 		home_key(line);
 	else if (key == -17)
 		end_key(line);
+	else if (key == -18)
+		del_key(line);
 	return (1);
 }

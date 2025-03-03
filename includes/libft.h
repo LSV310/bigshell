@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:00:56 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:42:00 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,11 +156,13 @@ void	reset_terminal_mode(void);
 int		read_key(void);
 int		reset_line(t_readline *line, char *prompt);
 int		printkey(int key, t_readline *line);
+void	back_space(t_readline *line);
 int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
 int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
 int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
 void	home_key(t_readline *line);
 void	end_key(t_readline *line);
+void	del_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);

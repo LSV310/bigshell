@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:14:28 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:49:30 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,12 @@ void	end_key(t_readline *line)
 		ft_fprintf(0, "%c", line->current_line[line->cursor]);
 		line->cursor++;
 	}
+}
+
+void	del_key(t_readline *line)
+{
+	if (line->cursor == line->end)
+		return ;
+	ft_fprintf(0, "%c", line->current_line[line->cursor++]);
+	back_space(line);
 }
