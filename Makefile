@@ -19,7 +19,6 @@ SRC			=	builtins/pwd.c				\
 				builtins/unset.c			\
 				arena/arena.c				\
 				arena/ft_arena.c			\
-				lexer/dummy.c				\
 				lexer/ft_lexer.c			\
 				lexer/is_utils.c			\
 				lexer/token_expand.c		\

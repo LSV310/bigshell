@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strstr_dlst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 12:56:34 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/27 12:45:51 by agruet            #+#    #+#             */
+/*   Updated: 2025/02/28 13:55:38 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exit2(t_mini *minishell, int exit_code)
+t_dlist	*ft_strstr_dlst(t_dlist *lst, char *str)
 {
-	ft_mapclear(&minishell->env);
-	ft_dlstclear(&minishell->history, &free_content);
-	ft_printf("exit\n");
-	exit(exit_code);
+	if (!lst || !lst->content)
+		return (NULL);
+	while (lst)
+	{
+		if (ft_strcmp((char *)lst->content, str) == 0)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
 }

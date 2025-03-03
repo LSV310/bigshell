@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstremove_node.c                                :+:      :+:    :+:   */
+/*   ft_dlstremove_node.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:59:15 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 11:10:24 by agruet           ###   ########.fr       */
+/*   Updated: 2025/02/28 16:14:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*))
+void	dlst_remove_node(t_dlist **lst, t_dlist *node, void (*del)(void*))
 {
-	t_list	*current;
-	t_list	*previous;
+	t_dlist	*current;
 
 	if (!lst || !*lst || !node)
 		return ;
 	current = *lst;
-	previous = *lst;
 	while (current)
 	{
 		if (current == node)
 		{
-			if (current == previous)
-				*lst = node->next;
+			if (node->prev)
+				node->prev->next = node->next;
 			else
-				previous->next = node->next;
-			ft_lstdelone(node, del);
+			{
+				*lst = node->next;
+				if (*lst)
+					(*lst)->prev = NULL;
+			}
+			if (del)
+				ft_dlstdelone(node, del);
 			return ;
 		}
-		previous = current;
 		current = current->next;
 	}
 }

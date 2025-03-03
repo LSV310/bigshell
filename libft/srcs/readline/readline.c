@@ -6,26 +6,35 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 17:49:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:42:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	new_buffer(t_readline *line)
+static int	new_buffer(t_readline *line, t_dlist **history)
 {
+	t_dlist	*line_history;
+
 	line->cursor = 0;
 	line->size = 1024;
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
+	if (history)
+	{
+		line_history = ft_dlstnew(line->current_line);
+		if (!line_history)
+			return (free(line->current_line), 0);
+		ft_dlstadd_front(history, line_history);
+	}
 	return (1);
 }
 
-static int	signal_received(t_readline *line, char *prompt)
+int	signal_received(t_readline *line, t_dlist **history, char *prompt)
 {
-	free(line->current_line);
-	if (!new_buffer(line))
+	clear_line(line, history, 1);
+	if (!new_buffer(line, history))
 		return (0);
 	ft_fprintf(0, "\n%s", prompt);
 	return (1);
@@ -44,55 +53,37 @@ static int	line_too_long(t_readline *line)
 	return (1);
 }
 
-static int	other_key(int key, t_readline *line, char *prompt, t_history *hist)
+void	clear_line(t_readline *line, t_dlist **history, int current)
 {
-	if (key == 4 && line->cursor == 0)
-	{
+	ft_dlst_top(history);
+	if (history && (*history)->content == line->current_line)
+		dlst_remove_node(history, *history, &void_content);
+	else if (history && (*history)->content != line->current_line)
+		dlst_remove_node(history, *history, &free_content);
+	if (current)
 		free(line->current_line);
-		return (write(0, "\n", 1), 0);
-	}
-	else if (key == -1 && !signal_received(line, prompt))
-		return (0);
-	else if (key == 127)
-	{
-		if (line->cursor > 0)
-		{
-			line->cursor--;
-			line->current_line[line->cursor] = '\0';
-			ft_fprintf(0, "\b \b");
-		}
-	}
-	else if (hist && key == -12 && !up_arrow(line, hist, prompt))
-		return (0);
-	else if (hist && key == -13 && !down_arrow(line, hist, prompt))
-		return (0);
-	return (1);
 }
 
-char	*read_line(char *prompt, t_history *history)
+char	*read_line(char *prompt, t_dlist **history)
 {
 	int			key;
 	t_readline	line;
 
-	ft_fprintf(0, prompt);
-	if (!new_buffer(&line))
+	if (!new_buffer(&line, history))
 		return (NULL);
+	ft_fprintf(0, prompt);
 	set_raw_mode();
 	while (1)
 	{
 		key = read_key();
-		if (ft_isprint(key))
-		{
-			if (key == '\n')
-				break ;
-			write(STDOUT_FILENO, &key, 1);
-			line.current_line[line.cursor++] = key;
-		}
+		if (ft_isprint(key) && printkey(key, &line))
+			break ;
 		else if (!other_key(key, &line, prompt, history))
 			return (reset_terminal_mode(), NULL);
 		if (!line_too_long(&line))
 			return (reset_terminal_mode(), NULL);
 	}
+	clear_line(&line, history, 0);
 	if (!cmd_add_history(history, line.current_line))
 		return (reset_terminal_mode(), NULL);
 	return (write(0, "\n", 1), reset_terminal_mode(), line.current_line);

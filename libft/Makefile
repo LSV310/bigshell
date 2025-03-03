@@ -48,6 +48,16 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_tolower.c			\
 				libc/ft_toupper.c			\
 				libc/tab_len.c				\
+				data/ft_dlst_shift.c		\
+				data/ft_dlst_top.c			\
+				data/ft_dlstadd_back.c		\
+				data/ft_dlstadd_front.c		\
+				data/ft_dlstclear.c			\
+				data/ft_dlstdelone.c		\
+				data/ft_dlstlast.c			\
+				data/ft_dlstnew.c			\
+				data/ft_dlstprint.c			\
+				data/ft_dlstremove_node.c	\
 				data/ft_lstadd_back.c		\
 				data/ft_lstadd_front.c		\
 				data/ft_lstclear.c			\
@@ -59,7 +69,9 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_lstnew.c			\
 				data/ft_lstremove_node.c	\
 				data/ft_lstsize.c			\
+				data/ft_lstvoid_content.c	\
 				data/ft_maps.c				\
+				data/ft_strstr_dlst.c		\
 				printf/ft_printf.c			\
 				printf/ft_fprintf.c			\
 				printf/ft_printf_utils.c	\
@@ -68,7 +80,7 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
-				readline/additional_keys.c	\
+				readline/keys.c				\
 				readline/history.c			\
 				readline/readline.c			\
 				readline/terminal.c
