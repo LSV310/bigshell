@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 18:48:50 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:20:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_cmd
 	char	*file_out;
 }	t_cmd;
 
-typedef struct s_ast t_ast;
+typedef struct s_ast	t_ast;
 
 struct s_ast
 {

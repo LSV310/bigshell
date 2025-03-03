@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 18:38:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:20:28 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_list *tks);
 t_list	*init_tokens(t_lexer *lex, t_arena *arena);
-
 
 #endif

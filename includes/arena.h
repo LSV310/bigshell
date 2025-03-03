@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 15:15:55 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:17:34 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_arena{
 t_chunk	*region_create(size_t capacity);
 t_arena	*arena_init(void);
 void	*arena_free(t_arena *arena);
-void 	*arena_alloc(size_t size, t_arena *arena);
+void	*arena_alloc(size_t size, t_arena *arena);
 t_list	*ar_lstnew(void *content, t_arena *arena);
 void	*arena_calloc(t_arena *arena, size_t size);
 char	*ar_strndup(const char *s, size_t n, t_arena *arena);
