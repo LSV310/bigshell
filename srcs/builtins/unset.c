@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:31:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/27 14:49:48 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:52:13 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	unset(t_mini *minishell, char *var)
 
 	find = get_env(minishell, var, ft_strlen(var));
 	if (!find)
-		return (0);
+		return (1);
 	map_remove_node(&minishell->env, find);
-	return (1);
+	return (0);
 }

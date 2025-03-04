@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 11:34:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:00:30 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <dirent.h>
+# include <sys/stat.h>
 
 typedef struct s_kv
 {
@@ -53,6 +52,7 @@ t_map	*get_env(t_mini *minishell, const char *var, size_t len);
 void	create_signals(void);
 
 // builtins
+int		cd(char *dir, t_mini *minishell);
 int		echo(char **args, int param);
 int		env(t_mini *minishell);
 int		exit2(t_mini *minishell, int exit_code);

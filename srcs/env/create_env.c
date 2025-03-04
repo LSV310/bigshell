@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:26:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/26 14:44:24 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:43:34 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	create_env(t_mini *minishell)
 		if (!current)
 			return (ft_mapclear(&minishell->env), 0);
 		if (!assign_kv(__environ[i], current))
-			return (map_remove_node(&minishell->env, current),
-				ft_mapclear(&minishell->env), 0);
+			return (free(current), ft_mapclear(&minishell->env), 0);
 		ft_addmap(&previous, current);
 		previous = current;
 		i++;

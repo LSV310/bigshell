@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:42:00 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/04 13:02:18 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <termios.h>
 
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"

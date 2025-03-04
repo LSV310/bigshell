@@ -11,7 +11,8 @@ OBJ_DIR		= objs/
 CFLAGS		+= -I$(INCLUDES)
 LIBS		= -lreadline
 
-SRC			=	builtins/pwd.c				\
+SRC			=	builtins/cd.c				\
+				builtins/pwd.c				\
 				builtins/echo.c				\
 				builtins/exit.c				\
 				builtins/env.c				\

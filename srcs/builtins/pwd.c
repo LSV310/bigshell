@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:36:40 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/19 15:21:14 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:25:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	pwd(void)
 
 	cwd = getcwd(NULL, 0);
 	ft_printf("%s\n", cwd);
+	if (!cwd)
+		return (1);
 	free(cwd);
 	return (0);
 }
