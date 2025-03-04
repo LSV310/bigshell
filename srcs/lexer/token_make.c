@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 16:42:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/04 15:16:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int	main(int ac, char *av[])
 		tks = init_tokens(&lex, arena);
 		print_tokens(tks, true);
 		if (!valid_par(tks))
-		printf("bad parenthesis\n");
+		ft_printf("bad parenthesis\n");
 		token_transform(tks, arena);
-		printf("\n");
+		ft_printf("\n");
 		print_tokens(tks, false);
 	}
 }

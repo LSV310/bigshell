@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 18:27:18 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/04 15:17:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void	print_token(t_token tok, bool p_pointer)
 	if (p_pointer)
 	{
 		if (tok.p)
-			printf("%.*s (%s)\n",
+			ft_printf("%.*s (%s)\n",
 				(int)tok.len, tok.p, toktype_to_string(tok.type));
 		else
-			printf("NULL (%s)\n", toktype_to_string(tok.type));
+			ft_printf("NULL (%s)\n", toktype_to_string(tok.type));
 	}
 	else
 	{
 		if (tok.str)
-			printf("%s (%s)\n", tok.str, toktype_to_string(tok.type));
+			ft_printf("%s (%s)\n", tok.str, toktype_to_string(tok.type));
 		else
-			printf("NULL (%s)\n", toktype_to_string(tok.type));
+			ft_printf("NULL (%s)\n", toktype_to_string(tok.type));
 	}
 }
 

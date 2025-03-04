@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 18:25:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/04 15:16:44 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env)
 	lex = init_lexer(line_read);
 	tks = init_tokens(&lex, arena);
 	if (!valid_par(tks))
-		printf("bad parenthesis\n");
+		ft_printf("bad parenthesis\n");
 	expend_token_list(tks, arena, env);
 	print_tokens(tks, false);
 	return (tks);
