@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/03 15:17:34 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/05 14:55:04 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct s_chunk {
 typedef struct s_arena{
 	t_chunk	*begin;
 	t_chunk	*end;
+	int		freed;
 }	t_arena;
 
 t_chunk	*region_create(size_t capacity);
