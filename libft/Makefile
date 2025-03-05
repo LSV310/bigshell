@@ -38,6 +38,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strlcat.c			\
 				libc/ft_strlcpy.c			\
 				libc/ft_strlen.c			\
+				libc/ft_strlstr.c			\
 				libc/ft_strmapi.c			\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
@@ -67,6 +68,7 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_lstlast.c			\
 				data/ft_lstmap.c			\
 				data/ft_lstnew.c			\
+				data/ft_lstprint.c			\
 				data/ft_lstremove_node.c	\
 				data/ft_lstsize.c			\
 				data/ft_lstvoid_content.c	\

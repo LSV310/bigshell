@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 14:36:40 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 11:40:44 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/28 13:42:53 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/05 15:16:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(void)
+void	ft_lstprint(t_list *lst)
 {
-	char	*cwd;
+	int	i;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (perror("cwd"), 1);
-	ft_printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	i = 0;
+	while (lst)
+	{
+		ft_printf("%d: %s\n", i, lst->content);
+		lst = lst->next;
+		i++;
+	}
 }
