@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 18:23:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:44:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,10 @@ DIR	*search_directory(t_list **lst, char *str)
 	return (dir);
 }
 
-void	compare_str(t_list **lst, t_list *elem, char *str)
+void	finish_cmp(t_list **lst, t_list *elem, char *str, char *chr)
 {
 	char	*content;
-	char	*chr;
 
-	content = elem->content;
-	chr = ft_strchr(str, '*');
-	if (!chr)
-	{
-		if (ft_strncmp(str, content, max(ft_strlen(str), ft_strlen(content))))
-			lst_remove_node(lst, elem, &void_content);
-		return ;
-	}
-	else if (ft_strncmp(str, content, chr - str))
-	{
-		lst_remove_node(lst, elem, &void_content);
-		return ;
-	}
 	content += chr - str;
 	while (*chr == '*')
 		chr++;
@@ -75,6 +61,27 @@ void	compare_str(t_list **lst, t_list *elem, char *str)
 	}
 	if (!ft_strnstr(content, str, max(ft_strlen(str), ft_strlen(content))))
 		lst_remove_node(lst, elem, &void_content);
+}
+
+void	compare_str(t_list **lst, t_list *elem, char *str)
+{
+	char	*content;
+	char	*chr;
+
+	content = elem->content;
+	chr = ft_strchr(str, '*');
+	if (!chr)
+	{
+		if (ft_strncmp(str, content, max(ft_strlen(str), ft_strlen(content))))
+			lst_remove_node(lst, elem, &void_content);
+		return ;
+	}
+	else if (ft_strncmp(str, content, chr - str))
+	{
+		lst_remove_node(lst, elem, &void_content);
+		return ;
+	}
+	finish_cmp(lst, elem, str, chr);
 }
 
 char	*get_expanded(t_list *lst, DIR *dir)
@@ -96,8 +103,8 @@ char	*get_expanded(t_list *lst, DIR *dir)
 	current = lst;
 	while (current)
 	{
-		ft_strlcat(result, current->content, ft_strlen(result) +
-			ft_strlen(current->content) + 1);
+		ft_strlcat(result, current->content, ft_strlen(result)
+			+ ft_strlen(current->content) + 1);
 		ft_strlcat(result, " ", ft_strlen(result) + 2);
 		current = current->next;
 	}
@@ -117,7 +124,7 @@ char	*get_wildcards(char *str)
 	dir = search_directory(&lst, str);
 	if (!dir)
 		return (NULL);
-	if(!lst)
+	if (!lst)
 		return (closedir(dir), NULL);
 	current = lst;
 	while (current)
