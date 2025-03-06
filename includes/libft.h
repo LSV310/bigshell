@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 18:21:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 12:39:18 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_map	*ft_maplast(t_map *map);
 void	ft_addmap(t_map **map, t_map *new);
 void	ft_mapclear(t_map **map);
 void	map_remove_node(t_map **map, t_map *node);
+size_t	ft_mapsize(t_map *map);
 
 // readline
 typedef struct s_readline

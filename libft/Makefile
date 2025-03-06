@@ -73,6 +73,7 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_lstsize.c			\
 				data/ft_lstvoid_content.c	\
 				data/ft_maps.c				\
+				data/ft_maps2.c				\
 				data/ft_strstr_dlst.c		\
 				printf/ft_printf.c			\
 				printf/ft_fprintf.c			\

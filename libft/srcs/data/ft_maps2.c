@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_maps2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 13:24:40 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/26 13:34:35 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/06 12:39:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(void)
+size_t	ft_mapsize(t_map *map)
 {
-	t_mini	minishell;
-	char	*input;
+	size_t	size;
 
-	minishell.history = NULL;
-	if (!create_env(&minishell))
-		return (EXIT_FAILURE);
-	create_signals();
-	while (1)
+	size = 0;
+	if (!map)
+		return (0);
+	while (map->next)
 	{
-		input = read_line("minishell$> ", &minishell.history);
-		if (!input)
-			break ;
-		make_tokens(input, arena_init(), &minishell);
-		free(input);
+		size++;
+		map = map->next;
 	}
-	exit2(&minishell, 0);
-	return (EXIT_SUCCESS);
+	return (size);
 }

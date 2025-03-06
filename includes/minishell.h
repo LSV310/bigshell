@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 17:16:05 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 12:40:52 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		unset(t_mini *minishell, char *var);
 int		create_env(t_mini *minishell);
 int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_mini *minishell, const char *var, size_t len);
+char	**convert_env(t_map *map);
 
 // lexer
 int		ft_isspace(char c);
