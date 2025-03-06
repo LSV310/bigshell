@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:22:43 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/06 19:28:42 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 19:56:33 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	count_name(t_list *tks)
 			break ;
 		if (tk->type == NAME)
 			n++;
+		tks = tks->next;
 	}
 	return (n);
 }

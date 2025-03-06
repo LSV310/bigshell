@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/06 19:45:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 19:53:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(void)
 	arena = arena_init();
 	if (!arena)
 	return (0);
-	tokens = make_tokens(">Makefile >.gitignore cat >a.txt >b.txt | wc -l  ", arena, NULL);
+	tokens = make_tokens("<Makefile <.gitignore cat >a.txt >b.txt | wc -l  ", arena, NULL);
 	t_cmd *cmd = parse_cmd(&tokens, arena);
 	(void) cmd;
 }
