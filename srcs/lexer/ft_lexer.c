@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/04 15:16:44 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 19:45:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env)
 	print_tokens(tks, false);
 	return (tks);
 }
-/*
+
 int	main(void)
 {
 	t_arena	*arena;
@@ -70,7 +70,8 @@ int	main(void)
 	arena = arena_init();
 	if (!arena)
 	return (0);
-	tokens = make_tokens("> Makefile cat | wc -l  ", arena);
-	(void) tokens;
+	tokens = make_tokens(">Makefile >.gitignore cat >a.txt >b.txt | wc -l  ", arena, NULL);
+	t_cmd *cmd = parse_cmd(&tokens, arena);
+	(void) cmd;
 }
-*/
+

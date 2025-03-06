@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 17:16:05 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 19:32:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*get_env_variable(const char *key, size_t n, void *env);
 int		expend_token(t_token *tok, t_arena *arena, t_mini *env);
 t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env);
 int		expend_token_list(t_list *tks, t_arena *arena, t_mini *env);
+int		is_cmd_token(t_token *tok);
+t_cmd	*parse_cmd(t_list **tks, t_arena *arena);
 
 // env
 int		create_env(t_mini *minishell);
