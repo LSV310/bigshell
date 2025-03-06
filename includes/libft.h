@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 12:39:18 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 17:15:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct s_readline
 	size_t	end;
 }	t_readline;
 
-char	*read_line(char *prompt, t_dlist **history);
+char	*ft_readline(char *prompt, t_dlist **history);
 int		signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);

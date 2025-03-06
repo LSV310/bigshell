@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:36:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 17:15:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	clear_line(t_readline *line, t_dlist **history, int current)
 		free(line->current_line);
 }
 
-char	*read_line(char *prompt, t_dlist **history)
+char	*ft_readline(char *prompt, t_dlist **history)
 {
 	int			key;
 	t_readline	line;
