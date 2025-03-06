@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 12:40:59 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:35:50 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**convert_env(t_map *map)
 			return (free_tab(tab, i), NULL);
 		tab[i] = ft_strjoin(temp, map->value);
 		if (!tab[i])
-			return (free(temp), free_tab(tab, i) ,NULL);
+			return (free(temp), free_tab(tab, i), NULL);
 		i++;
 		map = map->next;
 	}

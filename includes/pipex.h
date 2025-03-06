@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:32:21 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 17:15:51 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:07:08 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_pipe
 	int	write_fd;
 }	t_pipe;
 
-char	*parse_env(char *cmd, char **args);
-void	free_cmd(char *cmd, char **args);
+char	*search_cmd(char *cmd, char **env);
 
 #endif
