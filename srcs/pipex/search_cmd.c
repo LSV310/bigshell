@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.c                                        :+:      :+:    :+:   */
+/*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/24 15:59:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:07:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*new_cmd(char *old_cmd, char **args)
+static char	*new_cmd(char *old_cmd)
 {
 	char	*new_cmd;
 
@@ -20,19 +20,19 @@ static char	*new_cmd(char *old_cmd, char **args)
 		return (NULL);
 	new_cmd = ft_strjoin("/", old_cmd);
 	if (!new_cmd)
-		(free_cmd(NULL, args), exit(EXIT_FAILURE));
+		return (NULL);
 	return (new_cmd);
 }
 
-static char	*find_path(void)
+static char	*find_path(char **env)
 {
 	char	*path;
 	int		i;
 
 	i = 0;
-	while (__environ[i])
+	while (env[i])
 	{
-		path = ft_strnstr(__environ[i], "PATH=", 5);
+		path = ft_strnstr(env[i], "PATH=", 5);
 		if (path)
 			return (path + 5);
 		i++;
@@ -40,7 +40,7 @@ static char	*find_path(void)
 	return (NULL);
 }
 
-static char	*try_path(char *cmd, char **path, int i, char **args)
+static char	*try_path(char *cmd, char **path, int i)
 {
 	char	*join;
 
@@ -48,37 +48,52 @@ static char	*try_path(char *cmd, char **path, int i, char **args)
 		return (NULL);
 	join = ft_strjoin(path[i], cmd);
 	if (!join)
-		(free_cmd(cmd, args), free_cmd(NULL, path), exit(EXIT_FAILURE));
-	if (!access(join, X_OK))
+		return (NULL);
+	if (!access(join, F_OK | X_OK))
 		return (join);
 	free(join);
 	return (NULL);
 }
 
-char	*parse_env(char *cmd, char **args)
+static char	*search_path(char *cmd, char **env)
 {
 	char	**path;
 	char	*temp;
 	int		i;
 
-	i = 0;
-	if (!access(cmd, X_OK))
-		return (ft_strdup(cmd));
-	cmd = new_cmd(cmd, args);
-	temp = find_path();
+	cmd = new_cmd(cmd);
+	if (!cmd)
+		return (NULL);
+	temp = find_path(env);
 	if (!temp)
 		return (free(cmd), NULL);
 	path = ft_split(temp, ':');
 	if (!path)
-		(free_cmd(cmd, args), exit(EXIT_FAILURE));
+		return (NULL);
 	temp = NULL;
 	while (path[i])
 	{
-		temp = try_path(cmd, path, i, args);
+		temp = try_path(cmd, path, i);
 		if (temp)
 			break ;
 		i++;
 	}
-	free_cmd(cmd, path);
+	free_tab(path, 0);
+	if (!temp)
+		ft_fprintf(2, "%s: command not found\n", cmd);
 	return (temp);
+}
+
+char	*search_cmd(char *cmd, char **env)
+{
+	if (strchr(cmd, '/'))
+	{
+		if (access(cmd, F_OK | X_OK))
+		{
+			perror(cmd);
+			return (NULL);
+		}
+		return (cmd);
+	}
+	return (search_path(cmd, env));
 }

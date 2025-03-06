@@ -38,6 +38,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strlcat.c			\
 				libc/ft_strlcpy.c			\
 				libc/ft_strlen.c			\
+				libc/ft_strlstr.c			\
 				libc/ft_strmapi.c			\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
@@ -67,10 +68,12 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_lstlast.c			\
 				data/ft_lstmap.c			\
 				data/ft_lstnew.c			\
+				data/ft_lstprint.c			\
 				data/ft_lstremove_node.c	\
 				data/ft_lstsize.c			\
 				data/ft_lstvoid_content.c	\
 				data/ft_maps.c				\
+				data/ft_maps2.c				\
 				data/ft_strstr_dlst.c		\
 				printf/ft_printf.c			\
 				printf/ft_fprintf.c			\
@@ -80,10 +83,10 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/ft_readline.c			\
 				readline/history.c			\
 				readline/keys.c				\
 				readline/keys2.c			\
-				readline/readline.c			\
 				readline/terminal.c
 
 OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))

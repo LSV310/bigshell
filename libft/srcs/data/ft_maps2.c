@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_maps2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 14:36:40 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/05 11:40:44 by agruet           ###   ########.fr       */
+/*   Created: 2025/02/26 13:34:35 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/06 12:39:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(void)
+size_t	ft_mapsize(t_map *map)
 {
-	char	*cwd;
+	size_t	size;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (perror("cwd"), 1);
-	ft_printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	size = 0;
+	if (!map)
+		return (0);
+	while (map->next)
+	{
+		size++;
+		map = map->next;
+	}
+	return (size);
 }

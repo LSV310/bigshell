@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 19:39:21 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/06 19:49:25 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		ft_str_equals(const char *s1, const char *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+char	*ft_strlstr(const char *big, const char *little, size_t len);
 int		ft_strstr_tab(char **tab, char *str);
 int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -113,6 +114,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstprint(t_list *lst);
 t_dlist	*ft_dlstnew(void *content);
 void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
@@ -141,6 +143,7 @@ t_map	*ft_maplast(t_map *map);
 void	ft_addmap(t_map **map, t_map *new);
 void	ft_mapclear(t_map **map);
 void	map_remove_node(t_map **map, t_map *node);
+size_t	ft_mapsize(t_map *map);
 
 // readline
 typedef struct s_readline
@@ -151,7 +154,7 @@ typedef struct s_readline
 	size_t	end;
 }	t_readline;
 
-char	*read_line(char *prompt, t_dlist **history);
+char	*ft_readline(char *prompt, t_dlist **history);
 int		signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);
