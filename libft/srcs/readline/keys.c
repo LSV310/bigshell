@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/03 15:41:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:35:16 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	printkey(int key, t_readline *line)
 	len = ft_strlen(line->current_line + line->cursor);
 	if (len > 0)
 	{
-		memmove(line->current_line + line->cursor + 1,
+		ft_memmove(line->current_line + line->cursor + 1,
 			line->current_line + line->cursor, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor + 1);
 		while (len-- > 0)
@@ -66,7 +66,7 @@ void	back_space(t_readline *line)
 	ft_fprintf(0, "\b \b");
 	if (len > 1)
 	{
-		memmove(line->current_line + line->cursor,
+		ft_memmove(line->current_line + line->cursor,
 			line->current_line + line->cursor + 1, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor);
 		i = 0;
