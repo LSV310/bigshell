@@ -1,0 +1,15 @@
+wildcard avec match
+wildcard sans match
+
+multiple IN/OUT/APPEN/HEREDOC dans n'importe quel ordre
+
+list:
+
+'echo' hello
+
+# TEST="echo hello >file"
+$TEST
+
+>out1 cat <in1 -e >out2 <in2 | cat > /dev/stdout
+
+echo '$TEST'"$TEST"'ab c'
