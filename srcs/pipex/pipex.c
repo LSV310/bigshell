@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 15:37:01 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 12:05:20 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_mini *mini, char **env)
 	char	*cmd_name;
 	pid_t	pid;
 
-	cmd_name = search_cmd(cmd->cmd, env);
+	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
 		return (0);
 	pid = fork();

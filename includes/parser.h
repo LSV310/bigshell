@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/05 17:18:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/07 12:12:44 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef enum node_type
 
 typedef struct s_cmd
 {
+	char	*name;
 	int		fdin;
-	char	*cmd;
-	char	**args;
 	int		fdout;
+	char	**args;
 }	t_cmd;
 
 typedef struct s_ast	t_ast;

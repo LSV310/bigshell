@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:22:43 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/06 19:56:33 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/07 12:29:31 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_cmd	*parse_cmd(t_list **tks, t_arena *arena)
 	t_token	*tok;
 	int		i;
 
-	cmd = arena_calloc(arena, sizeof(cmd));
+	cmd = arena_calloc(arena, sizeof(t_cmd));
 	if (!cmd_args_alloc(cmd, *tks, arena))
 		return (NULL);
 	i = 0;
@@ -108,9 +108,9 @@ t_cmd	*parse_cmd(t_list **tks, t_arena *arena)
 		tok = (**tks).content;
 		if (!is_cmd_token(tok) || !in_out_token(tok, cmd))
 			return (NULL);
-		if (tok->type == NAME && cmd->cmd == NULL)
-			cmd->cmd = tok->str;
-		else if (tok->type == NAME && cmd->cmd != NULL)
+		if (tok->type == NAME && cmd->name == NULL)
+			cmd->name = tok->str;
+		else if (tok->type == NAME && cmd->name != NULL)
 			cmd->args[i++] = tok->str;
 		*tks = (*tks)->next;
 	}
