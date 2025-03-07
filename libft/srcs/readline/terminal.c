@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/04 15:15:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	set_raw_mode(void)
 {

@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:31:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/04 14:52:13 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 int	unset(t_mini *minishell, char *var)
 {

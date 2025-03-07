@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/03 15:20:28 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:52:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_token
 }	t_token;
 
 int		is_special(char c);
+int		ft_isspace(char c);
+int		char_in_set(char c, const char *set);
 void	print_token(t_token tok, bool p_pointer);
 void	print_tokens(t_list *tks, bool p_pointer);
 t_lexer	init_lexer(const char *rdl);
