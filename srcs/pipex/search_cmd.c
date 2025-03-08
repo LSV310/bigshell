@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 15:07:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 static char	*new_cmd(char *old_cmd)
 {
@@ -86,7 +86,7 @@ static char	*search_path(char *cmd, char **env)
 
 char	*search_cmd(char *cmd, char **env)
 {
-	if (strchr(cmd, '/'))
+	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK | X_OK))
 		{

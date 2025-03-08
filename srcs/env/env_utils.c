@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 15:35:50 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 t_map	*get_env(t_mini *minishell, const char *var, size_t len)
 {
@@ -37,7 +37,7 @@ char	**convert_env(t_map *map)
 	char	*temp;
 
 	size = ft_mapsize(map);
-	tab = calloc(size + 1, sizeof(char *));
+	tab = ft_calloc(size + 1, sizeof(char *));
 	if (!tab)
 		return (NULL);
 	i = 0;
