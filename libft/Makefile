@@ -55,6 +55,7 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_dlstadd_front.c		\
 				data/ft_dlstclear.c			\
 				data/ft_dlstdelone.c		\
+				data/ft_dlstfirst.c			\
 				data/ft_dlstlast.c			\
 				data/ft_dlstnew.c			\
 				data/ft_dlstprint.c			\

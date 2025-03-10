@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 12:29:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,17 @@ void	back_space(t_readline *line)
 	line->current_line[line->end] = '\0';
 }
 
+void	del_key(t_readline *line)
+{
+	if (line->cursor == line->end)
+		return ;
+	ft_fprintf(0, "%c", line->current_line[line->cursor++]);
+	back_space(line);
+}
+
 int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 {
-	if (key == 4 && line->cursor == 0)
+	if (key == 4 && line->end == 0)
 	{
 		clear_line(line, history, 1);
 		return (write(0, "\n", 1), 0);
@@ -97,7 +105,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 		home_key(line);
 	else if (key == -17)
 		end_key(line);
-	else if (key == -18)
+	else if (key == -18 || key == 4)
 		del_key(line);
 	return (1);
 }

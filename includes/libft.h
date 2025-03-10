@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 17:15:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 12:29:50 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	ft_lstprint(t_list *lst);
 t_dlist	*ft_dlstnew(void *content);
 void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
+t_dlist	*ft_dlstfirst(t_dlist *lst);
 t_dlist	*ft_dlstlast(t_dlist *lst);
 void	ft_dlst_top(t_dlist **lst);
 void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
@@ -166,7 +167,6 @@ int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
 int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
 void	home_key(t_readline *line);
 void	end_key(t_readline *line);
-void	del_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
