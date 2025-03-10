@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/10 02:22:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 02:26:11 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ char	*expand_input(char *rdl, t_mini *env)
 
 	len = sizeof_expand(rdl, env);
 	expanded = ft_calloc(len, sizeof(char));
+	if (!expanded)
+		return (NULL);
 	fill_expanded(rdl, expanded, expanded + len, env);
 	return (expanded);
 }
