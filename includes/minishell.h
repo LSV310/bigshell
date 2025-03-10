@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:53:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 14:48:47 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "lexer.h"
 # include "parser.h"
 # include "pipex.h"
+# include "wildcards.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <signal.h>
@@ -56,6 +57,6 @@ int		pipex(t_cmd **cmds, t_mini *mini);
 void	create_signals(void);
 
 // utils
-char	*get_wildcards(char *str);
+char	*get_wildcards(char *str, t_wildcard_type type, bool single_result);
 
 #endif

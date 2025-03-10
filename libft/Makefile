@@ -43,6 +43,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
 				libc/ft_strrchr.c			\
+				libc/ft_strrcmp.c			\
 				libc/ft_strstr_tab.c		\
 				libc/ft_strtrim.c			\
 				libc/ft_substr.c			\

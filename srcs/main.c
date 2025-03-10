@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 12:40:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 18:12:09 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(void)
 			break ;
 		// make_tokens(input, arena_init(), &minishell);
 		free(input);
+		if (!isatty(STDIN_FILENO))
+			break ;
 	}
 	exit2(&minishell, 0);
 	return (EXIT_SUCCESS);
