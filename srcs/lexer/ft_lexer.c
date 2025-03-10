@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/10 01:35:10 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:33:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,25 @@ t_list	*split_to_tok(const char *line, t_arena *arena)
 	tks = build_tokens(&lex, arena);
 	if (!valid_par(tks))
 		ft_printf("bad parenthesis\n");
-	print_tokens(tks, false);
+	print_tokens(tks, true);
 	return (tks);
 }
+
+int	main(void)
+{
+	t_mini	mini;
+	t_map	c = {.key = "PATH", .value = "CHEMIN", .next = NULL};
+	t_map	b = {.key = "GOAT", .value = "Tristan", .next = &c};
+	t_map	a = {.key = "USER", .value = "tgallet", .next = &b};
+	char	*rdl = "\"$GOAT\" \'$GOAT\'$GOATED $USER<$USER$PATH";
+
+	mini.env = &a;
+	char *expanded = expand_input(rdl, &mini);
+	split_to_tok(expanded, arena_init());
+	printf("Expanded: %s\n", expanded);
+	free(expanded);
+}
+
 /*
 int	main(void)
 {

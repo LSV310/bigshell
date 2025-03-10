@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/10 02:26:11 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:27:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	size_envar(const char *cur, int *i, t_mini *env)
 	}
 	if (n == 0)
 		return (0);
-	envar = get_env(env, cur + *i - n, n)->value;
+	envar = get_env_value(env, cur + *i - n, n);
 	len = ft_strlen(envar);
 	return (len);
 }
@@ -46,7 +46,7 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_mini *
 		*src_p += 1;
 		n++;
 	}
-	envar = get_env(env, *src_p - n, n)->value;
+	envar = get_env_value(env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
 	{
@@ -98,8 +98,10 @@ size_t	sizeof_expand(char *str, t_mini *env)
 		if ((!quote || quote == '"') && str[i] == '$')
 			n += size_envar(str, &i, env);
 		else
+		{
 			n++;
-		i++;
+			i++;
+		}
 	}
 	return (n + 1);
 }
@@ -114,47 +116,23 @@ char	*expand_input(char *rdl, t_mini *env)
 	if (!expanded)
 		return (NULL);
 	fill_expanded(rdl, expanded, expanded + len, env);
+	printf("raw input: %s\n", rdl);
+	printf("expanded: %s\n", expanded);
 	return (expanded);
 }
-
-int	main(int ac, char *av[])
+/*
+int	main(void)
 {
 	t_mini	mini;
 	t_map	c = {.key = "PATH", .value = "expanded from path", .next = NULL};
 	t_map	b = {.key = "GOAT", .value = "Tristan", .next = &c};
 	t_map	a = {.key = "USER", .value = "tgallet", .next = &b};
+	char	*rdl = "\"$GOAT\" \'$GOAT\'$GOATED $USER<$USER$PATH";
 
 	mini.env = &a;
-	if (ac == 2)
-	{
-		printf("input: %s\n", av[1]);
-		char *expanded = expand_input(av[1], &mini);
-		printf("Expanded: %s\n", expanded);
-		free(expanded);
-	}
+	printf("input: %s\n", rdl);
+	char *expanded = expand_input(rdl, &mini);
+	printf("Expanded: %s\n", expanded);
+	free(expanded);
 }
-
-// size_t	sizeof_expand(char *str, t_mini *env)
-// {
-// 	size_t			n;
-// 	int				i;
-// 	char			quote;
-// 	const size_t	strlen = ft_strlen(str);
-
-// 	i = 0;
-// 	n = 0;
-// 	quote = 0;
-// 	while (i < strlen)
-// 	{
-// 		if (!quote && char_in_set(str[i], "\"'"))
-// 			quote = str[i];
-// 		else if (str[i] == quote)
-// 			quote = 0;
-// 		else if ((!quote || quote == '"') && str[i] == '$')
-// 			n += size_envar(str, &i, env);
-// 		else
-// 			n++;
-// 		i++;
-// 	}
-// 	return (n + 1);
-// }
+*/

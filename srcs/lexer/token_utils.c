@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/10 01:34:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:38:28 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void	print_token(t_token tok, bool p_pointer)
 	if (p_pointer)
 	{
 		if (tok.p)
-			ft_printf("%.*s (%s)\n",
+			printf("%.*s (%s)\n",
 				(int)tok.len, tok.p, toktype_to_string(tok.type));
 		else
-			ft_printf("NULL (%s)\n", toktype_to_string(tok.type));
+			printf("NULL (%s)\n", toktype_to_string(tok.type));
 	}
 	else
 	{
 		if (tok.str)
-			ft_printf("%s (%s)\n", tok.str, toktype_to_string(tok.type));
+			printf("%s (%s)\n", tok.str, toktype_to_string(tok.type));
 		else
-			ft_printf("NULL (%s)\n", toktype_to_string(tok.type));
+			printf("NULL (%s)\n", toktype_to_string(tok.type));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 01:17:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:30:21 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int		unset(t_mini *minishell, char *var);
 int		create_env(t_mini *minishell);
 int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_mini *minishell, const char *var, size_t len);
+const char	*get_env_value(t_mini *minishell, const char *var, size_t len);
 char	**convert_env(t_map *map);
+char	*expand_input(char *rdl, t_mini *env);
 
 // lexer
 t_list	*split_to_tok(const char *line, t_arena *arena);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 17:08:30 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ t_map	*get_env(t_mini *minishell, const char *var, size_t len)
 		current = current->next;
 	}
 	return (NULL);
+}
+
+const char	*get_env_value(t_mini *minishell, const char *var, size_t len)
+{
+	t_map	*res;
+
+	res = get_env(minishell, var, len);
+	if (res == NULL || res->value == NULL)
+		return ("");
+	else
+		return (res->value);
 }
 
 char	**convert_env(t_map *map)
