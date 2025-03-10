@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 11:52:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/08 13:47:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "minishell.h"
 # include "arena.h"
 # include <stdbool.h>
 
@@ -59,6 +58,7 @@ void	fill_token(t_lexer *lex, t_token *tok, t_token_type type);
 void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_list *tks);
-t_list	*init_tokens(t_lexer *lex, t_arena *arena);
+t_list	*build_tokens(t_lexer *lex, t_arena *arena);
+int		is_cmd_token(t_token *tok);
 
 #endif

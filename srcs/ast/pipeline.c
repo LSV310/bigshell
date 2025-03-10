@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:27:21 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/06 19:28:19 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/08 13:44:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,4 @@ int	count_cmd(t_list *tks)
 	return (n);
 }
 
-int	is_cmd_token(t_token *tok)
-{
-	if (!tok)
-		return (0);
-	if (tok->type == NAME || tok->type == REDIN || tok->type == APPEN
-		|| tok->type == HEREDOC || tok->type == REDOUT)
-		return (1);
-	else
-		return (0);
-}
+

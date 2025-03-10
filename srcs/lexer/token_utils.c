@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/04 15:17:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 01:34:20 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,3 @@ void	print_tokens(t_list *tks, bool p_pointer)
 	}
 }
 
-int	expend_token_list(t_list *tks, t_arena *arena, t_mini *env)
-{
-	t_list	*cur;
-	t_token	*tok;
-
-	cur = tks;
-	while (cur)
-	{
-		tok = cur->content;
-		if (tok == NULL)
-			return (0);
-		if (tok->type == NAME || tok->type == REDIN
-			|| tok->type == REDOUT || tok->type == APPEN)
-			expend_token(tok, arena, env);
-		else
-			tok->str = ar_strndup(tok->p, tok->len, arena);
-		cur = cur->next;
-	}
-	return (1);
-}

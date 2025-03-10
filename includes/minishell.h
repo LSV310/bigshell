@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/08 13:38:45 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 01:17:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_mini
 	t_dlist	*history;
 }	t_mini;
 
-int		expend_token_list(t_list *tks, t_arena *arena, t_mini *env);
-int		is_cmd_token(t_token *tok);
 t_cmd	*parse_cmd(t_list **tks, t_arena *arena);
 
 // builtins
@@ -49,9 +47,7 @@ t_map	*get_env(t_mini *minishell, const char *var, size_t len);
 char	**convert_env(t_map *map);
 
 // lexer
-int		expend_token(t_token *tok, t_arena *arena, t_mini *env);
-t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env);
-int		expend_token_list(t_list *tks, t_arena *arena, t_mini *env);
+t_list	*split_to_tok(const char *line, t_arena *arena);
 
 // pipex
 int		pipex(t_cmd **cmds, t_mini *mini);

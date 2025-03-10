@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/08 13:38:56 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:10:00 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,28 @@ static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_mini *mini, char **env)
 	return (pid);
 }
 
-int	pipex(t_cmd **cmds, t_mini *mini)
-{
-	int		pipefd[2];
-	int		i;
-	pid_t	last_pid;
-	char	**env;
+// int	pipex(t_cmd **cmds, t_mini *mini)
+// {
+// 	int		pipefd[2];
+// 	int		i;
+// 	pid_t	last_pid;
+// 	char	**env;
 
-	i = 0;
-	env = convert_env(mini->env);
-	if (!env)
-		return (1);
-	while (cmds[i])
-	{
-		if (pipefd[1])
-			close(pipefd[1]);
-		pipe(pipefd);
-		dupfds(cmds[i], pipefd);
-		last_pid = exec_cmd(cmds[i], pipefd, mini, env);
-		if (last_pid == -1)
-			return (close(pipefd[1]), (pipefd[1] = 0), 1);
-		i++;
-	}
-	close(pipefd[1]);
-	return (wait_childs(i, last_pid));
-}
+// 	i = 0;
+// 	env = convert_env(mini->env);
+// 	if (!env)
+// 		return (1);
+// 	while (cmds[i])
+// 	{
+// 		if (pipefd[1])
+// 			close(pipefd[1]);
+// 		pipe(pipefd);
+// 		dupfds(cmds[i], pipefd);
+// 		last_pid = exec_cmd(cmds[i], pipefd, mini, env);
+// 		if (last_pid == -1)
+// 			return (close(pipefd[1]), (pipefd[1] = 0), 1);
+// 		i++;
+// 	}
+// 	close(pipefd[1]);
+// 	return (wait_childs(i, last_pid));
+// }

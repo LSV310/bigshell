@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 12:07:17 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/10 01:35:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,19 @@ void	skip_spaces(t_lexer *lex)
 		lex->cur++;
 }
 
-t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env)
+t_list	*split_to_tok(const char *line, t_arena *arena)
 {
 	t_list	*tks;
 	t_lexer	lex;
 
-	lex = init_lexer(line_read);
-	tks = init_tokens(&lex, arena);
+	lex = init_lexer(line);
+	tks = build_tokens(&lex, arena);
 	if (!valid_par(tks))
 		ft_printf("bad parenthesis\n");
-	expend_token_list(tks, arena, env);
 	print_tokens(tks, false);
 	return (tks);
 }
-
+/*
 int	main(void)
 {
 	t_arena	*arena;
@@ -70,10 +69,11 @@ int	main(void)
 	arena = arena_init();
 	if (!arena)
 	return (0);
-	// tokens = make_tokens("<a <b cat -e >c >d | wc -l  ", arena, NULL);
-	tokens = make_tokens("cat -e| wc -l  ", arena, NULL);
+	// tokens = split_to_tok("<a <b cat -e >c >d | wc -l  ", arena, NULL);
+	tokens = split_to_tok("cat -e| wc -l  ", arena);
 	t_cmd *cmd = parse_cmd(&tokens, arena);
 	printf("%s\n", cmd->name);
 	(void) cmd;
 }
+*/
 

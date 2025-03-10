@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/10 01:13:38 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(void)
 		input = ft_readline("minishell$> ", &minishell.history);
 		if (!input)
 			break ;
-		make_tokens(input, arena_init(), &minishell);
+		split_to_tok(input, arena_init());
 		free(input);
 	}
 	exit2(&minishell, 0);
