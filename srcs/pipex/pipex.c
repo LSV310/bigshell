@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 14:46:21 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_mini *mini, char **env)
 		(close(pipefd[0]), close(pipefd[1]));
 		execve(cmd_name, cmd->args, env);
 		perror("pipex");
-		exit2(mini, EXIT_FAILURE);
+		exit2(mini, EXIT_FAILURE, NULL);
 	}
 	return (pid);
 }

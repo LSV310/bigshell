@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 13:26:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 14:45:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_mini
 int		cd(char *dir, t_mini *minishell);
 int		echo(char **args, int param);
 int		env(t_mini *minishell);
-int		exit2(t_mini *minishell, int exit_code);
+int		exit2(t_mini *minishell, int int_code, char *char_code);
 int		export(t_mini *minishell, char *var);
 int		pwd(void);
 int		unset(t_mini *minishell, char *var);

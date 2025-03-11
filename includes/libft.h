@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 17:24:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 14:42:20 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strlstr(const char *big, const char *little, size_t len);
 int		ft_strstr_tab(char **tab, char *str);
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_realloc(void *old_ptr, size_t size, size_t old_size);
 char	*ft_strdup(const char *s);
@@ -63,6 +64,7 @@ void	*free_tab(char **tab, int nb);
 int		count_words(char const *s, char c);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+char	*ft_ltoa(long n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
