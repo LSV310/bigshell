@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 12:17:10 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 12:57:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ DIR	*search_directory(t_list **lst, char *str, t_wildcard_type type)
 	entry = readdir(dir);
 	while (entry)
 	{
-		if ((type == DIRECTORIES && entry->d_type == DT_DIR)
-			|| (type == FILES
-				&& (entry->d_type == DT_REG || entry->d_type == DT_LNK)))
+		if (type_corresponding(entry, type))
 		{
 			new = ft_lstnew(entry->d_name);
 			if (!new)
@@ -97,8 +95,7 @@ char	*get_expanded(t_list *lst, DIR *dir, char *str)
 	char	*result;
 
 	if (!lst)
-		return (ft_lstclear(&lst, &void_content), closedir(dir),
-			ft_strdup(str));
+		return (free_wildcards(lst, dir), ft_strdup(str));
 	current = lst;
 	count = 0;
 	while (current)
@@ -116,7 +113,7 @@ char	*get_expanded(t_list *lst, DIR *dir, char *str)
 		current = current->next;
 	}
 	result[count - 1] = 0;
-	return (ft_lstclear(&lst, &void_content), closedir(dir), result);
+	return (free_wildcards(lst, dir), result);
 }
 
 char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
@@ -142,6 +139,6 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 		current = next;
 	}
 	if (type == FILES && single_result == true && ft_lstsize(lst) > 1)
-		return (ft_lstclear(&lst, &void_content), closedir(dir), NULL);
+		return (free_wildcards(lst, dir), NULL);
 	return (get_expanded(lst, dir, str));
 }

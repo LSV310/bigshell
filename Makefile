@@ -32,6 +32,7 @@ SRC			=	arena/arena.c				\
 				pipex/pipex.c				\
 				pipex/search_cmd.c			\
 				signals/signals.c			\
+				utils/wildcards_utils.c		\
 				utils/wildcards.c			\
 				main.c
 

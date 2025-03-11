@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 12:12:40 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 13:26:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "lexer.h"
 # include "parser.h"
 # include "pipex.h"
+# include "wildcards.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <signal.h>
-# include <dirent.h>
 
 typedef struct s_mini
 {
@@ -54,14 +54,5 @@ int		pipex(t_cmd **cmds, t_mini *mini);
 
 // signals
 void	create_signals(void);
-
-// utils
-typedef enum WILDCARD
-{
-	FILES,
-	DIRECTORIES
-}	t_wildcard_type;
-
-char	*get_wildcards(char *str, t_wildcard_type type, bool single_result);
 
 #endif
