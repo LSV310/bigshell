@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 17:59:59 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/11 12:17:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ DIR	*search_directory(t_list **lst, char *str, t_wildcard_type type)
 	while (entry)
 	{
 		if ((type == DIRECTORIES && entry->d_type == DT_DIR)
-			|| (type == FILES &&
-			(entry->d_type == DT_REG || entry->d_type == DT_LNK)))
+			|| (type == FILES
+				&& (entry->d_type == DT_REG || entry->d_type == DT_LNK)))
 		{
 			new = ft_lstnew(entry->d_name);
 			if (!new)
@@ -44,6 +44,7 @@ DIR	*search_directory(t_list **lst, char *str, t_wildcard_type type)
 void	finish_cmp(t_list **lst, t_list *elem, char *content, char *chr)
 {
 	char	*str;
+	char	*find;
 
 	while (*chr == '*')
 		chr++;
@@ -51,13 +52,16 @@ void	finish_cmp(t_list **lst, t_list *elem, char *content, char *chr)
 	chr = ft_strchr(str, '*');
 	while (chr)
 	{
-		if (!ft_strlstr(content, str, chr - str))
+		find = ft_strlstr(content, str, chr - str);
+		if (!find)
 		{
 			lst_remove_node(lst, elem, &void_content);
 			return ;
 		}
-		content += chr - str;
-		str = chr + 1;
+		content = find + (chr - str);
+		str = chr;
+		while (str && *str == '*')
+			str++;
 		chr = ft_strchr(str, '*');
 	}
 	if (*str && ft_strrcmp(content, str))
@@ -86,14 +90,15 @@ void	compare_str(t_list **lst, t_list *elem, char *str)
 	finish_cmp(lst, elem, content, chr);
 }
 
-char	*get_expanded(t_list *lst, DIR *dir)
+char	*get_expanded(t_list *lst, DIR *dir, char *str)
 {
 	t_list	*current;
 	int		count;
 	char	*result;
 
 	if (!lst)
-		return (ft_lstclear(&lst, &void_content), closedir(dir), NULL);
+		return (ft_lstclear(&lst, &void_content), closedir(dir),
+			ft_strdup(str));
 	current = lst;
 	count = 0;
 	while (current)
@@ -111,8 +116,7 @@ char	*get_expanded(t_list *lst, DIR *dir)
 		current = current->next;
 	}
 	result[count - 1] = 0;
-	ft_lstclear(&lst, &void_content);
-	return (closedir(dir), result);
+	return (ft_lstclear(&lst, &void_content), closedir(dir), result);
 }
 
 char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
@@ -129,7 +133,7 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 	if (!dir)
 		return (NULL);
 	if (!lst)
-		return (closedir(dir), NULL);
+		return (closedir(dir), ft_strdup(str));
 	current = lst;
 	while (current)
 	{
@@ -139,5 +143,5 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 	}
 	if (type == FILES && single_result == true && ft_lstsize(lst) > 1)
 		return (ft_lstclear(&lst, &void_content), closedir(dir), NULL);
-	return (get_expanded(lst, dir));
+	return (get_expanded(lst, dir, str));
 }
