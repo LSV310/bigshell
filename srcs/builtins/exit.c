@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 14:45:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	long_overflow(char *nbr)
 		return (free(limit), true);
 }
 
-int	exit2(t_mini *minishell, int int_code, char *char_code)
+int	exit2(t_shell *minishell, int int_code, char *char_code)
 {
 	int	code;
 

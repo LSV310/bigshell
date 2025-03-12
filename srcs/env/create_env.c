@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:26:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 10:57:52 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	assign_kv(char *var, t_map *map)
 	return (1);
 }
 
-int	create_env(t_mini *minishell)
+int	create_env(t_shell *minishell)
 {
 	size_t	i;
 	t_map	*current;

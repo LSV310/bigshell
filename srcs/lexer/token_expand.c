@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:19 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	size_envar(const char *cur, int *i, t_mini *env)
+size_t	size_envar(const char *cur, int *i, t_shell *env)
 {
 	size_t		len;
 	size_t		n;
@@ -27,12 +27,12 @@ size_t	size_envar(const char *cur, int *i, t_mini *env)
 	}
 	if (n == 0)
 		return (0);
-	envar = get_env(env, cur + *i - n, n)->value;
+	envar = get_env(env->env, cur + *i - n, n)->value;
 	len = ft_strlen(envar);
 	return (len);
 }
 
-size_t	write_envar(char *here, const char *cur, int *i, t_mini *env)
+size_t	write_envar(char *here, const char *cur, int *i, t_shell *env)
 {
 	size_t		len;
 	size_t		n;
@@ -46,13 +46,13 @@ size_t	write_envar(char *here, const char *cur, int *i, t_mini *env)
 		(*i)++;
 		n++;
 	}
-	envar = get_env(env, cur + *i - n, n)->value;
+	envar = get_env(env->env, cur + *i - n, n)->value;
 	envar_len = ft_strlen(envar);
 	ft_memcpy(here, envar, ft_strlen(envar));
 	return (envar_len);
 }
 
-void	expend_token_fill(t_token *tok, size_t len, t_mini *env)
+void	expend_token_fill(t_token *tok, size_t len, t_shell *env)
 {
 	int		j;
 	int		i;
@@ -74,7 +74,7 @@ void	expend_token_fill(t_token *tok, size_t len, t_mini *env)
 	}
 }
 
-size_t	tokenstr_size(t_token *tok, t_mini *env)
+size_t	tokenstr_size(t_token *tok, t_shell *env)
 {
 	size_t	n;
 	int		i;
@@ -100,7 +100,7 @@ size_t	tokenstr_size(t_token *tok, t_mini *env)
 	return (n + 1);
 }
 
-int	expend_token(t_token *tok, t_arena *arena, t_mini *env)
+int	expend_token(t_token *tok, t_arena *arena, t_shell *env)
 {
 	size_t	len;
 

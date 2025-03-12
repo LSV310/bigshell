@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/04 15:17:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_tokens(t_list *tks, bool p_pointer)
 	}
 }
 
-int	expend_token_list(t_list *tks, t_arena *arena, t_mini *env)
+int	expend_token_list(t_list *tks, t_arena *arena, t_shell *env)
 {
 	t_list	*cur;
 	t_token	*tok;
