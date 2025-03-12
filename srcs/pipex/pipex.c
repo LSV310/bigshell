@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/08 13:38:56 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:41:34 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	dupfds(t_cmd *cmds, int *pipefd)
 		dup2(cmds->fdout, pipefd[1]);
 }
 
-static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_mini *mini, char **env)
+static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_shell *mini, char **env)
 {
 	char	*cmd_name;
 	pid_t	pid;
@@ -56,12 +56,12 @@ static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_mini *mini, char **env)
 		(close(pipefd[0]), close(pipefd[1]));
 		execve(cmd_name, cmd->args, env);
 		perror("pipex");
-		exit2(mini, EXIT_FAILURE);
+		exit2(mini, EXIT_FAILURE, NULL);
 	}
 	return (pid);
 }
 
-int	pipex(t_cmd **cmds, t_mini *mini)
+int	pipex(t_cmd **cmds, t_shell *mini)
 {
 	int		pipefd[2];
 	int		i;

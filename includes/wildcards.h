@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   wildcards.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:15:58 by agruet           ###   ########.fr       */
+/*   Created: 2025/03/11 12:46:20 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/11 13:26:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef WILDCARDS_H
+# define WILDCARDS_H
 
-int	env(t_map *env)
+# include "minishell.h"
+# include <dirent.h>
+
+typedef enum WILDCARD
 {
-	t_map	*current;
+	FILES,
+	DIRECTORIES,
+	BOTH
+}	t_wildcard_type;
 
-	if (!env)
-		return (1);
-	current = env->next;
-	while (current)
-	{
-		ft_printf("%s=%s\n", current->key, current->value);
-		current = current->next;
-	}
-	return (0);
-}
+char	*get_wildcards(char *str, t_wildcard_type type, bool single_result);
+bool	type_corresponding(struct dirent *entry, t_wildcard_type type);
+void	free_wildcards(t_list *lst, DIR *dir);
+
+#endif

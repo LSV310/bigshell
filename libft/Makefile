@@ -9,6 +9,7 @@ OBJ_DIR		= objs/
 CFLAGS		+= -I../$(INLCUDES)
 
 SRC			=	libc/ft_atoi.c				\
+				libc/ft_atol.c				\
 				libc/ft_bzero.c				\
 				libc/ft_calloc.c			\
 				libc/ft_isalnum.c			\
@@ -17,6 +18,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_isdigit.c			\
 				libc/ft_isprint.c			\
 				libc/ft_itoa.c				\
+				libc/ft_ltoa.c				\
 				libc/ft_memchr.c			\
 				libc/ft_memcmp.c			\
 				libc/ft_memcpy.c			\
@@ -43,6 +45,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
 				libc/ft_strrchr.c			\
+				libc/ft_strrcmp.c			\
 				libc/ft_strstr_tab.c		\
 				libc/ft_strtrim.c			\
 				libc/ft_substr.c			\
@@ -55,6 +58,7 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_dlstadd_front.c		\
 				data/ft_dlstclear.c			\
 				data/ft_dlstdelone.c		\
+				data/ft_dlstfirst.c			\
 				data/ft_dlstlast.c			\
 				data/ft_dlstnew.c			\
 				data/ft_dlstprint.c			\

@@ -1,5 +1,5 @@
 CC			= cc
-CFLAGS		= -g3 #-Wall -Werror -Wextra
+CFLAGS		= -ggdb #-Wall -Werror -Wextra
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -32,6 +32,7 @@ SRC			=	arena/arena.c				\
 				pipex/pipex.c				\
 				pipex/search_cmd.c			\
 				signals/signals.c			\
+				utils/wildcards_utils.c		\
 				utils/wildcards.c			\
 				main.c
 

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 19:49:25 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:41:08 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strrcmp(const char *s1, const char *s2);
 int		ft_str_equals(const char *s1, const char *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -50,6 +51,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strlstr(const char *big, const char *little, size_t len);
 int		ft_strstr_tab(char **tab, char *str);
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_realloc(void *old_ptr, size_t size, size_t old_size);
 char	*ft_strdup(const char *s);
@@ -62,6 +64,7 @@ void	*free_tab(char **tab, int nb);
 int		count_words(char const *s, char c);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+char	*ft_ltoa(long n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
@@ -118,6 +121,7 @@ void	ft_lstprint(t_list *lst);
 t_dlist	*ft_dlstnew(void *content);
 void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
+t_dlist	*ft_dlstfirst(t_dlist *lst);
 t_dlist	*ft_dlstlast(t_dlist *lst);
 void	ft_dlst_top(t_dlist **lst);
 void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
@@ -168,7 +172,6 @@ int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
 int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
 void	home_key(t_readline *line);
 void	end_key(t_readline *line);
-void	del_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);

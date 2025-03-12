@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 12:07:17 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:41:25 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	skip_spaces(t_lexer *lex)
 		lex->cur++;
 }
 
-t_list	*make_tokens(const char	*line_read, t_arena *arena, t_mini *env)
+t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
 {
 	t_list	*tks;
 	t_lexer	lex;

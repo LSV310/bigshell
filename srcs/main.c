@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	t_mini	minishell;
+	t_shell	minishell;
 	char	*input;
 
 	minishell.history = NULL;
@@ -26,9 +26,13 @@ int	main(void)
 		input = ft_readline("minishell$> ", &minishell.history);
 		if (!input)
 			break ;
-		make_tokens(input, arena_init(), &minishell);
+		char *wildcard = get_wildcards(input, FILES, false);
+		ft_printf("%s\n", wildcard);
+		free(wildcard);
 		free(input);
+		if (!isatty(STDIN_FILENO))
+			break ;
 	}
-	exit2(&minishell, 0);
+	exit2(&minishell, 0, NULL);
 	return (EXIT_SUCCESS);
 }

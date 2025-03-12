@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_dlstfirst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:15:58 by agruet           ###   ########.fr       */
+/*   Created: 2024/11/18 15:40:33 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/10 12:09:30 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-int	env(t_map *env)
+t_dlist	*ft_dlstfirst(t_dlist *lst)
 {
-	t_map	*current;
-
-	if (!env)
-		return (1);
-	current = env->next;
-	while (current)
-	{
-		ft_printf("%s=%s\n", current->key, current->value);
-		current = current->next;
-	}
-	return (0);
+	if (!lst)
+		return (NULL);
+	while (lst && lst->prev)
+		lst = lst->prev;
+	return (lst);
 }
