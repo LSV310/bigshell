@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:01:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:43:29 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:52:12 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,17 @@ static bool	update_env(char *dir, char *cwd, t_map *env)
 	return (true);
 }
 
-int	cd(t_map *env, char *dir)
+int	cd(t_map *env, char **args)
 {
 	char	*cwd;
+	char	*dir;
 
+	if (args[1])
+	{
+		ft_fprintf(2, "cd: too many arguments\n");
+		return (1);
+	}
+	dir = args[0];
 	cwd = getcwd(NULL, 0);
 	if (!dir || !cwd)
 	{

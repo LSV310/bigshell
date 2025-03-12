@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:31:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 16:45:23 by agruet           ###   ########.fr       */
+/*   Created: 2025/03/12 17:49:59 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/12 17:50:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "libft.h"
 
-int	unset(t_map *env, char **args)
+void	siginit(struct sigaction *sa, void (*action)(int, siginfo_t *, void *))
 {
-	t_map	*find;
-	int		i;
-
-	i = 0;
-	while (args[i])
-	{
-		find = get_env(env->next, args[i], ft_strlen(args[i]));
-		if (find)
-			map_remove_node(&env, find);
-		i++;
-	}
-	return (0);
+	sigemptyset(&sa->sa_mask);
+	sa->sa_handler = NULL;
+	sa->sa_sigaction = action;
+	sa->sa_flags = SA_SIGINFO;
 }
