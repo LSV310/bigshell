@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 14:42:20 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 13:34:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdarg.h>
 # include <limits.h>
 # include <termios.h>
+# include <signal.h>
 
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"
@@ -156,6 +157,8 @@ typedef struct s_readline
 	size_t	end;
 }	t_readline;
 
+extern volatile int	g_sig;
+
 char	*ft_readline(char *prompt, t_dlist **history);
 int		signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
@@ -173,6 +176,8 @@ void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
+void	siginit(struct sigaction *sa, void (*action)(int, siginfo_t *, void *));
+void	rl_signals(void);
 
 // readfile
 # ifndef BUFFER_SIZE

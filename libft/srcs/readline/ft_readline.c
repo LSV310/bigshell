@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 12:20:59 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 13:37:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static int	new_buffer(t_readline *line, t_dlist **history)
 
 int	signal_received(t_readline *line, t_dlist **history, char *prompt)
 {
+	if (g_sig != SIGINT)
+	{
+		g_sig = 0;
+		return (1);
+	}
 	clear_line(line, history, 1);
 	if (!new_buffer(line, history))
 		return (0);
@@ -70,6 +75,7 @@ char	*ft_readline(char *prompt, t_dlist **history)
 	int			key;
 	t_readline	line;
 
+	rl_signals();
 	if (!new_buffer(&line, history))
 		return (NULL);
 	ft_fprintf(0, prompt);
