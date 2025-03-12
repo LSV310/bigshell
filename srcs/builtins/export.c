@@ -49,6 +49,30 @@ static int	printenv(t_map *env)
 	return (0);
 }
 
+t_map	*add_env_var(t_map *env, char *key, char *value)
+{
+	char	*join;
+	char	*env_str;
+	t_map	*new_var;
+
+	if (!key)
+		return (NULL);
+	join = ft_strjoin(key, "=");
+	if (!join)
+		return (NULL);
+	if (value)
+	{
+		env_str = ft_strjoin(join, value);
+		free(join);
+		if (!env_str)
+			return (NULL);
+	}
+	else
+		env_str = join;
+	new_var = create_new_var(env, env_str);
+	free(env_str);
+	return (new_var);
+}
 
 int	export(t_map *env, char *var)
 {

@@ -18,8 +18,19 @@ static bool	update_env(char *dir, char *cwd, t_map *env)
 	t_map	*oldpwd;
 
 	pwd = get_env(env, "PWD", 3);
-	oldpwd = get_env(minishell, "OLDPWD", 6);
+	if (!pwd)
+	{
+		pwd = add_env_var(env, "PWD", cwd);
+		if (!pwd)
+			return (false);
+	}
 	oldpwd = get_env(env, "OLDPWD", 6);
+	if (!oldpwd)
+	{
+		oldpwd = add_env_var(env, "OLDPWD", NULL);
+		if (!oldpwd)
+			return (false);
+	}
 	free(oldpwd->value);
 	oldpwd->value = pwd->value;
 	pwd->value = cwd;
