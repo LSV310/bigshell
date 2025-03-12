@@ -6,11 +6,11 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 13:41:34 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:46:55 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 static int	wait_childs(int cmd_amount, int last_pid)
 {

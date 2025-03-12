@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 13:41:25 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:35:55 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,3 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
 	print_tokens(tks, false);
 	return (tks);
 }
-
-int	main(void)
-{
-	t_arena	*arena;
-	t_list	*tokens;
-
-	arena = arena_init();
-	if (!arena)
-	return (0);
-	// tokens = make_tokens("<a <b cat -e >c >d | wc -l  ", arena, NULL);
-	tokens = make_tokens("cat -e| wc -l  ", arena, NULL);
-	t_cmd *cmd = parse_cmd(&tokens, arena);
-	printf("%s\n", cmd->name);
-	(void) cmd;
-}
-

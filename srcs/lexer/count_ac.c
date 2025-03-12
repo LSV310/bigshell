@@ -1,13 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   uwu.c                                              :+:      :+:    :+:   */
+/*   count_ac.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 18:12:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/03 15:20:54 by agruet           ###   ########.fr       */
+/*   Created: 2025/03/12 16:53:47 by tgallet           #+#    #+#             */
+/*   Updated: 2025/03/12 16:58:42 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <stdio.h>
+
+int	main(int ac, char *av[])
+{
+	printf("nb: %d\n", ac - 1);
+	for (int i = 1; i < ac; i++)
+	{
+		printf("%d : %s\n", i, av[i]);
+	}
+}

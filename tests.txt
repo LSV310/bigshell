@@ -13,3 +13,5 @@ $TEST
 >out1 cat <in1 -e >out2 <in2 | cat > /dev/stdout
 
 echo '$TEST'"$TEST"'ab c'
+
+$NOTEXIST dissapear unstead of empty string

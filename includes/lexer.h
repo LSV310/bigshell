@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 11:52:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 21:05:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_token
 	size_t			len;
 	t_token_type	type;
 	char			*str;
+	t_arena			*arena;
 }	t_token;
 
 int		is_special(char c);
@@ -59,6 +60,6 @@ void	fill_token(t_lexer *lex, t_token *tok, t_token_type type);
 void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_list *tks);
-t_list	*init_tokens(t_lexer *lex, t_arena *arena);
+t_list	*init_tokens(const char *src, t_arena *arena);
 
 #endif
