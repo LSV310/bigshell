@@ -6,19 +6,19 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/07 11:49:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:15:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	env(t_mini *minishell)
+int	env(t_map *env)
 {
 	t_map	*current;
 
-	if (!minishell->env)
+	if (!env)
 		return (1);
-	current = minishell->env;
+	current = env->next;
 	while (current)
 	{
 		ft_printf("%s=%s\n", current->key, current->value);

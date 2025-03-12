@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:34:35 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/04 14:41:44 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 10:58:31 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	ft_mapclear(t_map **map)
 	while (*map)
 	{
 		next = (*map)->next;
-		free((*map)->key);
-		free((*map)->value);
+		if ((*map)->key)
+			free((*map)->key);
+		if ((*map)->value)
+			free((*map)->value);
 		free(*map);
 		*map = next;
 	}

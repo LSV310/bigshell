@@ -6,23 +6,23 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 17:12:30 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/12 11:28:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	create_new_var(t_mini *minishell, char *var)
+static t_map	*create_new_var(t_map *env, char *var)
 {
 	t_map	*new;
 
 	new = newmap(NULL, NULL);
 	if (!new)
-		return (0);
+		return (NULL);
 	if (!assign_kv(var, new))
-		return (free(new), 0);
-	ft_addmap(&minishell->env, new);
-	return (1);
+		return (free(new), NULL);
+	ft_addmap(&env, new);
+	return (new);
 }
 
 static int	replace_var(t_map *find, char *var, char *chr)
@@ -34,18 +34,34 @@ static int	replace_var(t_map *find, char *var, char *chr)
 	return (1);
 }
 
-int	export(t_mini *minishell, char *var)
+static int	printenv(t_map *env)
+{
+	t_map	*current;
+
+	if (!env)
+		return (1);
+	current = env->next;
+	while (current)
+	{
+		ft_printf("export %s=\"%s\"\n", current->key, current->value);
+		current = current->next;
+	}
+	return (0);
+}
+
+
+int	export(t_map *env, char *var)
 {
 	t_map	*find;
 	char	*chr;
 
 	if (!var)
-		return (env(minishell));
+		return (printenv(env));
 	chr = ft_strchr(var, '=');
 	if (!chr)
-		return (1);
-	find = get_env(minishell, var, chr - var);
-	if (!find && !create_new_var(minishell, var))
+		return (0);
+	find = get_env(env, var, chr - var);
+	if (!find && !create_new_var(env, var))
 		return (1);
 	else if (!replace_var(find, var, chr))
 		return (1);
