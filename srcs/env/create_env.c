@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:26:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:56:31 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	create_env(t_shell *minishell)
 	t_map	*current;
 	t_map	*previous;
 
-	minishell->env = newmap(ft_strdup("?"), ft_strdup(""));
+	minishell->env = newmap(ft_strdup("?"), ft_strdup("0"));
 	if (!minishell->env)
 		return (0);
 	i = 0;

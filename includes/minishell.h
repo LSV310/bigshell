@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 12:47:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 16:50:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		try_builtins(t_cmd *cmd, t_shell *shell);
 
 // signals
 void	create_signals(void);
+void	restore_signals(void);
 
 // utils
 int		check_first_arg(t_map *env, char **args, int *exit_code);

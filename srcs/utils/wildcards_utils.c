@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:35:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 14:13:50 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:14:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	type_corresponding(struct dirent *entry, t_wildcard_type type)
 {
+	if (entry->d_name[0] == '.')
+		return (false);
 	if (entry->d_type == DT_REG || entry->d_type == DT_LNK)
 	{
 		if (type == FILES || type == BOTH)
@@ -21,8 +23,6 @@ bool	type_corresponding(struct dirent *entry, t_wildcard_type type)
 	}
 	else if (entry->d_type == DT_DIR)
 	{
-		if (!ft_strcmp(entry->d_name, ".") || !ft_strcmp(entry->d_name, ".."))
-			return (false);
 		if (type == DIRECTORIES || type == BOTH)
 			return (true);
 	}

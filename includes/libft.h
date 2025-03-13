@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 11:10:36 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 16:49:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,14 @@ void	rl_init_signals(void);
 void	rl_reset_signals(void);
 
 // signals
-void	siginit(struct sigaction *sa, void (*action)(int, siginfo_t *, void *));
+typedef enum SIG_HANDLING
+{
+	HANDLER,
+	SIGACTION
+}	t_sighandler;
+
+void	siginit(struct sigaction *sa, t_sighandler sighandler,
+	void (*action)(int, siginfo_t *, void *));
 
 // readfile
 # ifndef BUFFER_SIZE
