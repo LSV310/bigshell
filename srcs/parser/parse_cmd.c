@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 16:05:29 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:01:15 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_cmd	*parse_cmd(t_list *tks)
 	{
 		tok = cur->content;
 		if (!is_cmd_token(tok) || !in_out_token(tok, cmd))
-			return (NULL);
+			break ;
 		if (tok->type == NAME && cmd->name == NULL)
 			cmd->name = ft_strdup(tok->str);
 		if (tok->type == NAME)

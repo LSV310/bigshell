@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 15:59:54 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:59:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
 		exit2(shell, builtins, NULL);
-	cmd_name = search_cmd(cmd->cmd, env);
+	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
-		exit2(shell, EXIT_FAILURE, NULL);
+		return (exit2(shell, EXIT_FAILURE, NULL));
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
 	return (exit2(shell, EXIT_FAILURE, NULL));
@@ -73,10 +73,11 @@ int	pipex(t_list **tks, t_shell *shell)
 		close(pipefd[1]);
 		last_pid = exec_cmd(tks[i], pipefd, shell, env);
 		if (last_pid == -1)
-			break ;
+		break ;
 		i++;
 	}
 	close(pipefd[0]);
 	free_tab(env, 0);
 	return (wait_childs(i, last_pid));
 }
+

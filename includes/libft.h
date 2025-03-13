@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 15:59:14 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:57:08 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,6 @@ char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
 void	rl_init_signals(void);
 void	rl_reset_signals(void);
-
-// signals
-void	siginit(struct sigaction *sa, void (*action)(int, siginfo_t *, void *));
 
 // readfile
 # ifndef BUFFER_SIZE

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 21:05:23 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:33:58 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_token	*get_next_token(t_lexer *lex, t_arena *arena)
 	tok = arena_calloc(arena, sizeof(t_token));
 	if (!tok)
 		return (NULL);
-	tok->arena = arena;
 	skip_spaces(lex);
 	if (*lex->cur == '\0' || (lex->cur >= lex->start + lex->len))
 		make_end_token(lex, tok);

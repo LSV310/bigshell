@@ -6,48 +6,39 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 21:38:08 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:33:03 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*wildcard_expand(char *src, t_shell *shell);
-
-t_token	*get_next_nametk(t_lexer *lex, t_arena *arena)
+char	*wildcard_expand(t_lexer lex, t_shell *shell) // must keep the quotes
 {
-	t_token	*tok;
+	char	*wild;
+	t_token	tok;
+	char	*res;
 
-	tok = arena_calloc(arena, sizeof(t_token));
-	if (!tok)
+	if (!lex.start)
 		return (NULL);
-	tok->arena = arena;
-	skip_spaces(lex);
-	if (*lex->cur == '\0' || (lex->cur >= lex->start + lex->len))
-		make_end_token(lex, tok);
-	else
-		fill_token(lex, tok, NAME);
-	return (tok);
-}
-
-t_list	*str_to_name_tks(const char *src, t_arena *arena)
-{
-	t_list		*tks;
-	t_token		*tmp;
-	t_lexer		lex;
-
-	lex = init_lexer(src);
-	tks = NULL;
-	while (true)
+	res = ft_strdup("");
+	while (res)
 	{
-		tmp = get_next_nametk(&lex, arena);
-		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
-		if (!tks || !tmp)
-			return (NULL);
-		if (tmp->type == ENDT || tmp->type == INVALID)
+		memset(&tok, 0, sizeof(t_token));
+		fill_token(skip_spaces(&lex), &tok, NAME);
+		tok.str = ft_substr(tok.p, 0, tok.len);
+		if (!tok.str)
 			break ;
+		wild = get_wildcards(tok.str , BOTH, false);
+		free(tok.str);
+		tok.str = res;
+		res = ft_strjoin(tok.str, wild);
+		free(wild);
+		free(tok.str);
+		tok.str = res;
+		res = ft_strjoin(tok.str, " ");
+		free(tok.str);
 	}
-	return (tks);
+	return (res);
 }
 
 bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell)
@@ -59,9 +50,9 @@ bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell)
 
 	tok = cur->content;
 	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
-	if (!res || !*res)
+	if (!res)
 		lst_remove_node(&tks, cur, void_content);
-	res = wildcard_expand(res, shell);
+	res = wildcard_expand(init_lexer(res), shell);
 	free(res);
 	return (true);
 }
@@ -84,4 +75,5 @@ int	expand_lst_token(t_list *tks, t_shell *shell)
 		}
 		cur = cur->next;
 	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 20:34:42 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:32:50 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
 	{
-		printf("error: env value was bigger than buffer\n");
+		ft_printf("error: env value was bigger than buffer\n");
 		return (0);
 	}
 	ft_memcpy(dst_p, envar, envar_len);
@@ -79,7 +79,7 @@ void	fill_expanded(const char *src, char *dest, char const *dest_end, t_shell *e
 	}
 }
 
-size_t	sizeof_expand(char *str, t_shell *env)
+size_t	sizeof_expand(char *str, t_shell *env) // must keep the quotes
 {
 	size_t			n;
 	int				i;
@@ -118,8 +118,8 @@ char	*env_exp(char *src, t_shell *env)
 	if (!expanded)
 		return (NULL);
 	fill_expanded(src, expanded, expanded + len, env);
-	printf("raw input: %s\n", src);
-	printf("expanded: %s\n", expanded);
+	ft_printf("raw input: %s\n", src);
+	ft_printf("expanded: %s\n", expanded);
 	free(src);
 	return (expanded);
 }
