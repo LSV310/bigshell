@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 20:42:53 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:59:33 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ char	*env_exp(char *src, t_shell *env);
 
 
 // builtins
-int		cd(t_map *env, char *dir);
+int		cd(t_map *env, char **args);
 int		echo(char **args);
-int		env(t_map *env);
-int		exit2(t_shell *minishell, int int_code, char *char_code);
-int		export(t_map *env, char *var);
-int		pwd(void);
-int		unset(t_map *env, char *var);
+int		env2(t_map *env, char **args);
+int		exit2(t_shell *minishell, int int_code, char **args);
+int		export(t_map *env, char **args);
+int		pwd(char **args);
+int		unset(t_map *env, char **args);
 
 // env
 int		create_env(t_shell *minishell);
@@ -60,9 +60,14 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env);
 int		expend_token_list(t_list *tks, t_arena *arena, t_shell *env);
 
 // pipex
-int		pipex(t_cmd **cmds, t_shell *mini);
+int		pipex(t_list **tks, t_shell *shell);
+int		try_builtins(t_cmd *cmd, t_shell *shell);
 
 // signals
 void	create_signals(void);
+
+// utils
+int		check_first_arg(t_map *env, char **args, int *exit_code);
+bool	var_name_valid(char *var);
 
 #endif

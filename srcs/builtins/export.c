@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:28:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:39:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static t_map	*create_new_var(t_map *env, char *var)
 {
 	t_map	*new;
 
+	if (var_name_valid(var) == false)
+	{
+		ft_fprintf(2, "export: %s: not a valid identifier", var);
+		return (NULL);
+	}
 	new = newmap(NULL, NULL);
 	if (!new)
 		return (NULL);
@@ -32,21 +37,6 @@ static int	replace_var(t_map *find, char *var, char *chr)
 	if (!find->value)
 		return (0);
 	return (1);
-}
-
-static int	printenv(t_map *env)
-{
-	t_map	*current;
-
-	if (!env)
-		return (1);
-	current = env->next;
-	while (current)
-	{
-		ft_printf("export %s=\"%s\"\n", current->key, current->value);
-		current = current->next;
-	}
-	return (0);
 }
 
 t_map	*add_env_var(t_map *env, char *key, char *value)
@@ -74,20 +64,31 @@ t_map	*add_env_var(t_map *env, char *key, char *value)
 	return (new_var);
 }
 
-int	export(t_map *env, char *var)
+int	export(t_map *env, char **args)
 {
 	t_map	*find;
 	char	*chr;
+	int		exit_code;
+	int		i;
 
-	if (!var)
-		return (printenv(env));
-	chr = ft_strchr(var, '=');
-	if (!chr)
-		return (0);
-	find = get_env(env, var, chr - var);
-	if (!find && !create_new_var(env, var))
-		return (1);
-	else if (!replace_var(find, var, chr))
-		return (1);
-	return (0);
+	exit_code = 0;
+	if (!check_first_arg(env, args, &exit_code))
+		return (exit_code);
+	i = 0;
+	while (args[i])
+	{
+		chr = ft_strchr(args[i], '=');
+		if (!chr)
+		{
+			i++;
+			continue ;
+		}
+		find = get_env(env, args[i], chr - args[i]);
+		if (!find && !create_new_var(env, args[i]))
+			exit_code = 1;
+		else if (find && !replace_var(find, args[i], chr))
+			exit_code = 1;
+		i++;
+	}
+	return (exit_code);
 }

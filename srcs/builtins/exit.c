@@ -6,46 +6,58 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 16:11:06 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:59:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool	long_overflow(char *nbr)
+static bool	is_num(char *nbr)
+{
+	if (*nbr == '-' || *nbr == '+')
+		nbr++;
+	while (*nbr && ft_isdigit(*nbr))
+		nbr++;
+	if (*nbr)
+		return (false);
+	return (true);
+}
+
+static bool	numeric_arg(char *nbr)
 {
 	char	*limit;
 
 	while (*nbr == 32 || (*nbr >= 9 && *nbr <= 13))
 		nbr++;
-	if (*nbr == '+' || *nbr == '-')
-	{
-		if (*nbr == '-')
-			limit = ft_ltoa(LONG_MIN);
-		else
-			limit = ft_ltoa(LONG_MAX);
-	}
+	if (is_num(nbr) == false)
+		return (false);
+	if (*nbr == '-')
+		limit = ft_ltoa(LONG_MIN);
+	else
+		limit = ft_ltoa(LONG_MAX);
 	if (!limit)
 		return (false);
-	if (ft_strcmp(limit, nbr) <= 0)
-		return (free(limit), false);
-	else
+	if (ft_strcmp(nbr, limit) <= 0)
 		return (free(limit), true);
+	else
+		return (free(limit), false);
 }
 
-int	exit2(t_shell *minishell, int int_code, char *char_code)
+int	exit2(t_shell *minishell, int int_code, char **args)
 {
 	int	code;
 
-	if (char_code)
+	if (args && args[0] && args[1])
+		return (ft_fprintf(2, "exit: too many arguments\n"), 1);
+	if (args && args[0])
 	{
-		if (long_overflow(char_code) == true)
+		if (numeric_arg(args[0]) == false)
 		{
-			ft_fprintf(2, "exit: %s numeric argument required\n", char_code);
+			ft_fprintf(2, "exit: %s numeric argument required\n", args[0]);
 			code = 2;
 		}
 		else
-			code = ft_atol(char_code);
+			code = ft_atol(args[0]);
 	}
 	else
 		code = int_code;

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 13:46:55 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:59:54 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	wait_childs(int cmd_amount, int last_pid)
 	i = 0;
 	while (i++ < cmd_amount - 1)
 		waitpid(-1, &status, 0);
-	waitpid(last_pid, &status, 0);
+	if (last_pid != -1)
+		waitpid(last_pid, &status, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -28,40 +29,32 @@ static int	wait_childs(int cmd_amount, int last_pid)
 	return (1);
 }
 
-static void	dupfds(t_cmd *cmds, int *pipefd)
+static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 {
-	if (cmds->fdin != 0)
-		dup2(cmds->fdin, STDIN_FILENO);
-	else
-		dup2(pipefd[0], STDIN_FILENO);
-	close(pipefd[0]);
-	if (cmds->fdout != 1)
-		dup2(cmds->fdout, pipefd[1]);
-}
-
-static pid_t	exec_cmd(t_cmd *cmd, int *pipefd, t_shell *mini, char **env)
-{
+	t_cmd	*cmd;
 	char	*cmd_name;
+	int		builtins;
 	pid_t	pid;
 
-	cmd_name = search_cmd(cmd->name, env);
-	if (!cmd_name)
-		return (0);
 	pid = fork();
 	if (pid == -1)
 		perror("fork");
-	else if (pid == 0)
-	{
-		dup2(pipefd[1], STDOUT_FILENO);
-		(close(pipefd[0]), close(pipefd[1]));
-		execve(cmd_name, cmd->args, env);
-		perror("pipex");
-		exit2(mini, EXIT_FAILURE, NULL);
-	}
-	return (pid);
+	else if (pid != 0)
+		return (pid);
+	cmd = parse_cmd(cmdtk);
+	(close(pipefd[0]), close(pipefd[1]));
+	builtins = try_builtins(cmd, shell);
+	if (builtins >= 0)
+		exit2(shell, builtins, NULL);
+	cmd_name = search_cmd(cmd->cmd, env);
+	if (!cmd_name)
+		exit2(shell, EXIT_FAILURE, NULL);
+	execve(cmd_name, cmd->args, env);
+	perror("pipex");
+	return (exit2(shell, EXIT_FAILURE, NULL));
 }
 
-int	pipex(t_cmd **cmds, t_shell *mini)
+int	pipex(t_list **tks, t_shell *shell)
 {
 	int		pipefd[2];
 	int		i;
@@ -69,20 +62,21 @@ int	pipex(t_cmd **cmds, t_shell *mini)
 	char	**env;
 
 	i = 0;
-	env = convert_env(mini->env);
+	env = convert_env(shell->env);
 	if (!env)
 		return (1);
-	while (cmds[i])
+	while (tks[i])
 	{
-		if (pipefd[1])
-			close(pipefd[1]);
+		if (pipefd[0])
+			(dup2(pipefd[0], STDIN_FILENO), close(pipefd[0]));
 		pipe(pipefd);
-		dupfds(cmds[i], pipefd);
-		last_pid = exec_cmd(cmds[i], pipefd, mini, env);
+		close(pipefd[1]);
+		last_pid = exec_cmd(tks[i], pipefd, shell, env);
 		if (last_pid == -1)
-			return (close(pipefd[1]), (pipefd[1] = 0), 1);
+			break ;
 		i++;
 	}
-	close(pipefd[1]);
+	close(pipefd[0]);
+	free_tab(env, 0);
 	return (wait_childs(i, last_pid));
 }

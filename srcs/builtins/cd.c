@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:01:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 11:43:29 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:26:31 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool	update_env(char *dir, char *cwd, t_map *env)
+static int	update_env(char *cwd, t_map *env)
 {
 	t_map	*pwd;
 	t_map	*oldpwd;
@@ -22,39 +22,54 @@ static bool	update_env(char *dir, char *cwd, t_map *env)
 	{
 		pwd = add_env_var(env, "PWD", cwd);
 		if (!pwd)
-			return (false);
+			return (1);
 	}
 	oldpwd = get_env(env, "OLDPWD", 6);
 	if (!oldpwd)
 	{
 		oldpwd = add_env_var(env, "OLDPWD", NULL);
 		if (!oldpwd)
-			return (false);
+			return (1);
 	}
 	free(oldpwd->value);
 	oldpwd->value = pwd->value;
 	pwd->value = cwd;
-	return (true);
+	return (0);
 }
 
-int	cd(t_map *env, char *dir)
+static int	go_home(t_map *env)
+{
+	t_map	*find;
+
+	find = get_env(env, "HOME", 5);
+	if (!find->value)
+		return (ft_fprintf(2, "cd: HOME not set\n"), 0);
+	if (chdir(find->value))
+		return (perror(find->value), 1);
+	return (0);
+}
+
+int	cd(t_map *env, char **args)
 {
 	char	*cwd;
+	char	*dir;
 
+	if (args && args[1])
+		return (ft_fprintf(2, "cd: too many arguments\n"), 1);
+	dir = args[0];
 	cwd = getcwd(NULL, 0);
-	if (!dir || !cwd)
+	if (!cwd)
 	{
-		if (cwd)
-			free(cwd);
-		if (chdir("~"))
-			return (perror(dir), errno);
+		perror("cd");
+		if (!chdir("~"))
+			return (1);
 	}
+	if (!dir && !go_home(env))
+		return (1);
 	else
 	{
 		if (chdir(dir))
 			return (free(cwd), perror(dir), errno);
 	}
-	if (update_env(dir, cwd, env) == false)
-		return (1);
-	return (0);
+	return (update_env(cwd, env));
 }
