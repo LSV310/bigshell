@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 16:27:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:12:15 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	try_builtins(t_cmd *cmd, t_shell *shell)
+int	try_builtins(t_cmd *cmd, t_shell *shell)
 {
 	if (ft_strcmp(cmd->cmd, "echo"))
 		return (echo(&cmd->args[1]));

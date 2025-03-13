@@ -30,6 +30,7 @@ SRC			=	arena/arena.c				\
 				lexer/token_make.c			\
 				lexer/token_utils.c			\
 				pipex/pipex.c				\
+				pipex/search_builtins.c		\
 				pipex/search_cmd.c			\
 				signals/signals.c			\
 				utils/wildcards_utils.c		\

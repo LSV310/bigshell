@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 12:29:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:10:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 		clear_line(line, history, 1);
 		return (write(0, "\n", 1), 0);
 	}
-	else if (key == -1 && !signal_received(line, history, prompt))
+	else if (key == -1 && !rl_signal_received(line, history, prompt))
 		return (0);
 	else if (key == 127)
 		back_space(line);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 18:05:48 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:10:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ extern volatile int	g_sig;
 
 char	*ft_readline(char *prompt, t_dlist **history);
 int		new_buffer(t_readline *line, t_dlist **history);
-int		signal_received(t_readline *line, t_dlist **history, char *prompt);
+int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);
 void	reset_terminal_mode(void);

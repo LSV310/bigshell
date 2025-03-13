@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 16:42:50 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:16:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	wait_childs(int cmd_amount, int last_pid)
 	i = 0;
 	while (i++ < cmd_amount - 1)
 		waitpid(-1, &status, 0);
-	waitpid(last_pid, &status, 0);
+	if (last_pid != -1)
+		waitpid(last_pid, &status, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -50,7 +51,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		exit2(shell, EXIT_FAILURE, NULL);
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
-	exit2(shell, EXIT_FAILURE, NULL);
+	return (exit2(shell, EXIT_FAILURE, NULL));
 }
 
 int	pipex(t_list **tks, t_shell *shell)
@@ -72,7 +73,7 @@ int	pipex(t_list **tks, t_shell *shell)
 		close(pipefd[1]);
 		last_pid = exec_cmd(tks[i], pipefd, shell, env);
 		if (last_pid == -1)
-			return (close(pipefd[0]), 1);
+			break ;
 		i++;
 	}
 	close(pipefd[0]);
