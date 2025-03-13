@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 12:57:58 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:28:20 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-DIR	*search_directory(t_list **lst, char *str, t_wildcard_type type)
+DIR	*search_directory(t_list **lst, t_wildcard_type type)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -126,7 +126,7 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 	if (!ft_strchr(str, '*'))
 		return (ft_strdup(str));
 	lst = NULL;
-	dir = search_directory(&lst, str, type);
+	dir = search_directory(&lst, type);
 	if (!dir)
 		return (NULL);
 	if (!lst)

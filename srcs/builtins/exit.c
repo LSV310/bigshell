@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 12:40:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:27:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ static bool	numeric_arg(char *nbr)
 		nbr++;
 	if (is_num(nbr) == false)
 		return (false);
-	if (*nbr == '+' || *nbr == '-')
-	{
-		if (*nbr == '-')
-			limit = ft_ltoa(LONG_MIN);
-		else
-			limit = ft_ltoa(LONG_MAX);
-	}
+	if (*nbr == '-')
+		limit = ft_ltoa(LONG_MIN);
+	else
+		limit = ft_ltoa(LONG_MAX);
 	if (!limit)
 		return (false);
 	if (ft_strcmp(nbr, limit) <= 0)
