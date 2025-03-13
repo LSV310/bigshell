@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 11:12:37 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:47:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef struct s_shell
 // builtins
 int		cd(t_map *env, char **args);
 int		echo(char **args);
-int		env2(t_map *env);
-int		exit2(t_shell *minishell, int int_code, char *char_code);
+int		env2(t_map *env, char **args);
+int		exit2(t_shell *minishell, int int_code, char **args);
 int		export(t_map *env, char **args);
-int		pwd(void);
+int		pwd(char **args);
 int		unset(t_map *env, char **args);
 
 // env
@@ -56,5 +56,9 @@ int		try_builtins(t_cmd *cmd, t_shell *shell);
 
 // signals
 void	create_signals(void);
+
+// utils
+int		check_first_arg(t_map *env, char **args, int *exit_code);
+bool	var_name_valid(char *var);
 
 #endif

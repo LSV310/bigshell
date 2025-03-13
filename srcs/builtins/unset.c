@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:31:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 16:45:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:34:56 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	unset(t_map *env, char **args)
 	int		i;
 
 	i = 0;
+	if (args[0] && args[0][0] == '-')
+		return (ft_fprintf(2, "unset: -%c: invalid option\n", args[0][1]), 2);
 	while (args[i])
 	{
 		find = get_env(env->next, args[i], ft_strlen(args[i]));

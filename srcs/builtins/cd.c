@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:01:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 15:52:12 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:40:27 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,24 @@ static bool	update_env(char *dir, char *cwd, t_map *env)
 	return (true);
 }
 
+static int	go_home(t_map *env)
+{
+	t_map	*find;
+
+	find = get_env(env, "HOME", 5);
+	if (!find->value)
+		return (ft_fprintf(2, "cd: HOME not set\n"), 0);
+	if (chdir(find->value))
+		return (perror(find->value), 1);
+	return (0);
+}
+
 int	cd(t_map *env, char **args)
 {
 	char	*cwd;
 	char	*dir;
 
-	if (args[1])
+	if (args && args[1])
 	{
 		ft_fprintf(2, "cd: too many arguments\n");
 		return (1);
@@ -53,8 +65,8 @@ int	cd(t_map *env, char **args)
 	{
 		if (cwd)
 			free(cwd);
-		if (chdir("~"))
-			return (perror(dir), errno);
+		if (!go_home(env))
+			return (1);
 	}
 	else
 	{
