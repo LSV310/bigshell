@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:15:12 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 20:17:19 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:28:55 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena)
 	t_token		*tmp;
 	t_lexer		lex;
 
+	if (!src)
+		return (NULL);
 	lex = init_lexer(src);
 	tks = NULL;
 	while (true)
@@ -45,4 +47,15 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena)
 			break ;
 	}
 	return (tks);
+}
+
+void	lst_insert(t_list *dest, t_list *to_insert)
+{
+	t_list	*tmp;
+
+	if (!dest || !to_insert)
+		return ;
+	tmp = dest->next;
+	dest->next = to_insert;
+	ft_lstlast(to_insert)->next = tmp;
 }

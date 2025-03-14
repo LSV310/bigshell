@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:35:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	print_tokens(t_list *tks, bool p_pointer)
 	}
 }
 
-int	expend_token_list(t_list *tks, t_arena *arena, t_shell *env)
+// TODO: use old token_fillstr and make sure it returns 0 when it fails
+int	tks_fillstr(t_list *tks, t_shell *env)
 {
 	t_list	*cur;
 	t_token	*tok;
@@ -79,9 +80,9 @@ int	expend_token_list(t_list *tks, t_arena *arena, t_shell *env)
 			return (0);
 		if (tok->type == NAME || tok->type == REDIN
 			|| tok->type == REDOUT || tok->type == APPEN)
-			expend_token(tok, arena, env);
+			token_fillstr(tok, env->arena, env);
 		else
-			tok->str = ar_strndup(tok->p, tok->len, arena);
+			tok->str = ar_strndup(tok->p, tok->len, env->arena);
 		cur = cur->next;
 	}
 	return (1);
