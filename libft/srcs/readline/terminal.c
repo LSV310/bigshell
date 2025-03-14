@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 16:55:00 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 19:00:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	set_raw_mode(void)
 {
 	struct termios	term;
 
+	ft_memset(&term, 0, sizeof(struct termios));
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ICANON | ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
@@ -25,6 +26,7 @@ void	reset_terminal_mode(void)
 {
 	struct termios	term;
 
+	ft_memset(&term, 0, sizeof(struct termios));
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag |= (ICANON | ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
