@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 11:03:58 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 11:36:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,9 +182,9 @@ void	rl_init_signals(void);
 void	rl_reset_signals(void);
 
 // signals
+void	init_sighandler(struct sigaction *sa, void (*action)(int));
 void	init_sigaction(struct sigaction *sa,
 	void (*action)(int, siginfo_t *, void *));
-void	init_sighandler(struct sigaction *sa, void (*action)(int));
 
 // readfile
 # ifndef BUFFER_SIZE
