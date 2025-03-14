@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 13:14:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:32:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	main(void)
 		if (!input)
 			break ;
 		free(input);
-		if (!isatty(STDIN_FILENO))
-			break ;
 	}
 	exit2(&minishell, 0, NULL);
 	return (EXIT_SUCCESS);

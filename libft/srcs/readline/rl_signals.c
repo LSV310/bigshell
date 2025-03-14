@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 13:20:53 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:14:41 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	rl_reset_signals(bool use_sigint)
 
 int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
 {
+	if (g_sig == 0)
+		return (0);
 	if (g_sig != SIGINT)
 	{
 		g_sig = 0;
