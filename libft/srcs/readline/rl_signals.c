@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 17:53:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 11:02:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	rl_init_signals(void)
 {
 	struct sigaction	sa;
 
-	siginit(&sa, handle_signals);
+	init_sigaction(&sa, handle_signals);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 }
@@ -35,9 +35,7 @@ void	rl_reset_signals(void)
 {
 	struct sigaction	sa;
 
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = SIG_DFL;
-	sa.sa_flags = 0;
+	init_sighandler(&sa, SIG_DFL);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 }

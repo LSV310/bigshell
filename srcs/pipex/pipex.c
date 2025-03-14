@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 16:52:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 11:09:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		exit2(shell, builtins, NULL);
 	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
-		return (exit2(shell, EXIT_FAILURE, NULL));
+		exit2(shell, EXIT_FAILURE, NULL);
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
 	return (exit2(shell, EXIT_FAILURE, NULL));
