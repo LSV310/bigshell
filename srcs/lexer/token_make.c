@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 17:33:58 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:23:38 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,3 @@ t_list	*init_tokens(const char *src, t_arena *arena)
 	}
 	return (tks);
 }
-

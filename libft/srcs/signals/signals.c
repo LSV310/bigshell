@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:49:59 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 11:04:08 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 13:23:27 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_sigaction(struct sigaction *sa,
 	sigemptyset(&sa->sa_mask);
 	sa->sa_sigaction = action;
 	sa->sa_flags = SA_SIGINFO;
-
 }
 
 void	init_sighandler(struct sigaction *sa, void (*action)(int))
