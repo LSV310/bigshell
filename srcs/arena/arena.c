@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/05 15:03:50 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:25:51 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	*arena_free(t_arena *arena)
 	t_chunk	*region;
 	t_chunk	*next;
 
+	if (!arena)
+		return (NULL);
 	region = arena->begin;
 	while (region != NULL)
 	{
