@@ -1,0 +1,4 @@
+.vscode
+.gitingore
+*.a
+*.o

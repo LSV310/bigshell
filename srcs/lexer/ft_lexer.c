@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 18:35:37 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:43:14 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ t_lexer	*skip_spaces(t_lexer *lex)
 		lex->cur++;
 	return (lex);
 }
+// TODO: organize the first and the second pass on the tokens
+// t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
+// {
+// 	t_list	*tks;
+// 	t_lexer	lex;
 
-t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
-{
-	t_list	*tks;
-	t_lexer	lex;
-
-	lex = init_lexer(line_read);
-	tks = init_tokens(&lex, arena);
-	if (!valid_par(tks))
-		ft_printf("bad parenthesis\n");
-	expend_token_list(tks, arena, env);
-	print_tokens(tks, false);
-	return (tks);
-}
+// 	lex = init_lexer(line_read);
+// 	tks = init_tokens(&lex, arena);
+// 	if (!valid_par(tks))
+// 		ft_printf("bad parenthesis\n");
+// 	tks_fillstr(tks, env);
+// 	print_tokens(tks, false);
+// 	return (tks);
+// }

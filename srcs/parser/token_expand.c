@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 20:33:03 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:36:23 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,21 @@ char	*wildcard_expand(t_lexer lex, t_shell *shell) // must keep the quotes
 
 bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell)
 {
-	// TODO: delete token case, multi token case, env expand + wildcard expand
 	char	*res;
 	t_token	*tok;
 	t_list	*new_tks;
 
 	tok = cur->content;
 	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
-	if (!res)
-		lst_remove_node(&tks, cur, void_content);
 	res = wildcard_expand(init_lexer(res), shell);
+	lst_insert(cur, str_to_name_tks(res, shell->arena));
+	lst_remove_node(&tks, cur, void_content);
+	if (!tks_fillstr(tks, shell))
+	{
+		free(res);
+		return (false);
+	}
+	// TODO: allocates and fill token->strs
 	free(res);
 	return (true);
 }
