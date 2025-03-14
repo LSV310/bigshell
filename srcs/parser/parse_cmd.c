@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 14:22:43 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 12:29:31 by tgallet          ###   ########.fr       */
+/*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
+/*   Updated: 2025/03/13 17:01:15 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_name(t_list *tks)
 	return (n);
 }
 
-int	cmd_args_alloc(t_cmd *cmd, t_list *tks, t_arena *arena)
+int	cmd_args_alloc(t_cmd *cmd, t_list *tks)
 {
 	int	n;
 
@@ -42,7 +42,7 @@ int	cmd_args_alloc(t_cmd *cmd, t_list *tks, t_arena *arena)
 		return (0);
 	else if (n > 1)
 	{
-		cmd->args = arena_calloc(arena, sizeof(char *) * (n));
+		cmd->args = ft_calloc(sizeof(char *) * (n), 1);
 		if (cmd->args == NULL)
 			return (0);
 		cmd->args[n] = NULL;
@@ -67,7 +67,7 @@ void	replace_fd(int fd, t_cmd *cmd, bool is_in)
 	}
 	else
 	{
-		if (cmd->fdout != STDOUT_FILENO && cmd->fdin > -1)
+		if (cmd->fdout != STDOUT_FILENO && cmd->fdout > -1)
 			close (cmd->fdout);
 		cmd->fdout = fd;
 		if (fd > 1)
@@ -93,26 +93,30 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 	return (1);
 }
 
-t_cmd	*parse_cmd(t_list **tks, t_arena *arena)
+t_cmd	*parse_cmd(t_list *tks)
 {
 	t_cmd	*cmd;
 	t_token	*tok;
 	int		i;
+	t_list	*cur;
 
-	cmd = arena_calloc(arena, sizeof(t_cmd));
-	if (!cmd_args_alloc(cmd, *tks, arena))
+	if (!tks)
+		return (NULL);
+	cur = tks;
+	cmd = ft_calloc(sizeof(t_cmd), 1);
+	if (!cmd_args_alloc(cmd, cur))
 		return (NULL);
 	i = 0;
-	while (*tks && (**tks).content)
+	while (cur && cur->content)
 	{
-		tok = (**tks).content;
+		tok = cur->content;
 		if (!is_cmd_token(tok) || !in_out_token(tok, cmd))
-			return (NULL);
+			break ;
 		if (tok->type == NAME && cmd->name == NULL)
-			cmd->name = tok->str;
-		else if (tok->type == NAME && cmd->name != NULL)
+			cmd->name = ft_strdup(tok->str);
+		if (tok->type == NAME)
 			cmd->args[i++] = tok->str;
-		*tks = (*tks)->next;
+		cur = cur->next;
 	}
 	return (cmd);
 }

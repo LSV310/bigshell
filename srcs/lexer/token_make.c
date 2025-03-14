@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/04 15:16:49 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 17:33:58 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,17 @@ t_token	*get_next_token(t_lexer *lex, t_arena *arena)
 	return (tok);
 }
 
-t_list	*init_tokens(t_lexer *lex, t_arena *arena)
+t_list	*init_tokens(const char *src, t_arena *arena)
 {
 	t_list		*tks;
 	t_token		*tmp;
+	t_lexer		lex;
 
+	lex = init_lexer(src);
 	tks = NULL;
 	while (true)
 	{
-		tmp = get_next_token(lex, arena);
+		tmp = get_next_token(&lex, arena);
 		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
 		if (!tks || !tmp)
 			return (NULL);
@@ -95,26 +97,3 @@ t_list	*init_tokens(t_lexer *lex, t_arena *arena)
 	return (tks);
 }
 
-/*
-
-int	main(int ac, char *av[])
-{
-	t_list	*tks;
-	t_lexer	lex;
-	t_arena	*arena;
-
-	arena = arena_init();
-	if (ac == 2)
-	{
-		lex = init_lexer("(<$IN $GOAT >$OUT) && ls");
-		tks = init_tokens(&lex, arena);
-		print_tokens(tks, true);
-		if (!valid_par(tks))
-		ft_printf("bad parenthesis\n");
-		token_transform(tks, arena);
-		ft_printf("\n");
-		print_tokens(tks, false);
-	}
-}
-
-*/

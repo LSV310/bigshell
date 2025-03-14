@@ -6,12 +6,13 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/27 16:37:03 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:38:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// count characters including quotes and stops at unquoted (space or special)
 void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 {
 	char	quote;
@@ -19,7 +20,7 @@ void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 	quote = 0;
 	tok->p = lex->cur;
 	tok->type = type;
-	while (*lex->cur != '\0' && (quote != 0 || !ft_isspace(*lex->cur))
+	while (*lex->cur != '\0' && (quote || !ft_isspace(*lex->cur))
 		&& !(quote == 0 && is_special(*lex->cur)))
 	{
 		if (quote == 0 && char_in_set(*lex->cur, "\"\'"))
@@ -28,11 +29,6 @@ void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 			quote = 0;
 		tok->len++;
 		lex->cur++;
-	}
-	if (tok->len == 0)
-	{
-		tok->type = INVALID;
-		tok->p = NULL;
 	}
 }
 

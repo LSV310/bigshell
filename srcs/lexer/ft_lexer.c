@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/12 11:56:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ t_lexer	init_lexer(const char *rdl)
 	return (lex);
 }
 
-void	skip_spaces(t_lexer *lex)
+t_lexer	*skip_spaces(t_lexer *lex)
 {
 	while (ft_isspace(*lex->cur))
 		lex->cur++;
+	return (lex);
 }
 
 t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
@@ -61,16 +62,3 @@ t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
 	print_tokens(tks, false);
 	return (tks);
 }
-/*
-int	main(void)
-{
-	t_arena	*arena;
-	t_list	*tokens;
-
-	arena = arena_init();
-	if (!arena)
-	return (0);
-	tokens = make_tokens("> Makefile cat | wc -l  ", arena);
-	(void) tokens;
-}
-*/

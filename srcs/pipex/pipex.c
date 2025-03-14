@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
 /*   Updated: 2025/03/13 16:52:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 static int	wait_childs(int cmd_amount, int last_pid)
 {
@@ -47,9 +47,9 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
 		exit2(shell, builtins, NULL);
-	cmd_name = search_cmd(cmd->cmd, env);
+	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
-		exit2(shell, EXIT_FAILURE, NULL);
+		return (exit2(shell, EXIT_FAILURE, NULL));
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
 	return (exit2(shell, EXIT_FAILURE, NULL));

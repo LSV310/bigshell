@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
 /*   Updated: 2025/03/13 16:50:39 by agruet           ###   ########.fr       */
@@ -27,7 +27,15 @@ typedef struct s_shell
 {
 	t_map	*env;
 	t_dlist	*history;
+	t_arena	*arena;
 }	t_shell;
+
+//idk
+int		expend_token_list(t_list *tks, t_arena *arena, t_shell *env);
+int		is_cmd_token(t_token *tok);
+t_cmd	*parse_cmd(t_list *tks);
+char	*env_exp(char *src, t_shell *env);
+
 
 // builtins
 int		cd(t_map *env, char **args);
@@ -44,6 +52,7 @@ int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_map *env, const char *var, size_t len);
 t_map	*add_env_var(t_map *env, char *key, char *value);
 char	**convert_env(t_map *map);
+const char	*get_env_value(t_map *env, const char *var, size_t len);
 
 // lexer
 int		expend_token(t_token *tok, t_arena *arena, t_shell *env);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 14:27:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 16:19:51 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 static bool	is_num(char *nbr)
 {
@@ -63,6 +63,7 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 		code = int_code;
 	ft_mapclear(&minishell->env);
 	ft_dlstclear(&minishell->history, &free_content);
+	arena_free(minishell->arena);
 	ft_printf("exit\n");
 	exit(code);
 }

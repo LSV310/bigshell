@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:30:56 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/07 11:52:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:29 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int		char_in_set(char c, const char *set);
 void	print_token(t_token tok, bool p_pointer);
 void	print_tokens(t_list *tks, bool p_pointer);
 t_lexer	init_lexer(const char *rdl);
-void	skip_spaces(t_lexer *lex);
 void	fill_token(t_lexer *lex, t_token *tok, t_token_type type);
 void	make_end_token(t_lexer *lex, t_token *tok);
 void	bad_token(t_lexer *lex, t_token *tok);
 int		valid_par(t_list *tks);
-t_list	*init_tokens(t_lexer *lex, t_arena *arena);
+t_list	*init_tokens(const char *src, t_arena *arena);
+t_lexer	*skip_spaces(t_lexer *lex);
 
 #endif
