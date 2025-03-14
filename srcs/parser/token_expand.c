@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/14 14:36:23 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:44:11 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell)
 		free(res);
 		return (false);
 	}
-	// TODO: allocates and fill token->strs
 	free(res);
 	return (true);
 }
