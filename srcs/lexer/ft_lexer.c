@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/14 14:43:14 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/15 21:36:13 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,28 @@ t_lexer	*skip_spaces(t_lexer *lex)
 		lex->cur++;
 	return (lex);
 }
-// TODO: organize the first and the second pass on the tokens
-// t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env)
-// {
-// 	t_list	*tks;
-// 	t_lexer	lex;
 
-// 	lex = init_lexer(line_read);
-// 	tks = init_tokens(&lex, arena);
-// 	if (!valid_par(tks))
-// 		ft_printf("bad parenthesis\n");
-// 	tks_fillstr(tks, env);
-// 	print_tokens(tks, false);
-// 	return (tks);
-// }
+// return NULL on fail
+t_list	*make_tokens(const char	*line_read, t_shell *env)
+{
+	t_list	*tks;
+
+	tks = init_tokens(line_read, env->arena);
+	print_tokens(tks, true);
+	if (!valid_par(tks))
+		return (NULL);
+	if (!expand_lst_token(tks, env))
+		return (NULL);
+	print_tokens(tks, false);
+	return (tks);
+}
+
+int	main(void)
+{
+	const char	*input = "< note.txt cat";
+	t_shell		*shell = test_env();
+	t_list		*tks = make_tokens(input, shell);
+
+	(void) tks;
+	return (EXIT_SUCCESS);
+}

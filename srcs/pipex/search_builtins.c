@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 12:58:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/15 21:38:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	try_builtins(t_cmd *cmd, t_shell *shell)
 {
-	if (ft_strcmp(cmd->cmd, "echo"))
+	if (ft_strcmp(cmd->name, "echo"))
 		return (echo(&cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "cd"))
+	if (ft_strcmp(cmd->name, "cd"))
 		return (cd(shell->env, &cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "pwd"))
+	if (ft_strcmp(cmd->name, "pwd"))
 		return (pwd(&cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "export"))
+	if (ft_strcmp(cmd->name, "export"))
 		return (export(shell->env, &cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "unset"))
+	if (ft_strcmp(cmd->name, "unset"))
 		return (unset(shell->env, &cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "env"))
+	if (ft_strcmp(cmd->name, "env"))
 		return (env2(shell->env, &cmd->args[1]));
-	if (ft_strcmp(cmd->cmd, "exit"))
+	if (ft_strcmp(cmd->name, "exit"))
 		return (exit2(shell, EXIT_SUCCESS, &cmd->args[1]));
 	return (-1);
 }

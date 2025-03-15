@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rl_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 17:53:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/15 21:37:30 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 
 volatile int	g_sig;
 
-static void	handle_signals(int sig, siginfo_t *info, void *context)
-{
-	g_sig = sig;
-	(void)info;
-	(void)context;
-	return ;
-}
+// static void	handle_signals(int sig, siginfo_t *info, void *context)
+// {
+// 	g_sig = sig;
+// 	(void)info;
+// 	(void)context;
+// 	return ;
+// }
 
-void	rl_init_signals(void)
-{
-	struct sigaction	sa;
+// void	rl_init_signals(void)
+// {
+// 	struct sigaction	sa;
 
-	siginit(&sa, handle_signals);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-}
+// 	siginit(&sa, handle_signals);
+// 	sigaction(SIGINT, &sa, NULL);
+// 	sigaction(SIGQUIT, &sa, NULL);
+// }
 
-void	rl_reset_signals(void)
-{
-	struct sigaction	sa;
+// void	rl_reset_signals(void)
+// {
+// 	struct sigaction	sa;
 
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = SIG_DFL;
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-}
+// 	sigemptyset(&sa.sa_mask);
+// 	sa.sa_handler = SIG_DFL;
+// 	sa.sa_flags = 0;
+// 	sigaction(SIGINT, &sa, NULL);
+// 	sigaction(SIGQUIT, &sa, NULL);
+// }
 
 int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
 {

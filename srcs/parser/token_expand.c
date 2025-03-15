@@ -6,59 +6,26 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/14 14:44:11 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/15 21:23:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*wildcard_expand(t_lexer lex, t_shell *shell) // must keep the quotes
+int	switch_type_tk(t_list *cur, t_list *tks, t_shell *shell)
 {
-	char	*wild;
-	t_token	tok;
-	char	*res;
+	t_token	*token;
 
-	if (!lex.start)
-		return (NULL);
-	res = ft_strdup("");
-	while (res)
-	{
-		memset(&tok, 0, sizeof(t_token));
-		fill_token(skip_spaces(&lex), &tok, NAME);
-		tok.str = ft_substr(tok.p, 0, tok.len);
-		if (!tok.str)
-			break ;
-		wild = get_wildcards(tok.str , BOTH, false);
-		free(tok.str);
-		tok.str = res;
-		res = ft_strjoin(tok.str, wild);
-		free(wild);
-		free(tok.str);
-		tok.str = res;
-		res = ft_strjoin(tok.str, " ");
-		free(tok.str);
-	}
-	return (res);
-}
-
-bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell)
-{
-	char	*res;
-	t_token	*tok;
-	t_list	*new_tks;
-
-	tok = cur->content;
-	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
-	res = wildcard_expand(init_lexer(res), shell);
-	lst_insert(cur, str_to_name_tks(res, shell->arena));
-	lst_remove_node(&tks, cur, void_content);
-	if (!tks_fillstr(tks, shell))
-	{
-		free(res);
+	if (!tks || !cur)
 		return (false);
-	}
-	free(res);
-	return (true);
+	token = cur->content;
+	if (token->type == NAME)
+		return (expand_namet(cur, tks, shell));
+	else if (token->type == REDIN || token->type == REDOUT
+		|| token->type == APPEN)
+		return (expand_redt(cur, tks, shell));
+	else
+		return (true);
 }
 
 int	expand_lst_token(t_list *tks, t_shell *shell)
@@ -72,12 +39,9 @@ int	expand_lst_token(t_list *tks, t_shell *shell)
 		token = cur->content;
 		if (token->type == ENDT)
 			break ;
-		else if (token->type == NAME)
-		{
-			if (!expand_namet(cur, tks, shell))
-				return (0);
-		}
+		if (!switch_type_tk(cur, tks, shell))
+			return (false);
 		cur = cur->next;
 	}
-	return (1);
+	return (true);
 }

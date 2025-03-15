@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 20:38:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/15 21:34:17 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,26 @@ void	bad_token(t_lexer *lex, t_token *tok)
 		tok->len++;
 		lex->cur++;
 	}
+}
+
+t_shell	*test_env(void)
+{
+	t_shell	*shell;
+	t_map	*env;
+	t_map	*env2;
+
+	shell = malloc(sizeof(t_shell));
+	shell->arena = arena_init();
+	shell->history = NULL;
+	env = malloc(sizeof(t_map));
+	env->key = "GOAT";
+	env->value = "Tristan";
+	env2 = malloc(sizeof(t_map));
+	env2->key = "PATH";
+	env2->value = "CHEMIN";
+
+	env->next = env2;
+	env2->next = NULL;
+	shell->env = env;
+	return  (shell);
 }

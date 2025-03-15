@@ -1,4 +1,18 @@
+# Gitignore
+.gitignore
+
+# VSCode
 .vscode
-.gitingore
-*.a
-*.o
+
+# Objects
+objs
+
+# Libft
+libft/libft.a
+
+# Exec file
+minishell
+
+test
+
+*.txt
