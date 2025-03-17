@@ -47,18 +47,23 @@ char	**convert_env(t_map *map);
 char	*get_env_value(t_map *env, const char *var, size_t len);
 
 // lexer && parsing
-int		token_fillstr(t_token *tok, t_arena *arena, t_shell *env);
-t_list	*make_tokens(const char	*line_read, t_arena *arena, t_shell *env);
-int		tks_fillstr(t_list *tks, t_shell *env);
+
+int		token_fillstr(t_token *tok, t_arena *arena);
+t_list	*make_tokens(const char	*line_read, t_shell *env);
+int		tks_fillstr(t_list *tks, t_arena *arena);
 int		is_cmd_token(t_token *tok);
-t_cmd	*parse_cmd(t_list *tks);
 char	*env_exp(char *src, t_shell *env);
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	lst_insert(t_list *dest, t_list *to_insert);
+int		expand_lst_token(t_list *tks, t_shell *shell);
+bool	expand_namet(t_list **cur, t_list *tks, t_shell *shell);
+bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
+t_shell	*test_env(void);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
 int		try_builtins(t_cmd *cmd, t_shell *shell);
+t_cmd	*parse_cmd(t_list *tks);
 
 // signals
 void	create_signals(void);

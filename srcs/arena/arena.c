@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/14 17:25:51 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/17 04:32:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_arena	*arena_init(void)
 	return (arena);
 }
 
-void	*arena_free(t_arena *arena)
+void	*regions_free(t_arena *arena)
 {
 	t_chunk	*region;
 	t_chunk	*next;
@@ -53,7 +53,6 @@ void	*arena_free(t_arena *arena)
 	}
 	arena->begin = NULL;
 	arena->end = NULL;
-	free(arena);
 	return (NULL);
 }
 
@@ -63,6 +62,7 @@ void	*arena_alloc(size_t size, t_arena *arena)
 	t_chunk	*new_chunk;
 	void	*res;
 
+	printf("arena allocating %lu\n", size);
 	if (!arena || !arena->end || !arena->begin)
 		return (NULL);
 	size = (size + sizeof(uintptr_t) - 1) / sizeof(uintptr_t);
@@ -73,7 +73,7 @@ void	*arena_alloc(size_t size, t_arena *arena)
 			capacity = size;
 		new_chunk = region_create(capacity);
 		if (new_chunk == NULL)
-			return (arena_free(arena));
+			return (regions_free(arena));
 		arena->end->next = new_chunk;
 		arena->end = new_chunk;
 	}

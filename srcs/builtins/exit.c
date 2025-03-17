@@ -65,6 +65,7 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 		ft_printf("exit\n");
 	ft_mapclear(&minishell->env);
 	ft_dlstclear(&minishell->history, &free_content);
-	arena_free(minishell->arena);
+	regions_free(minishell->arena);
+	free(minishell->arena);
 	exit(code);
 }

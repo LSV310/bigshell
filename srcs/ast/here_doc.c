@@ -34,7 +34,7 @@ void	stdin_to_pipe(int to_write, char *delimiter)
 		free(line);
 	ft_dlstclear(&history, &free_content);
 }
-
+// TODO: implement env var expansion
 int	here_doc(char *delimiter)
 {
 	t_pipe	fds;

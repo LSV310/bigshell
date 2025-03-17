@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 23:01:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/02/26 15:38:13 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 03:34:13 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,29 @@ char	*ar_strndup(const char *s, size_t n, t_arena *arena)
 	new[n] = 0;
 	return (new);
 }
+
+t_list	*arlst_remove_node(t_list **lst, t_list *node)
+{
+	t_list	*current;
+	t_list	*previous;
+
+	if (!lst || !*lst || !node)
+		return (NULL);
+	current = *lst;
+	previous = *lst;
+	while (current)
+	{
+		if (current == node)
+		{
+			if (current == previous)
+				*lst = node->next;
+			else
+				previous->next = node->next;
+			return (node->next);
+		}
+		previous = current;
+		current = current->next;
+	}
+}
+
+
