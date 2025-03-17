@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 04:07:31 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 11:53:14 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 	return (tks);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	// const char	*input = "< note.txt echo *";
 	const char	*input = "< note.txt echo";
@@ -73,4 +73,4 @@ int	main(void)
 
 	(void) tks;
 	return (EXIT_SUCCESS);
-}
+} */

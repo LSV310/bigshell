@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 15:17:01 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:12:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	rl_quit(bool use_sigint)
 
 static int	line_too_long(t_readline *line)
 {
-	if (line->cursor + 1 >= line->size)
+	if (line->end + 1 >= line->size)
 	{
 		line->current_line = ft_realloc(line->current_line,
 				line->size * 2, line->size);

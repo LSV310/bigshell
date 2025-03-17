@@ -30,9 +30,11 @@ SRC			=	arena/arena.c				\
 				lexer/token_utils.c			\
 				parser/cmd_arr.c			\
 				parser/env_exp.c			\
+				parser/fill_token.c			\
 				parser/parse_cmd.c			\
 				parser/tk_to_tks.c			\
 				parser/token_expand.c		\
+				parser/token_expand2.c		\
 				parser/wildcard_exp.c		\
 				pipex/pipex.c				\
 				pipex/search_builtins.c		\

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 14:28:20 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:07:08 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 	t_list	*current;
 	t_list	*next;
 
+	if (!str)
+		return (NULL);
 	if (!ft_strchr(str, '*'))
 		return (ft_strdup(str));
 	lst = NULL;
