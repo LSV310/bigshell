@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/16 15:26:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 04:07:31 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 
 int	main(void)
 {
-	const char	*input = "< note.txt cat";
+	// const char	*input = "< note.txt echo *";
+	const char	*input = "< note.txt echo";
 	t_shell		*shell = test_env();
 	t_list		*tks = make_tokens(input, shell);
 

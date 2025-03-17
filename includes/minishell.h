@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/15 21:49:02 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 04:56:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ char	**convert_env(t_map *map);
 const char	*get_env_value(t_map *env, const char *var, size_t len);
 
 // lexer && parsing
+
 int		token_fillstr(t_token *tok, t_arena *arena);
 t_list	*make_tokens(const char	*line_read, t_shell *env);
-int		tks_fillstr(t_list *tks, t_shell *env);
+int		tks_fillstr(t_list *tks, t_arena *arena);
 int		is_cmd_token(t_token *tok);
 char	*env_exp(char *src, t_shell *env);
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	lst_insert(t_list *dest, t_list *to_insert);
 int		expand_lst_token(t_list *tks, t_shell *shell);
-bool	expand_namet(t_list *cur, t_list *tks, t_shell *shell);
+bool	expand_namet(t_list **cur, t_list *tks, t_shell *shell);
 bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
 t_shell	*test_env(void);
 

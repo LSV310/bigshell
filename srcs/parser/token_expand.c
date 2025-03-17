@@ -6,24 +6,24 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/15 21:23:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 04:06:04 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	switch_type_tk(t_list *cur, t_list *tks, t_shell *shell)
+int	switch_type_tk(t_list **cur, t_list *tks, t_shell *shell)
 {
 	t_token	*token;
 
-	if (!tks || !cur)
+	if (!tks || !(*cur))
 		return (false);
-	token = cur->content;
+	token = (*cur)->content;
 	if (token->type == NAME)
 		return (expand_namet(cur, tks, shell));
 	else if (token->type == REDIN || token->type == REDOUT
 		|| token->type == APPEN)
-		return (expand_redt(cur, tks, shell));
+		return (expand_redt(*cur, tks, shell));
 	else
 		return (true);
 }
@@ -39,7 +39,7 @@ int	expand_lst_token(t_list *tks, t_shell *shell)
 		token = cur->content;
 		if (token->type == ENDT)
 			break ;
-		if (!switch_type_tk(cur, tks, shell))
+		if (!switch_type_tk(&cur, tks, shell))
 			return (false);
 		cur = cur->next;
 	}

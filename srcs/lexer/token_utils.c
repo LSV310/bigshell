@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/16 16:03:58 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 04:02:08 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,12 @@ void	print_token(t_token tok, bool p_pointer)
 
 void	print_tokens(t_list *tks, bool p_pointer)
 {
+
+	printf("\n");
 	while (tks)
 	{
 		print_token(*(t_token *)tks->content, p_pointer);
 		tks = tks->next;
 	}
+	printf("\n");
 }

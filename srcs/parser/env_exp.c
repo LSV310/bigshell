@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/14 13:51:29 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/17 03:57:17 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ char	*env_exp(char *src, t_shell *env)
 	if (!expanded)
 		return (NULL);
 	fill_expanded(src, expanded, expanded + len, env);
-	ft_printf("raw input: %s\n", src);
-	ft_printf("expanded: %s\n", expanded);
+	// ft_printf("\nraw input: %s\n", src);
+	// ft_printf("expanded: %s\n\n", expanded);
 	free(src);
 	return (expanded);
 }
