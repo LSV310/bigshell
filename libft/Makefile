@@ -1,6 +1,6 @@
 AR			= ar rcs
 CC			= cc
-CFLAGS		= -g3 -Wall -Werror -Wextra
+CFLAGS		= -ggdb #-Wall -Werror -Wextra
 
 INLCUDES	= includes/
 SRC_DIR		= srcs/

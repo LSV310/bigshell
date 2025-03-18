@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 11:10:36 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:24:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 {
 	if (key == 4 && line->end == 0)
 	{
+		write(0, "\n", 1);
+		ft_printf("exit\n");
 		clear_line(line, history, 1);
-		return (write(0, "\n", 1), 0);
+		return (0);
 	}
 	else if (key == -1 && !rl_signal_received(line, history, prompt))
 		return (0);

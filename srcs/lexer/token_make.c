@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/16 16:03:09 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:06:39 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,3 @@ t_list	*create_token_list(const char *src, t_arena *arena)
 	}
 	return (tks);
 }
-

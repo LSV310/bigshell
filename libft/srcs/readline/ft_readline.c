@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/12 17:54:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:17:01 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	new_buffer(t_readline *line, t_dlist **history)
 	return (1);
 }
 
-static void	rl_quit(void)
+static void	rl_quit(bool use_sigint)
 {
 	reset_terminal_mode();
-	rl_reset_signals();
+	rl_reset_signals(use_sigint);
 }
 
 static int	line_too_long(t_readline *line)
@@ -62,14 +62,14 @@ void	clear_line(t_readline *line, t_dlist **history, int current)
 		free(line->current_line);
 }
 
-char	*ft_readline(char *prompt, t_dlist **history)
+char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 {
 	int			key;
 	t_readline	line;
 
 	if (!new_buffer(&line, history))
 		return (NULL);
-	rl_init_signals();
+	rl_init_signals(use_sigint);
 	set_raw_mode();
 	ft_fprintf(0, prompt);
 	while (1)
@@ -78,12 +78,12 @@ char	*ft_readline(char *prompt, t_dlist **history)
 		if (ft_isprint(key) && printkey(key, &line))
 			break ;
 		else if (!other_key(key, &line, prompt, history))
-			return (rl_quit(), NULL);
+			return (rl_quit(use_sigint), NULL);
 		if (!line_too_long(&line))
-			return (rl_quit(), NULL);
+			return (rl_quit(use_sigint), NULL);
 	}
 	clear_line(&line, history, 0);
 	if (!cmd_add_history(history, line.current_line))
-		return (rl_quit(), NULL);
-	return (write(0, "\n", 1), rl_quit(), line.current_line);
+		return (rl_quit(use_sigint), NULL);
+	return (write(0, "\n", 1), rl_quit(use_sigint), line.current_line);
 }

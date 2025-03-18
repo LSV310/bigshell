@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/17 04:56:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:05:25 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "pipex.h"
 # include "wildcards.h"
 # include <stdio.h>
-# include <stdbool.h>
 # include <signal.h>
 
 typedef struct s_shell
@@ -45,7 +44,7 @@ int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_map *env, const char *var, size_t len);
 t_map	*add_env_var(t_map *env, char *key, char *value);
 char	**convert_env(t_map *map);
-const char	*get_env_value(t_map *env, const char *var, size_t len);
+char	*get_env_value(t_map *env, const char *var, size_t len);
 
 // lexer && parsing
 
@@ -68,6 +67,7 @@ t_cmd	*parse_cmd(t_list *tks);
 
 // signals
 void	create_signals(void);
+void	restore_signals(void);
 
 // utils
 int		check_first_arg(t_map *env, char **args, int *exit_code);

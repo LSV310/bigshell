@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/16 15:50:00 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:06:22 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 	}
 	else
 		code = int_code;
+	if (args)
+		ft_printf("exit\n");
 	ft_mapclear(&minishell->env);
 	ft_dlstclear(&minishell->history, &free_content);
 	regions_free(minishell->arena);

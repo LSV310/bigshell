@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/15 21:37:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:05:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,30 @@ volatile int	g_sig;
 // 	return ;
 // }
 
-// void	rl_init_signals(void)
-// {
-// 	struct sigaction	sa;
+void	rl_init_signals(bool use_sigint)
+{
+	struct sigaction	sa;
 
-// 	siginit(&sa, handle_signals);
-// 	sigaction(SIGINT, &sa, NULL);
-// 	sigaction(SIGQUIT, &sa, NULL);
-// }
+	init_sigaction(&sa, handle_signals);
+	if (use_sigint)
+		sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}
 
-// void	rl_reset_signals(void)
-// {
-// 	struct sigaction	sa;
+void	rl_reset_signals(bool use_sigint)
+{
+	struct sigaction	sa;
 
-// 	sigemptyset(&sa.sa_mask);
-// 	sa.sa_handler = SIG_DFL;
-// 	sa.sa_flags = 0;
-// 	sigaction(SIGINT, &sa, NULL);
-// 	sigaction(SIGQUIT, &sa, NULL);
-// }
+	init_sighandler(&sa, SIG_DFL);
+	if (use_sigint)
+		sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}
 
 int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
 {
+	if (g_sig == 0)
+		return (0);
 	if (g_sig != SIGINT)
 	{
 		g_sig = 0;

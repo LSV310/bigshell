@@ -1,5 +1,5 @@
 CC			= cc
-CFLAGS		= -ggdb -Wall -Werror -Wextra
+CFLAGS		= -ggdb #-Wall -Werror -Wextra
 
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
@@ -13,7 +13,7 @@ CFLAGS		+= -I$(INCLUDES)
 SRC			=	arena/arena.c				\
 				arena/ft_arena.c			\
 				ast/here_doc.c				\
-				ast/parse_cmd.c				\
+				ast/pipeline.c				\
 				builtins/cd.c				\
 				builtins/echo.c				\
 				builtins/env.c				\
@@ -25,10 +25,15 @@ SRC			=	arena/arena.c				\
 				env/env_utils.c				\
 				lexer/ft_lexer.c			\
 				lexer/is_utils.c			\
-				lexer/token_expand.c		\
 				lexer/token_make_utils.c	\
 				lexer/token_make.c			\
 				lexer/token_utils.c			\
+				parser/cmd_arr.c			\
+				parser/env_exp.c			\
+				parser/parse_cmd.c			\
+				parser/tk_to_tks.c			\
+				parser/token_expand.c		\
+				parser/wildcard_exp.c		\
 				pipex/pipex.c				\
 				pipex/search_builtins.c		\
 				pipex/search_cmd.c			\

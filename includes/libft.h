@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 16:57:08 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:22:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <termios.h>
 # include <signal.h>
+# include <stdbool.h>
 
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"
@@ -160,7 +161,7 @@ typedef struct s_readline
 
 extern volatile int	g_sig;
 
-char	*ft_readline(char *prompt, t_dlist **history);
+char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
 int		new_buffer(t_readline *line, t_dlist **history);
 int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
@@ -178,8 +179,13 @@ void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
-void	rl_init_signals(void);
-void	rl_reset_signals(void);
+void	rl_init_signals(bool use_sigint);
+void	rl_reset_signals(bool use_sigint);
+
+// signals
+void	init_sighandler(struct sigaction *sa, void (*action)(int));
+void	init_sigaction(struct sigaction *sa,
+			void (*action)(int, siginfo_t *, void *));
 
 // readfile
 # ifndef BUFFER_SIZE

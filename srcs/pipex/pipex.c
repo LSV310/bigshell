@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/15 21:49:18 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:06:48 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static int	wait_childs(int cmd_amount, int last_pid)
 	int	i;
 
 	i = 0;
-	while (i++ < cmd_amount - 1)
-		waitpid(-1, &status, 0);
 	if (last_pid != -1)
 		waitpid(last_pid, &status, 0);
+	while (i++ < cmd_amount - 1)
+		waitpid(-1, NULL, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -41,6 +41,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		perror("fork");
 	else if (pid != 0)
 		return (pid);
+	restore_signals();
 	cmd = parse_cmd(cmdtk);
 	(close(pipefd[0]), close(pipefd[1]));
 	builtins = try_builtins(cmd, shell);
@@ -48,7 +49,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		exit2(shell, builtins, NULL);
 	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
-		return (exit2(shell, EXIT_FAILURE, NULL));
+		exit2(shell, EXIT_FAILURE, NULL);
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
 	return (exit2(shell, EXIT_FAILURE, NULL));
@@ -73,11 +74,10 @@ int	pipex(t_list **tks, t_shell *shell)
 		close(pipefd[1]);
 		last_pid = exec_cmd(tks[i], pipefd, shell, env);
 		if (last_pid == -1)
-		break ;
+			break ;
 		i++;
 	}
 	close(pipefd[0]);
 	free_tab(env, 0);
 	return (wait_childs(i, last_pid));
 }
-
