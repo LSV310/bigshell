@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 05:05:23 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 12:52:26 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int	tks_fillstr(t_list *tks, t_arena *arena)
 			tok->str = ar_strndup(tok->p, tok->len, arena);
 		cur = cur->next;
 	}
+	print_tokens(tks, false);
 	return (true);
 }

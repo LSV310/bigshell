@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 04:07:31 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 13:02:58 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,20 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 	t_list	*tks;
 
 	tks = create_token_list(line_read, env->arena);
-	print_tokens(tks, true);
 	if (!valid_par(tks))
 		return (NULL);
 	if (!expand_lst_token(tks, env))
 		return (NULL);
-	print_tokens(tks, false);
 	return (tks);
 }
 
 int	main(void)
 {
-	// const char	*input = "< note.txt echo *";
-	const char	*input = "< note.txt echo";
+	const char	*input = "< idk.txt echo *nomatch";
 	t_shell		*shell = test_env();
 	t_list		*tks = make_tokens(input, shell);
 
+	print_tokens(tks, false);
 	(void) tks;
 	return (EXIT_SUCCESS);
 }
