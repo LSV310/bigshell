@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/18 13:05:25 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:06:28 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,16 @@ t_shell	*test_env(void);
 int		pipex(t_list **tks, t_shell *shell);
 int		try_builtins(t_cmd *cmd, t_shell *shell);
 t_cmd	*parse_cmd(t_list *tks);
+t_list	**ptr_arr_pipeline(t_list *tks);
 
 // signals
 void	create_signals(void);
 void	restore_signals(void);
 
 // utils
-int		check_first_arg(t_map *env, char **args, int *exit_code);
-bool	var_name_valid(char *var);
+int			check_first_arg(t_map *env, char **args, int *exit_code);
+bool		var_name_valid(char *var);
+const char	*toktype_to_string(t_token_type type);
+void		print_pipeline(t_list **pipeline);
 
 #endif

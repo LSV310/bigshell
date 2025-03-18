@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 13:02:58 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:30:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 
 int	main(void)
 {
-	const char	*input = "< idk.txt echo *nomatch";
+	const char	*input =
+	"< idk.txt echo *nomatch | grep -v \"idk| bro\" > outfile.txt";
 	t_shell		*shell = test_env();
 	t_list		*tks = make_tokens(input, shell);
+	t_list		**pipel;
 
 	print_tokens(tks, false);
-	(void) tks;
+	pipel = ptr_arr_pipeline(tks);
+	print_pipeline(pipel);
 	return (EXIT_SUCCESS);
 }

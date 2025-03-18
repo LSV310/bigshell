@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/18 13:05:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:08:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 volatile int	g_sig;
 
-// static void	handle_signals(int sig, siginfo_t *info, void *context)
-// {
-// 	g_sig = sig;
-// 	(void)info;
-// 	(void)context;
-// 	return ;
-// }
+static void	handle_signals(int sig, siginfo_t *info, void *context)
+{
+	g_sig = sig;
+	(void)info;
+	(void)context;
+	return ;
+}
 
 void	rl_init_signals(bool use_sigint)
 {

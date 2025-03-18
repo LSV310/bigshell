@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 12:52:26 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 18:01:33 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	token_fillstr(t_token *tok, t_arena *arena)
 	return (1);
 }
 
-// TODO: use old token_fillstr and make sure it returns 0 when it fails
 int	tks_fillstr(t_list *tks, t_arena *arena)
 {
 	t_list	*cur;
@@ -76,6 +75,8 @@ int	tks_fillstr(t_list *tks, t_arena *arena)
 		}
 		else
 			tok->str = ar_strndup(tok->p, tok->len, arena);
+		if (!tok->str)
+			return (false);
 		cur = cur->next;
 	}
 	print_tokens(tks, false);
