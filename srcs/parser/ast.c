@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 01:32:26 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:11:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 		return (left);
 	else if (tok->type == ORT || tok->type == ANDT)
 		return (parse_logic(tokens, arena, left, tok->type));
+	return (NULL);
 }
 
 // GRAMMAR
