@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 22:43:44 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:55:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	tks_fillstr(t_list *tks, t_arena *arena)
 		if (tok == NULL)
 			return (false);
 		if ((tok->type == NAME || tok->type == REDIN
-			|| tok->type == REDOUT || tok->type == APPEN))
+				|| tok->type == REDOUT || tok->type == APPEN))
 		{
 			if (!token_fillstr(tok, arena))
 				return (false);

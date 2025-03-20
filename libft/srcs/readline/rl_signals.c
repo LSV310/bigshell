@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 12:44:09 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:54:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	handle_signals(int sig, siginfo_t *info, void *context)
 	return ;
 }
 
-void	rl_init_signals()
+void	rl_init_signals(void)
 {
 	struct sigaction	sa;
 
@@ -31,7 +31,7 @@ void	rl_init_signals()
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-void	rl_reset_signals()
+void	rl_reset_signals(void)
 {
 	struct sigaction	sa;
 

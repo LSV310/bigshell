@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 12:32:53 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:50:14 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,8 @@ void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
-void	rl_init_signals();
-void	rl_reset_signals();
+void	rl_init_signals(void);
+void	rl_reset_signals(void);
 
 // signals
 void	init_sighandler(struct sigaction *sa, void (*action)(int));

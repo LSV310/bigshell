@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 12:36:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:53:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	new_buffer(t_readline *line, t_dlist **history, bool use_sigint)
 	return (1);
 }
 
-static void	rl_quit()
+static void	rl_quit(void)
 {
 	reset_terminal_mode();
 	rl_reset_signals();
