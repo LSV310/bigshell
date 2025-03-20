@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 13:22:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:32:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,13 @@ typedef struct s_readline
 	size_t	size;
 	size_t	cursor;
 	size_t	end;
+	bool	sigint_nl;
 }	t_readline;
 
 extern volatile int	g_sig;
 
 char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
-int		new_buffer(t_readline *line, t_dlist **history);
+int		new_buffer(t_readline *line, t_dlist **history, bool use_sigint);
 int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);
@@ -179,8 +180,8 @@ void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
-void	rl_init_signals(bool use_sigint);
-void	rl_reset_signals(bool use_sigint);
+void	rl_init_signals();
+void	rl_reset_signals();
 
 // signals
 void	init_sighandler(struct sigaction *sa, void (*action)(int));

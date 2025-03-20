@@ -6,19 +6,20 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/17 12:12:40 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:36:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	new_buffer(t_readline *line, t_dlist **history)
+int	new_buffer(t_readline *line, t_dlist **history, bool use_sigint)
 {
 	t_dlist	*line_history;
 
 	line->cursor = 0;
 	line->size = 1024;
 	line->end = 0;
+	line->sigint_nl = use_sigint;
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
@@ -32,10 +33,10 @@ int	new_buffer(t_readline *line, t_dlist **history)
 	return (1);
 }
 
-static void	rl_quit(bool use_sigint)
+static void	rl_quit()
 {
 	reset_terminal_mode();
-	rl_reset_signals(use_sigint);
+	rl_reset_signals();
 }
 
 static int	line_too_long(t_readline *line)
@@ -67,9 +68,9 @@ char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 	int			key;
 	t_readline	line;
 
-	if (!new_buffer(&line, history))
+	if (!new_buffer(&line, history, use_sigint))
 		return (NULL);
-	rl_init_signals(use_sigint);
+	rl_init_signals();
 	set_raw_mode();
 	ft_fprintf(0, prompt);
 	while (1)
@@ -78,12 +79,12 @@ char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 		if (ft_isprint(key) && printkey(key, &line))
 			break ;
 		else if (!other_key(key, &line, prompt, history))
-			return (rl_quit(use_sigint), NULL);
+			return (rl_quit(), NULL);
 		if (!line_too_long(&line))
-			return (rl_quit(use_sigint), NULL);
+			return (rl_quit(), NULL);
 	}
 	clear_line(&line, history, 0);
 	if (!cmd_add_history(history, line.current_line))
-		return (rl_quit(use_sigint), NULL);
-	return (write(0, "\n", 1), rl_quit(use_sigint), line.current_line);
+		return (rl_quit(), NULL);
+	return (write(0, "\n", 1), rl_quit(), line.current_line);
 }
