@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 18:01:33 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 22:43:44 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	strlen_noquotes(const char *p, size_t len)
 			new_len++;
 		i++;
 	}
-	return (new_len + 1);
+	return (new_len);
 }
 
 void	strcpy_noquotes(char *dest, const char *src, size_t len)
@@ -49,7 +49,7 @@ int	token_fillstr(t_token *tok, t_arena *arena)
 	size_t	len;
 
 	len = strlen_noquotes(tok->p, tok->len);
-	tok->str = arena_alloc(len, arena);
+	tok->str = arena_alloc(len + 1, arena);
 	if (!tok->str)
 		return (0);
 	strcpy_noquotes(tok->str, tok->p, tok->len);
@@ -79,6 +79,5 @@ int	tks_fillstr(t_list *tks, t_arena *arena)
 			return (false);
 		cur = cur->next;
 	}
-	print_tokens(tks, false);
 	return (true);
 }

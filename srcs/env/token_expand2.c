@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 12:59:27 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 00:49:44 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*name_wild(t_lexer lex, t_shell *shell)
 	return (res);
 }
 
-bool	expand_namet(t_list **cur, t_list *tks, t_shell *shell)
+bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell)
 {
 	char	*res;
 	t_token	*tok;
@@ -67,7 +67,7 @@ bool	expand_namet(t_list **cur, t_list *tks, t_shell *shell)
 		return (NULL);
 	new_cur = ft_lstlast(new_tks);
 	lst_insert((*cur), new_tks);
-	arlst_remove_node(&tks, (*cur));
+	arlst_remove_node(tks, (*cur));
 	*cur = new_cur;
 	free(res);
 	return (true);

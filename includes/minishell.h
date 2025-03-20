@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/18 18:06:28 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 00:49:40 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,18 @@ int		is_cmd_token(t_token *tok);
 char	*env_exp(char *src, t_shell *env);
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	lst_insert(t_list *dest, t_list *to_insert);
-int		expand_lst_token(t_list *tks, t_shell *shell);
-bool	expand_namet(t_list **cur, t_list *tks, t_shell *shell);
+int		expand_lst_token(t_list **tks, t_shell *shell);
+bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell);
 bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
 t_shell	*test_env(void);
+t_ast	*build_ast(t_list *tks, t_arena *arena);
+t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
 int		try_builtins(t_cmd *cmd, t_shell *shell);
 t_cmd	*parse_cmd(t_list *tks);
-t_list	**ptr_arr_pipeline(t_list *tks);
+t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena);
 
 // signals
 void	create_signals(void);
