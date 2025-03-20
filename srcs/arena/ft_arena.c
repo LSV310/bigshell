@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 23:01:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 11:52:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/18 12:20:20 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ t_list	*arlst_remove_node(t_list **lst, t_list *node)
 		previous = current;
 		current = current->next;
 	}
-	return (NULL);
+	return (*lst);
 }

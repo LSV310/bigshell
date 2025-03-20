@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/13 20:17:39 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/19 19:38:22 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ typedef enum node_type
 {
 	ND_NULL = 0,
 	ND_CMD,
-	PIPELINE,
 	ND_AND,
 	ND_OR,
-	ND_GRP
+	ND_GRP,
+	ND_ERROR
 }	t_node_type;
 
 typedef struct s_cmd
 {
-	char	*name;
 	int		fdin;
 	int		fdout;
+	char	*name;
 	char	**args;
 }	t_cmd;
 
@@ -37,13 +37,14 @@ typedef struct s_ast	t_ast;
 
 struct s_ast
 {
-	t_node_type		type;
-	t_ast			*left;
-	t_ast			*right;
-	t_cmd			**cmds;
+	t_node_type	type;
+	t_ast		*left;
+	t_ast		*right;
+	t_list		**cmds;
 };
 
 int		here_doc(char *delimiter);
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
+void	skip_pipeline(t_list **tks);
 
 #endif

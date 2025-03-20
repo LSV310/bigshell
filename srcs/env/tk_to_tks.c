@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:15:12 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 04:57:43 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/18 12:22:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena)
 			break ;
 		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
 	}
-	printf("\nstr_to_name_tks:");
-	print_tokens(tks, true);
 	if (!tks_fillstr(tks, arena))
 		return (NULL);
 	return (tks);
