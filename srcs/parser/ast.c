@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 01:28:29 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 01:32:26 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 		left = createNode(ND_CMD, tokens, arena, (t_ast *[]){NULL, NULL});
 	else
 		return (NULL);
-	// printCurToken(tokens);
+	log_cur_token(tokens);
 	if (!left)
 		return (NULL);
 	tok = (**tokens).content;
