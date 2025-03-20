@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 11:03:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 void	create_signals(void)
 {

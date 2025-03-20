@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   keys3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 14:36:40 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
+/*   Created: 2025/03/20 17:15:00 by agruet            #+#    #+#             */
+/*   Updated: 2025/03/20 17:22:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	pwd(char **args)
+int	ft_isprint2(int c)
 {
-	char	*cwd;
-
-	if (args && args[0])
-	{
-		if (args[0][0] == '-')
-		{
-			ft_fprintf(2, "pwd: -%c: invalid option\n", args[0][1]);
-			return (2);
-		}
-	}
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		return (perror("cwd"), 1);
-	ft_printf("%s\n", cwd);
-	free(cwd);
+	if ((c >= ' ' && c <= '~') || (c >= 9 && c <= 13 && c != '\t' && c != '\v'))
+		return (16384);
 	return (0);
 }

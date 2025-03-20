@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 00:49:44 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:08:34 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell)
 	res = name_wild(init_lexer(res), shell);
 	new_tks = str_to_name_tks(res, shell->arena);
 	if (!new_tks)
-		return (NULL);
+		return (false);
 	new_cur = ft_lstlast(new_tks);
 	lst_insert((*cur), new_tks);
 	arlst_remove_node(tks, (*cur));

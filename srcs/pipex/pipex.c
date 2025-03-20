@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 11:09:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:51:47 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		return (pid);
 	restore_signals();
 	cmd = parse_cmd(cmdtk);
+	if (!cmd)
+		return (exit2(shell, EXIT_FAILURE, NULL));
 	(close(pipefd[0]), close(pipefd[1]));
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
@@ -63,9 +65,11 @@ int	pipex(t_list **tks, t_shell *shell)
 	char	**env;
 
 	i = 0;
-	env = convert_env(shell->env);
+	env = convert_env(shell->env->next);
 	if (!env)
 		return (1);
+	pipefd[0] = 0;
+	pipefd[1] = 0;
 	while (tks[i])
 	{
 		if (pipefd[0])

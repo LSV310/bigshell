@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:26:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 16:45:48 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 int	assign_kv(char *var, t_map *map)
 {

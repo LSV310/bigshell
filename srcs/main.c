@@ -6,16 +6,17 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/17 11:57:48 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 17:22:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 int	main(void)
 {
 	t_shell	minishell;
 	char	*input;
+	t_list	*tks;
 
 	minishell.history = NULL;
 	if (!create_env(&minishell))
@@ -29,7 +30,8 @@ int	main(void)
 		input = ft_readline("minishell$> ", &minishell.history, true);
 		if (!input)
 			break ;
-		make_tokens(input, &minishell);
+		tks = make_tokens(input, &minishell);
+		pipex(ptr_arr_pipeline(tks, minishell.arena), &minishell);
 		free(input);
 	}
 	exit2(&minishell, 0, NULL);

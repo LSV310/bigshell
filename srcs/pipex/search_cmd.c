@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 14:34:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 static char	*new_cmd(char *old_cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 04:32:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:51:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	*arena_alloc(size_t size, t_arena *arena)
 	t_chunk	*new_chunk;
 	void	*res;
 
-	printf("arena allocating %lu\n", size);
 	if (!arena || !arena->end || !arena->begin)
 		return (NULL);
 	size = (size + sizeof(uintptr_t) - 1) / sizeof(uintptr_t);

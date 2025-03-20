@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:53:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 11:43:17 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 int	env2(t_map *env, char **args)
 {

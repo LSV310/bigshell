@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:34:35 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/06 12:39:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:50:01 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_mapsize(t_map *map)
 	size = 0;
 	if (!map)
 		return (0);
-	while (map->next)
+	while (map)
 	{
 		size++;
 		map = map->next;

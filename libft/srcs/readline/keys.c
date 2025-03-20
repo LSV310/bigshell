@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 15:24:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 int	printkey(int key, t_readline *line)
 {

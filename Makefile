@@ -12,6 +12,7 @@ CFLAGS		+= -I$(INCLUDES)
 
 SRC			=	arena/arena.c				\
 				arena/ft_arena.c			\
+				ast/ast.c					\
 				ast/here_doc.c				\
 				ast/pipeline.c				\
 				builtins/cd.c				\
@@ -33,7 +34,6 @@ SRC			=	arena/arena.c				\
 				lexer/token_make_utils.c	\
 				lexer/token_make.c			\
 				lexer/token_utils.c			\
-				parser/ast.c				\
 				parser/cmd_arr.c			\
 				parser/parse_cmd.c			\
 				pipex/pipex.c				\
