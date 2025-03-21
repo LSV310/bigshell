@@ -6,33 +6,42 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 17:22:58 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:52:00 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	init_minishell(t_shell *minishell)
+{
+	minishell->arena = NULL;
+	minishell->history = NULL;
+	minishell->arena = NULL;
+	minishell->input = NULL;
+	if (!create_env(minishell))
+		return (EXIT_FAILURE);
+	minishell->arena = arena_init();
+	if (!minishell->arena)
+		exit2(minishell, 1, NULL);
+	create_signals();
+	return (1);
+}
+
 int	main(void)
 {
 	t_shell	minishell;
-	char	*input;
 	t_list	*tks;
 
-	minishell.history = NULL;
-	if (!create_env(&minishell))
-		return (EXIT_FAILURE);
-	minishell.arena = arena_init();
-	if (!minishell.arena)
-		exit2(&minishell, 1, NULL);
-	create_signals();
+	init_minishell(&minishell);
 	while (1)
 	{
-		input = ft_readline("minishell$> ", &minishell.history, true);
-		if (!input)
+		minishell.input = ft_readline("minishell$> ", &minishell.history, true);
+		if (!minishell.input)
 			break ;
-		tks = make_tokens(input, &minishell);
+		tks = make_tokens(minishell.input, &minishell);
 		pipex(ptr_arr_pipeline(tks, minishell.arena), &minishell);
-		free(input);
+		free(minishell.input);
+		minishell.input = NULL;
 	}
 	exit2(&minishell, 0, NULL);
 	return (EXIT_SUCCESS);

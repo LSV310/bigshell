@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 12:53:20 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:52:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_shell
 	t_map	*env;
 	t_dlist	*history;
 	t_arena	*arena;
+	char	*input;
 }	t_shell;
 
 // builtins
@@ -47,7 +48,6 @@ char	**convert_env(t_map *map);
 char	*get_env_value(t_map *env, const char *var, size_t len);
 
 // lexer && parsing
-
 int		token_fillstr(t_token *tok, t_arena *arena);
 t_list	*make_tokens(const char	*line_read, t_shell *env);
 int		tks_fillstr(t_list *tks, t_arena *arena);
@@ -73,6 +73,7 @@ void	create_signals(void);
 void	restore_signals(void);
 
 // utils
+void	free_minishell(t_shell *minishell);
 int		check_first_arg(t_map *env, char **args, int *exit_code);
 bool	var_name_valid(char *var);
 char	*toktype_to_string(t_token_type type);

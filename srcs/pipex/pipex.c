@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 16:51:47 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 12:15:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	wait_childs(int cmd_amount, int last_pid)
 	int	i;
 
 	i = 0;
+	if (cmd_amount <= 0)
+		return (0);
 	if (last_pid != -1)
 		waitpid(last_pid, &status, 0);
 	while (i++ < cmd_amount - 1)
@@ -38,23 +40,35 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 
 	pid = fork();
 	if (pid == -1)
-		perror("fork");
+		return (perror("fork"), -1);
 	else if (pid != 0)
 		return (pid);
 	restore_signals();
 	cmd = parse_cmd(cmdtk);
 	if (!cmd)
-		return (exit2(shell, EXIT_FAILURE, NULL));
+		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
 	(close(pipefd[0]), close(pipefd[1]));
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
-		exit2(shell, builtins, NULL);
+		(free_tab(env, 0), exit2(shell, builtins, NULL));
 	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
-		exit2(shell, EXIT_FAILURE, NULL);
+		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
 	execve(cmd_name, cmd->args, env);
 	perror("pipex");
-	return (exit2(shell, EXIT_FAILURE, NULL));
+	return ((free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL)));
+}
+
+char	**init_pipex(t_shell *shell, int *pipefd)
+{
+	char	**env;
+
+	env = convert_env(shell->env->next);
+	if (!env)
+		return (NULL);
+	pipefd[0] = 0;
+	pipefd[1] = 0;
+	return (env);
 }
 
 int	pipex(t_list **tks, t_shell *shell)
@@ -65,11 +79,9 @@ int	pipex(t_list **tks, t_shell *shell)
 	char	**env;
 
 	i = 0;
-	env = convert_env(shell->env->next);
+	env = init_pipex(shell, pipefd);
 	if (!env)
 		return (1);
-	pipefd[0] = 0;
-	pipefd[1] = 0;
 	while (tks[i])
 	{
 		if (pipefd[0])
@@ -81,7 +93,8 @@ int	pipex(t_list **tks, t_shell *shell)
 			break ;
 		i++;
 	}
-	close(pipefd[0]);
+	if (pipefd[0])
+		close(pipefd[0]);
 	free_tab(env, 0);
 	return (wait_childs(i, last_pid));
 }

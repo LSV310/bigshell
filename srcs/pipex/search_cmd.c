@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 16:14:40 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:37:36 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*search_path(char *cmd, char **env)
 		return (free(cmd), NULL);
 	path = ft_split(temp, ':');
 	if (!path)
-		return (NULL);
+		return (free(cmd), NULL);
 	temp = NULL;
 	i = 0;
 	while (path[i])
@@ -79,13 +79,13 @@ char	*search_path(char *cmd, char **env)
 			break ;
 		i++;
 	}
-	if (!temp)
-		ft_fprintf(2, "%s: command not found\n", cmd);
-	return (free_tab(path, 0), temp);
+	return (free(cmd), free_tab(path, 0), temp);
 }
 
 char	*search_cmd(char *cmd, char **env)
 {
+	char	*in_path;
+
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK | X_OK))
@@ -95,5 +95,8 @@ char	*search_cmd(char *cmd, char **env)
 		}
 		return (cmd);
 	}
-	return (search_path(cmd, env));
+	in_path = search_path(cmd, env);
+	if (!in_path)
+		ft_fprintf(2, "%s: command not found\n", cmd);
+	return (in_path);
 }
