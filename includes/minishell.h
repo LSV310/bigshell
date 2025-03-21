@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 12:59:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:05 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
 t_shell	*test_env(void);
 t_ast	*build_ast(t_list *tks, t_arena *arena);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
+bool	exec_ast(t_ast *ast, t_shell *shell);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
