@@ -1,0 +1,3 @@
+☐ allocate cmd into arena
+☐ function to reset arena after each command
+☐ AST exec

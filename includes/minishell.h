@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 00:49:40 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 12:59:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
 int		try_builtins(t_cmd *cmd, t_shell *shell);
-t_cmd	*parse_cmd(t_list *tks);
+t_cmd	*parse_cmd(t_list *tks, t_arena *arena);
 t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena);
 
 // signals
