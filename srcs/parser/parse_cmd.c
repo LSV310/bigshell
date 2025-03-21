@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 13:02:53 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 15:30:07 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	cmd_args_alloc(t_cmd *cmd, t_list *tks, t_arena *arena)
 		cmd->args = arena_calloc(arena, sizeof(char *) * (n + 1));
 		if (cmd->args == NULL)
 			return (0);
+		cmd->args[0] = "test";
 		cmd->args[n] = NULL;
 	}
 	cmd->fdin = STDIN_FILENO;
@@ -103,7 +104,7 @@ t_cmd	*parse_cmd(t_list *tks, t_arena *arena)
 	if (!tks)
 		return (NULL);
 	cur = tks;
-	cmd = arena_calloc(arena, sizeof(cmd));
+	cmd = arena_calloc(arena, sizeof(t_cmd));
 	if (!cmd_args_alloc(cmd, cur, arena))
 		return (NULL);
 	i = 0;
@@ -113,7 +114,7 @@ t_cmd	*parse_cmd(t_list *tks, t_arena *arena)
 		if (!is_cmd_token(tok) || !in_out_token(tok, cmd))
 			break ;
 		if (tok->type == NAME && cmd->name == NULL)
-			cmd->name = ft_strdup(tok->str);
+			cmd->name = tok->str;
 		if (tok->type == NAME)
 			cmd->args[i++] = tok->str;
 		cur = cur->next;

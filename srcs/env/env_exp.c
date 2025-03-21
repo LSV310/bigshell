@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 03:57:17 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:02:43 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 		n++;
 	}
 	if (n == 0)
-		return (0);
+		return (1);
 	envar = get_env_value(shell->env, cur + *i - n, n);
 	len = ft_strlen(envar);
 	return (len);
@@ -51,10 +51,7 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
-	{
-		ft_printf("error: env value was bigger than buffer\n");
 		return (0);
-	}
 	ft_memcpy(dst_p, envar, envar_len);
 	return (envar_len);
 }
@@ -120,25 +117,6 @@ char	*env_exp(char *src, t_shell *env)
 	if (!expanded)
 		return (NULL);
 	fill_expanded(src, expanded, expanded + len, env);
-	// ft_printf("\nraw input: %s\n", src);
-	// ft_printf("expanded: %s\n\n", expanded);
 	free(src);
 	return (expanded);
 }
-
-/*
-int	main(void)
-{
-	t_mini	mini;
-	t_map	c = {.key = "PATH", .value = "expanded from path", .next = NULL};
-	t_map	b = {.key = "GOAT", .value = "Tristan", .next = &c};
-	t_map	a = {.key = "USER", .value = "tgallet", .next = &b};
-	char	*src = "\"$GOAT\" \'$GOAT\'$GOATED $USER<$USER$PATH";
-
-	mini.env = &a;
-	printf("input: %s\n", src);
-	char *expanded = expand_input(src, &mini);
-	printf("Expanded: %s\n", expanded);
-	free(expanded);
-}
-*/
