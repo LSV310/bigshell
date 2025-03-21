@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/15 21:48:45 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 18:20:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	cmd_args_alloc(t_cmd *cmd, t_list *tks)
 		return (0);
 	n = count_name(tks);
 	if (n == 0)
-		return (0);
-	else if (n > 1)
+		return (1);
+	else
 	{
 		cmd->args = ft_calloc(sizeof(char *) * (n), 1);
 		if (cmd->args == NULL)
