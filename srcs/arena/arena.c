@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:27:24 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 13:05:50 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:05:44 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_arena	*arena_init(void)
 	return (arena);
 }
 
-void	*regions_free(t_arena *arena)
+void	*arena_regions_free(t_arena *arena)
 {
 	t_chunk	*region;
 	t_chunk	*next;
@@ -72,7 +72,7 @@ void	*arena_alloc(size_t size, t_arena *arena)
 			capacity = size;
 		new_chunk = region_create(capacity);
 		if (new_chunk == NULL)
-			return (regions_free(arena));
+			return (arena_regions_free(arena));
 		arena->end->next = new_chunk;
 		arena->end = new_chunk;
 	}
