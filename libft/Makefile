@@ -91,7 +91,6 @@ SRC			=	libc/ft_atoi.c				\
 				readline/history.c			\
 				readline/keys.c				\
 				readline/keys2.c			\
-				readline/keys3.c			\
 				readline/rl_signals.c		\
 				readline/terminal.c			\
 				signals/signals.c

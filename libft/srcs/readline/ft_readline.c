@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 17:16:34 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 12:29:56 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 	while (1)
 	{
 		key = read_key();
-		if (ft_isprint2(key) && printkey(key, &line))
+		if (ft_isprint(key) && printkey(key, &line))
 			break ;
 		else if (!other_key(key, &line, prompt, history))
 			return (rl_quit(), NULL);

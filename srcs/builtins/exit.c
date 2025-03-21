@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 11:54:31 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:13:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	free_minishell(t_shell *minishell)
 	}
 	if (minishell->input)
 		free(minishell->input);
+	if (minishell->std_in != -1)
+	{
+		close(minishell->std_in);
+		minishell->std_in = -1;
+	}
 }
 
 int	exit2(t_shell *minishell, int int_code, char **args)

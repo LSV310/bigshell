@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 11:52:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:05:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_shell
 	t_dlist	*history;
 	t_arena	*arena;
 	char	*input;
+	int		std_in;
 }	t_shell;
 
 // builtins

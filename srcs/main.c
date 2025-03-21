@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 11:52:00 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:15:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	init_minishell(t_shell *minishell)
 	minishell->history = NULL;
 	minishell->arena = NULL;
 	minishell->input = NULL;
+	minishell->std_in = -1;
 	if (!create_env(minishell))
 		return (EXIT_FAILURE);
 	minishell->arena = arena_init();

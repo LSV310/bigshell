@@ -6,18 +6,22 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 12:15:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:23:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	wait_childs(int cmd_amount, int last_pid)
+static int	wait_childs(t_shell *shell, int cmd_amount, int last_pid)
 {
 	int	status;
 	int	i;
 
 	i = 0;
+	if (shell->std_in != -1)
+		dup2(shell->std_in, STDIN_FILENO);
+	close(shell->std_in);
+	shell->std_in = -1;
 	if (cmd_amount <= 0)
 		return (0);
 	if (last_pid != -1)
@@ -50,7 +54,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	(close(pipefd[0]), close(pipefd[1]));
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
-		(free_tab(env, 0), exit2(shell, builtins, NULL));
+		return (free_tab(env, 0), exit2(shell, builtins, NULL));
 	cmd_name = search_cmd(cmd->name, env);
 	if (!cmd_name)
 		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
@@ -62,7 +66,12 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 char	**init_pipex(t_shell *shell, int *pipefd)
 {
 	char	**env;
+	int		std_in;
 
+	std_in = dup(STDIN_FILENO);
+	if (std_in == -1)
+		return (NULL);
+	shell->std_in = std_in;
 	env = convert_env(shell->env->next);
 	if (!env)
 		return (NULL);
@@ -96,5 +105,5 @@ int	pipex(t_list **tks, t_shell *shell)
 	if (pipefd[0])
 		close(pipefd[0]);
 	free_tab(env, 0);
-	return (wait_childs(i, last_pid));
+	return (wait_childs(shell, i, last_pid));
 }
