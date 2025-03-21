@@ -6,11 +6,11 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:27:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:55:54 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../includes/minishell.h"
 
 bool	exec_input(char *input, t_shell *shell)
 {
@@ -28,24 +28,36 @@ bool	exec_input(char *input, t_shell *shell)
 	return (true);
 }
 
+int	init_minishell(t_shell *minishell)
+{
+	minishell->arena = NULL;
+	minishell->history = NULL;
+	minishell->arena = NULL;
+	minishell->input = NULL;
+	minishell->std_in = -1;
+	if (!create_env(minishell))
+		return (EXIT_FAILURE);
+	minishell->arena = arena_init();
+	if (!minishell->arena)
+		exit2(minishell, 1, NULL);
+	create_signals();
+	return (1);
+}
+
 int	main(void)
 {
 	t_shell	minishell;
-	char	*input;
 
-	minishell.history = NULL;
-	if (!create_env(&minishell))
-		return (EXIT_FAILURE);
-	minishell.arena = arena_init();
-	if (!minishell.arena)
-		exit2(&minishell, 1, NULL);
-	create_signals();
+	init_minishell(&minishell);
 	while (1)
 	{
-		input = ft_readline("minishell$> ", &minishell.history, true);
-		if (!input)
+		minishell.input = ft_readline("minishell$> ", &minishell.history, true);
+		if (!minishell.input)
 			break ;
-		free(input);
+		exec_input(minishell.input, &minishell);
+		reset_arena(&minishell.arena);
+		free(minishell.input);
+		minishell.input = NULL;
 	}
 	exit2(&minishell, 0, NULL);
 	return (EXIT_SUCCESS);

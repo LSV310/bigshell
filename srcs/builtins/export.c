@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 12:39:36 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 static t_map	*create_new_var(t_map *env, char *var)
 {

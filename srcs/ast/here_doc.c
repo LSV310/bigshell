@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 13:06:06 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:54:13 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	stdin_to_pipe(int to_write, char *delimiter)
 		free(line);
 	ft_dlstclear(&history, &free_content);
 }
+
 // TODO: implement env var expansion
 int	here_doc(char *delimiter)
 {

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/18 18:07:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:16:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,18 +157,20 @@ typedef struct s_readline
 	size_t	size;
 	size_t	cursor;
 	size_t	end;
+	bool	sigint_nl;
 }	t_readline;
 
 extern volatile int	g_sig;
 
 char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
-int		new_buffer(t_readline *line, t_dlist **history);
+int		new_buffer(t_readline *line, t_dlist **history, bool use_sigint);
 int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw_mode(void);
 void	reset_terminal_mode(void);
 int		read_key(void);
 int		reset_line(t_readline *line, char *prompt);
+int		ft_isprint2(int c);
 int		printkey(int key, t_readline *line);
 void	back_space(t_readline *line);
 int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
@@ -179,8 +181,8 @@ void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
-void	rl_init_signals(bool use_sigint);
-void	rl_reset_signals(bool use_sigint);
+void	rl_init_signals(void);
+void	rl_reset_signals(void);
 
 // signals
 void	init_sighandler(struct sigaction *sa, void (*action)(int));

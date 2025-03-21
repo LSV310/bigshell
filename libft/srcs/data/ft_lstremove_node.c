@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:59:15 by agruet            #+#    #+#             */
-/*   Updated: 2025/02/28 11:10:24 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/17 11:31:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	lst_remove_node(t_list **lst, t_list *node, void (*del)(void*))
 				*lst = node->next;
 			else
 				previous->next = node->next;
-			ft_lstdelone(node, del);
+			if (del)
+				ft_lstdelone(node, del);
 			return ;
 		}
 		previous = current;

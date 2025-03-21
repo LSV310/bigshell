@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/14 13:23:11 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 t_map	*get_env(t_map *env, const char *var, size_t len)
 {
@@ -58,8 +58,9 @@ char	**convert_env(t_map *env)
 		if (!temp)
 			return (free_tab(tab, i), NULL);
 		tab[i] = ft_strjoin(temp, env->value);
+		free(temp);
 		if (!tab[i])
-			return (free(temp), free_tab(tab, i), NULL);
+			return (free_tab(tab, i), NULL);
 		i++;
 		env = env->next;
 	}

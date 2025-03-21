@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:50:51 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 13:08:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-const char	*toktype_to_string(t_token_type type)
+char	*toktype_to_string(t_token_type type)
 {
 	if (type == ENDT)
 		return ("END");
@@ -59,7 +59,6 @@ void	print_token(t_token tok, bool p_pointer)
 
 void	print_tokens(t_list *tks, bool p_pointer)
 {
-
 	printf("\n");
 	while (tks)
 	{

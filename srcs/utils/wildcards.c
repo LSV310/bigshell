@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/13 14:28:20 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 DIR	*search_directory(t_list **lst, t_wildcard_type type)
 {
@@ -123,6 +123,8 @@ char	*get_wildcards(char *str, t_wildcard_type type, bool single_result)
 	t_list	*current;
 	t_list	*next;
 
+	if (!str)
+		return (NULL);
 	if (!ft_strchr(str, '*'))
 		return (ft_strdup(str));
 	lst = NULL;

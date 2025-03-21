@@ -6,11 +6,11 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:25:51 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 15:56:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 static int	find_n_arg(char *arg)
 {

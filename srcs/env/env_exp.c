@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
 /*   Updated: 2025/03/17 03:57:17 by tgallet          ###   ########.fr       */
@@ -46,6 +46,8 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 		*src_p += 1;
 		n++;
 	}
+	if (!**src_p)
+		return (0);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arena.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 23:01:47 by tgallet           #+#    #+#             */
 /*   Updated: 2025/03/21 13:05:44 by tgallet          ###   ########.fr       */
@@ -73,5 +73,3 @@ void	reset_arena(t_arena **arena)
 	free (*arena);
 	*arena = arena_init();
 }
-
-

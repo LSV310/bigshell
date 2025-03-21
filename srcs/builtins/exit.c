@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:05:44 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:40:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,26 @@ static bool	numeric_arg(char *nbr)
 		return (free(limit), false);
 }
 
+void	free_minishell(t_shell *minishell)
+{
+	if (minishell->env)
+		ft_mapclear(&minishell->env);
+	if (minishell->history)
+		ft_dlstclear(&minishell->history, &free_content);
+	if (minishell->arena)
+	{
+		arena_regions_free(minishell->arena);
+		free(minishell->arena);
+	}
+	if (minishell->input)
+		free(minishell->input);
+	if (minishell->std_in != -1)
+	{
+		close(minishell->std_in);
+		minishell->std_in = -1;
+	}
+}
+
 int	exit2(t_shell *minishell, int int_code, char **args)
 {
 	int	code;
@@ -63,10 +83,6 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 		code = int_code;
 	if (args)
 		ft_printf("exit\n");
-	ft_mapclear(&minishell->env);
-	ft_dlstclear(&minishell->history, &free_content);
-	arena_regions_free(minishell->arena);
-	free(minishell->arena);
-	ft_printf("exit\n");
+	free_minishell(minishell);
 	exit(code);
 }
