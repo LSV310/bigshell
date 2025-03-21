@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 15:30:07 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:23:48 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	replace_fd(int fd, t_cmd *cmd, bool is_in)
 {
 	if (is_in)
 	{
-		if (cmd->fdin != STDIN_FILENO && cmd->fdin > -1)
-			close(cmd->fdin);
 		cmd->fdin = fd;
 		if (fd > 0)
 		{
@@ -68,8 +66,6 @@ void	replace_fd(int fd, t_cmd *cmd, bool is_in)
 	}
 	else
 	{
-		if (cmd->fdout != STDOUT_FILENO && cmd->fdout > -1)
-			close (cmd->fdout);
 		cmd->fdout = fd;
 		if (fd > 1)
 		{
