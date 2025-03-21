@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 16:11:57 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 19:42:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 		return (NULL);
 	if (!expand_lst_token(&tks, env))
 		return (NULL);
-	print_tokens(tks, false);
+	// print_tokens(tks, false);
 	return (tks);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 00:49:44 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:39:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*name_wild(t_lexer lex, t_shell *shell)
 		}
 		res = process_wildcard(&tok, res, shell);
 	}
+	free((char *)lex.start);
 	return (res);
 }
 

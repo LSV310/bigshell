@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 19:45:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	else if (pid != 0)
 		return (pid);
 	restore_signals();
+	dup2(pipefd[1], STDOUT_FILENO);
+	(close(pipefd[0]), close(pipefd[1]));
 	cmd = parse_cmd(cmdtk, shell->arena);
 	if (!cmd)
 		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
-	(close(pipefd[0]), close(pipefd[1]));
 	builtins = try_builtins(cmd, shell);
 	if (builtins >= 0)
 		return (free_tab(env, 0), exit2(shell, builtins, NULL));
@@ -59,7 +60,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	if (!cmd_name)
 		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
 	execve(cmd_name, cmd->args, env);
-	perror("pipex");
+	perror("minishell");
 	return ((free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL)));
 }
 
@@ -87,23 +88,23 @@ int	pipex(t_list **tks, t_shell *shell)
 	pid_t	last_pid;
 	char	**env;
 
-	i = 0;
 	env = init_pipex(shell, pipefd);
 	if (!env)
-		return (1);
+	return (1);
+	i = 0;
 	while (tks[i])
 	{
-		if (pipefd[0])
-			(dup2(pipefd[0], STDIN_FILENO), close(pipefd[0]));
 		pipe(pipefd);
-		close(pipefd[1]);
+		if (!tks[i + 1])
+			dup2(STDOUT_FILENO, pipefd[1]);
 		last_pid = exec_cmd(tks[i], pipefd, shell, env);
+		dup2(pipefd[0], STDIN_FILENO);
+		close(pipefd[0]);
+		close(pipefd[1]);
 		if (last_pid == -1)
 			break ;
 		i++;
 	}
-	if (pipefd[0])
-		close(pipefd[0]);
 	free_tab(env, 0);
 	return (wait_childs(shell, i, last_pid));
 }
