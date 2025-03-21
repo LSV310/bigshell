@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rl_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/20 12:54:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 18:02:54 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
 {
 	bool	sigint_nl;
 
+	if (g_sig == 0)
+		return (0);
 	if (g_sig != SIGINT)
 		return (1);
 	sigint_nl = line->sigint_nl;
