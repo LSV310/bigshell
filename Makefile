@@ -13,6 +13,7 @@ CFLAGS		+= -I$(INCLUDES)
 SRC			=	arena/arena.c				\
 				arena/ft_arena.c			\
 				ast/ast.c					\
+				ast/exec_ast.c				\
 				ast/here_doc.c				\
 				ast/pipeline.c				\
 				builtins/cd.c				\
