@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 15:46:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 12:47:16 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	log_cur_token(t_list **tokens)
 	printf("current token: %s (%s)\n", tok->str, toktype_to_string(tok->type));
 }
 
-t_ast	*createNode(t_node_type type, t_list **tokens, t_arena *arena, t_ast *childs[2])
+t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *childs[2])
 {
 	t_list	**commands;
 	t_ast	*node;
@@ -65,8 +65,6 @@ static bool advance_token(t_list **tokens)
 		return (false);
 }
 
-t_ast	*parse_expr(t_list **tokens, t_arena *arena);
-
 t_ast	*parse_par(t_list **tokens, t_arena *arena)
 {
 	t_ast	*ret;
@@ -94,9 +92,9 @@ t_ast	*parse_logic(t_list **tokens, t_arena *arena, t_ast *left, t_token_type ty
 	if (!right)
 		return (NULL);
 	if (type == ORT)
-		return (createNode(ND_OR, NULL, arena, (t_ast *[]){left, right}));
+		return (create_node(ND_OR, NULL, arena, (t_ast *[]){left, right}));
 	else if (type == ANDT)
-		return (createNode(ND_AND, NULL, arena, (t_ast *[]){left, right}));
+		return (create_node(ND_AND, NULL, arena, (t_ast *[]){left, right}));
 	else
 		return (NULL);
 }
@@ -110,7 +108,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 	if (tok->type == LPAR)
 		left = parse_par(tokens, arena);
 	else if (is_cmd_token(tok))
-		left = createNode(ND_CMD, tokens, arena, (t_ast *[]){NULL, NULL});
+		left = create_node(ND_CMD, tokens, arena, (t_ast *[]){NULL, NULL});
 	else
 		return (NULL);
 	log_cur_token(tokens);
@@ -121,7 +119,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 		return (left);
 	else if (tok->type == ORT || tok->type == ANDT)
 		return (parse_logic(tokens, arena, left, tok->type));
-	return (NULL);
+	return (left);
 }
 
 // GRAMMAR

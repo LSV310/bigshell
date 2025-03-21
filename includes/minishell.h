@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:27:05 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:41:21 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	restore_signals(void);
 
 // utils
 void	free_minishell(t_shell *minishell);
-int			check_first_arg(t_map *env, char **args, int *exit_code);
-bool		var_name_valid(char *var);
-const char	*toktype_to_string(t_token_type type);
-void		print_pipeline(t_list **pipeline);
+int		check_first_arg(t_map *env, char **args, int *exit_code);
+bool	var_name_valid(char *var);
+char	*toktype_to_string(t_token_type type);
+void	print_pipeline(t_list **pipeline);
 
 #endif

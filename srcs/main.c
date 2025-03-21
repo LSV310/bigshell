@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:15:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:40:16 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	proute(char *input, t_shell *shell)
+bool	exec_input(char *input, t_shell *shell)
 {
 	t_list	*tks;
 	t_ast	*ast;
@@ -47,7 +47,6 @@ int	init_minishell(t_shell *minishell)
 int	main(void)
 {
 	t_shell	minishell;
-	t_list	*tks;
 
 	init_minishell(&minishell);
 	while (1)
@@ -55,8 +54,8 @@ int	main(void)
 		minishell.input = ft_readline("minishell$> ", &minishell.history, true);
 		if (!minishell.input)
 			break ;
-		tks = make_tokens(minishell.input, &minishell);
-		pipex(ptr_arr_pipeline(tks, minishell.arena), &minishell);
+		exec_input(minishell.input, &minishell);
+		reset_arena(&minishell.arena);
 		free(minishell.input);
 		minishell.input = NULL;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:13:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:40:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_minishell(t_shell *minishell)
 		ft_dlstclear(&minishell->history, &free_content);
 	if (minishell->arena)
 	{
-		regions_free(minishell->arena);
+		arena_regions_free(minishell->arena);
 		free(minishell->arena);
 	}
 	if (minishell->input)
