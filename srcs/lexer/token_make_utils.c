@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_make_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 16:24:29 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// count characters including quotes and stops at unquoted (space or special)
 void	fill_token(t_lexer *lex, t_token *tok, t_token_type type)
 {
 	char	quote;
@@ -65,7 +64,6 @@ t_shell	*test_env(void)
 	env2 = malloc(sizeof(t_map));
 	env2->key = "PATH";
 	env2->value = "CHEMIN";
-
 	env->next = env2;
 	env2->next = NULL;
 	shell->env = env;
