@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   search_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
 /*   Updated: 2025/03/20 16:26:35 by agruet           ###   ########.fr       */

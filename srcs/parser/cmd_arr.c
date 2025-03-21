@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:49 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 01:10:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:13:58 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	**flaten_tlistp(t_list *lst, t_arena *arena)
 		i++;
 	}
 	ft_lstclear(&lst, void_content);
+	print_pipeline((t_list	**)ptrs);
 	return (ptrs);
 }
 

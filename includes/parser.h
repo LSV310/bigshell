@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/19 19:38:22 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 12:47:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ struct s_ast
 int		here_doc(char *delimiter);
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	skip_pipeline(t_list **tks);
+t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 
 #endif

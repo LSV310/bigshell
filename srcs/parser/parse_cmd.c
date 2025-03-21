@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 16:19:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:02:53 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_name(t_list *tks)
 	return (n);
 }
 
-int	cmd_args_alloc(t_cmd *cmd, t_list *tks)
+int	cmd_args_alloc(t_cmd *cmd, t_list *tks, t_arena *arena)
 {
 	int	n;
 
@@ -40,9 +40,9 @@ int	cmd_args_alloc(t_cmd *cmd, t_list *tks)
 	n = count_name(tks);
 	if (n == 0)
 		return (1);
-	else if (n >= 1)
+	else
 	{
-		cmd->args = ft_calloc(sizeof(char *) * (n + 1), 1);
+		cmd->args = arena_calloc(arena, sizeof(char *) * (n + 1));
 		if (cmd->args == NULL)
 			return (0);
 		cmd->args[n] = NULL;
@@ -93,7 +93,7 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 	return (1);
 }
 
-t_cmd	*parse_cmd(t_list *tks)
+t_cmd	*parse_cmd(t_list *tks, t_arena *arena)
 {
 	t_cmd	*cmd;
 	t_token	*tok;
@@ -103,8 +103,8 @@ t_cmd	*parse_cmd(t_list *tks)
 	if (!tks)
 		return (NULL);
 	cur = tks;
-	cmd = ft_calloc(sizeof(t_cmd), 1);
-	if (!cmd_args_alloc(cmd, cur))
+	cmd = arena_calloc(arena, sizeof(cmd));
+	if (!cmd_args_alloc(cmd, cur, arena))
 		return (NULL);
 	i = 0;
 	while (cur && cur->content)

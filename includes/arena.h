@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/17 03:33:54 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:06:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ typedef struct s_arena{
 
 t_chunk	*region_create(size_t capacity);
 t_arena	*arena_init(void);
-void	*regions_free(t_arena *arena);
+void	*arena_regions_free(t_arena *arena);
 void	*arena_alloc(size_t size, t_arena *arena);
 t_list	*ar_lstnew(void *content, t_arena *arena);
 void	*arena_calloc(t_arena *arena, size_t size);
 char	*ar_strndup(const char *s, size_t n, t_arena *arena);
 t_list	*arlst_remove_node(t_list **lst, t_list *node);
+void	reset_arena(t_arena **arena);
 
 #endif

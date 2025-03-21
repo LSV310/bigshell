@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 23:01:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 12:20:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:05:44 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,11 @@ t_list	*arlst_remove_node(t_list **lst, t_list *node)
 		current = current->next;
 	}
 	return (*lst);
+}
+
+void	reset_arena(t_arena **arena)
+{
+	arena_regions_free(*arena);
+	free (*arena);
+	*arena = arena_init();
 }
