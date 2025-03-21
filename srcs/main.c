@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 17:38:35 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 18:17:17 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool	exec_input(char *input, t_shell *shell)
 
 int	init_minishell(t_shell *minishell)
 {
+	_PC_PIPE_BUF
 	minishell->arena = NULL;
 	minishell->history = NULL;
 	minishell->arena = NULL;
