@@ -6,13 +6,13 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:27:31 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-bool	proute(char *input, t_shell *shell)
+bool	exec_input(char *input, t_shell *shell)
 {
 	t_list	*tks;
 	t_ast	*ast;
