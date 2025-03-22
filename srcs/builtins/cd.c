@@ -37,16 +37,16 @@ static int	update_env(char *cwd, t_map *env)
 	return (0);
 }
 
-static int	go_home(t_map *env)
+static int	go_home(t_map *env, char *cwd)
 {
 	t_map	*find;
 
 	find = get_env(env, "HOME", 5);
-	if (!find->value)
-		return (ft_fprintf(2, "cd: HOME not set\n"), 0);
+	if (!find)
+		return (ft_fprintf(2, "cd: HOME not set\n"), 1);
 	if (chdir(find->value))
-		return (perror(find->value), 1);
-	return (0);
+		return (write(2, "cd: ", 4), perror(find->value), errno);
+	return (update_env(ft_strdup(find->value), env));
 }
 
 int	cd(t_map *env, char **args)
@@ -61,15 +61,15 @@ int	cd(t_map *env, char **args)
 	if (!cwd)
 	{
 		perror("cd");
-		if (!go_home(env))
+		if (!go_home(env, cwd))
 			return (1);
 	}
-	if (!dir && !go_home(env))
-		return (1);
+	if (!dir)
+		return (go_home(env, cwd));
 	else
 	{
 		if (chdir(dir))
-			return (free(cwd), perror(dir), errno);
+			return (free(cwd), write(2, "cd: ", 4), perror(dir), errno);
 	}
 	return (update_env(cwd, env));
 }

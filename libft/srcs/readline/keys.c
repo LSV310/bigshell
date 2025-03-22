@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 17:54:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/22 10:48:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	printkey(int key, t_readline *line)
 
 	if (key == '\n')
 		return (1);
-	if (key == '\t')
-		key = ' ';
+	if (key == '\t' && isatty(STDIN_FILENO))
+		return (0);
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);
 	if (len > 0)

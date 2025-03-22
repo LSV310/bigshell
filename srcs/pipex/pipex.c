@@ -14,8 +14,10 @@
 
 static int	wait_childs(t_shell *shell, int cmd_amount, int last_pid)
 {
-	int	status;
-	int	i;
+	int		status;
+	int		i;
+	int		exit_code;
+	char	*itoa_code;
 
 	i = 0;
 	if (shell->std_in != -1)
@@ -28,11 +30,14 @@ static int	wait_childs(t_shell *shell, int cmd_amount, int last_pid)
 		waitpid(last_pid, &status, 0);
 	while (i++ < cmd_amount - 1)
 		waitpid(-1, NULL, 0);
+	exit_code = 1;
 	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
+		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	return (1);
+		exit_code = (128 + WTERMSIG(status));
+	itoa_code = ft_itoa(exit_code);
+	modify_var(shell->env, itoa_code);
+	free(itoa_code);
 }
 
 static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
@@ -90,7 +95,7 @@ int	pipex(t_list **tks, t_shell *shell)
 
 	env = init_pipex(shell, pipefd);
 	if (!env)
-	return (1);
+		return (1);
 	i = 0;
 	while (tks[i])
 	{

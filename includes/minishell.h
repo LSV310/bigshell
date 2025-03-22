@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:41:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/22 12:12:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int		create_env(t_shell *minishell);
 int		assign_kv(char *var, t_map *map);
 t_map	*get_env(t_map *env, const char *var, size_t len);
 t_map	*add_env_var(t_map *env, char *key, char *value);
-char	**convert_env(t_map *map);
 char	*get_env_value(t_map *env, const char *var, size_t len);
+int		modify_var(t_map *var, char *value);
+char	**convert_env(t_map *map);
 
 // lexer && parsing
 

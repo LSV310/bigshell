@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:01:38 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_map	*create_new_var(t_map *env, char *var)
 
 	if (var_name_valid(var) == false)
 	{
-		ft_fprintf(2, "export: %s: not a valid identifier", var);
+		ft_fprintf(2, "export: %s: not a valid identifier\n", var);
 		return (NULL);
 	}
 	new = newmap(NULL, NULL);
@@ -36,6 +36,17 @@ static int	replace_var(t_map *find, char *var, char *chr)
 	find->value = ft_substr(var, chr - var + 1, ft_strlen(var));
 	if (!find->value)
 		return (0);
+	return (1);
+}
+
+int	modify_var(t_map *var, char *value)
+{
+	if (!var)
+		return (0);
+	free(var->value);
+	if (!value)
+		value = "";
+	var->value = ft_strdup(value);
 	return (1);
 }
 
@@ -78,12 +89,9 @@ int	export(t_map *env, char **args)
 	while (args[i])
 	{
 		chr = ft_strchr(args[i], '=');
-		if (!chr)
-		{
-			i++;
-			continue ;
-		}
-		find = get_env(env, args[i], chr - args[i]);
+		find = NULL;
+		if (chr && chr != args[i])
+			find = get_env(env, args[i], chr - args[i]);
 		if (!find && !create_new_var(env, args[i]))
 			exit_code = 1;
 		else if (find && !replace_var(find, args[i], chr))
