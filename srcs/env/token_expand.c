@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 00:50:23 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:50:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ int	switch_type_tk(t_list **cur, t_list **tks, t_shell *shell)
 		return (expand_namet(cur, tks, shell));
 	else if (token->type == REDIN || token->type == REDOUT
 		|| token->type == APPEN)
+	{
+		*cur = (*cur)->next;
 		return (expand_redt(*cur, *tks, shell));
+	}
 	else
+	{
+		*cur = (*cur)->next;
 		return (token_fillstr((**cur).content, shell->arena));
+	}
 }
 
 int	expand_lst_token(t_list **tks, t_shell *shell)
@@ -41,7 +47,7 @@ int	expand_lst_token(t_list **tks, t_shell *shell)
 			break ;
 		if (!switch_type_tk(&cur, tks, shell))
 			return (false);
-		cur = cur->next;
+		// cur = cur->next; TODO: advance in switch type tk
 	}
 	return (true);
 }

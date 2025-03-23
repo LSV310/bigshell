@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 19:44:14 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/23 15:29:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	log_cur_token(t_list **tokens)
-{
-	t_token	*tok;
-
-	tok = (*tokens)->content;
-	// printf("current token: %s (%s)\n", tok->str, toktype_to_string(tok->type));
-}
 
 t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *childs[2])
 {
@@ -42,17 +34,13 @@ t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *chil
 	return (node);
 }
 
-// Moves to the next token by incrementing 'pos'
 static bool advance_token(t_list **tokens)
 {
 	t_token	*tok;
 
 	tok = (*tokens)->content;
-	// printCurToken(tokens);
-	ft_printf("advancing token: %s ", toktype_to_string(tok->type));
 	*tokens = (*tokens)->next;
 	tok = (*tokens)->content;
-	ft_printf("to %s\n", toktype_to_string(tok->type));
 	if (*tokens)
 	{
 		tok = (*tokens)->content;
@@ -85,7 +73,6 @@ t_ast	*parse_logic(t_list **tokens, t_arena *arena, t_ast *left, t_token_type ty
 	t_ast	*right;
 	t_token	*tok;
 
-	log_cur_token(tokens);
 	if (!advance_token(tokens))
 		return (NULL);
 	right = parse_expr(tokens, arena);
@@ -110,8 +97,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 	else if (is_cmd_token(tok))
 		left = create_node(ND_CMD, tokens, arena, (t_ast *[]){NULL, NULL});
 	else
-		return (NULL);
-	log_cur_token(tokens);
+		return (create_node(ND_NULL, NULL, arena, (t_ast *[]){NULL, NULL}));
 	if (!left)
 		return (NULL);
 	tok = (**tokens).content;
@@ -122,16 +108,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 	return (left);
 }
 
-// GRAMMAR
-// terminal things are: OR AND CMD L_PAR R_PAR ENDT
-// expr		:= CMD | logic | par
-// logic	:= expr AND expr | expr OR expr
-// pars		:= L_PAR expr R_PAR
-
-// cmd1 || (cmd2 && cmd3)
-// (cmd1 && cmd2 || cmd3) || cmd4
-// cmd2 && cmd3
-t_ast *build_ast(t_list *tks, t_arena *arena)
+t_ast	*build_ast(t_list *tks, t_arena *arena)
 {
 	t_ast	*root;
 	t_token	*tok;
