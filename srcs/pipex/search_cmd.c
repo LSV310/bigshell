@@ -16,7 +16,7 @@ static char	*new_cmd(char *old_cmd)
 {
 	char	*new_cmd;
 
-	if (!old_cmd)
+	if (!old_cmd || !old_cmd[0])
 		return (NULL);
 	new_cmd = ft_strjoin("/", old_cmd);
 	if (!new_cmd)
@@ -55,7 +55,7 @@ static char	*try_path(char *cmd, char **path, int i)
 	return (NULL);
 }
 
-char	*search_path(char *cmd, char **env)
+char	*search_path(char *cmd, char **env, int *exit_code)
 {
 	char	**path;
 	char	*temp;
@@ -82,21 +82,30 @@ char	*search_path(char *cmd, char **env)
 	return (free(cmd), free_tab(path, 0), temp);
 }
 
-char	*search_cmd(char *cmd, char **env)
+char	*search_cmd(char *cmd, char **env, int *exit_code)
 {
-	char	*in_path;
+	char		*in_path;
+	struct stat	file_stat;
 
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK | X_OK))
 		{
-			perror(cmd);
-			return (NULL);
+			*exit_code = 127;
+			if (errno == 20)
+				*exit_code = 126;
+			return (perror(cmd), NULL);
+		}
+		if (stat(cmd, &file_stat) == -1 || S_ISDIR(file_stat.st_mode))
+		{
+			*exit_code = 126;
+			return (ft_fprintf(2, "%s: Is a directory\n", cmd), NULL);
 		}
 		return (cmd);
 	}
-	in_path = search_path(cmd, env);
+	in_path = search_path(cmd, env, exit_code);
 	if (!in_path)
 		ft_fprintf(2, "%s: command not found\n", cmd);
+	*exit_code = 127;
 	return (in_path);
 }

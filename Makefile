@@ -54,7 +54,6 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	# @cp $(NAME) ~/.local/bin/
 
 $(LIBFT):
 	make -sC $(LIBFT_DIR)

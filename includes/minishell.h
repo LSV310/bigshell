@@ -21,8 +21,9 @@
 # include "wildcards.h"
 # include <stdio.h>
 # include <signal.h>
+# include <sys/stat.h>
 
-# define ENVN_STOP "\'\"$&|<>()# *[]{}\%"
+# define ENVN_STOP "\'\"$&|<>()# *[]{}\%="
 
 typedef struct s_shell
 {

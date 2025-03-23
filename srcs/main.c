@@ -52,6 +52,7 @@ int	main(void)
 	while (1)
 	{
 		minishell.input = ft_readline("minishell$> ", &minishell.history, true);
+		create_signals();
 		if (!minishell.input)
 			break ;
 		exec_input(minishell.input, &minishell);

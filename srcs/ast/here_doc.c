@@ -41,7 +41,7 @@ int	here_doc(char *delimiter)
 	t_pipe	fds;
 
 	if (pipe((int *) &fds) == -1)
-		perror("pipe failed");
+		perror("");
 	else
 	{
 		stdin_to_pipe(fds.write_fd, delimiter);

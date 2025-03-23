@@ -24,6 +24,6 @@ typedef struct s_pipe
 	int	write_fd;
 }	t_pipe;
 
-char	*search_cmd(char *cmd, char **env);
+char	*search_cmd(char *cmd, char **env, int *exit_code);
 
 #endif

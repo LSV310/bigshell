@@ -40,33 +40,43 @@ static int	wait_childs(t_shell *shell, int cmd_amount, int last_pid)
 	free(itoa_code);
 }
 
+char	*get_cmd_name(t_cmd	*cmd, t_shell *shell, char **env)
+{
+	int		builtins;
+	int		exit_code;
+	char	*cmd_name;
+
+	if (!cmd)
+		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
+	builtins = try_builtins(cmd, shell);
+	if (builtins >= 0)
+		(free_tab(env, 0), exit2(shell, builtins, NULL));
+	cmd_name = search_cmd(cmd->name, env, &exit_code);
+	if (!cmd_name)
+		(free_tab(env, 0), exit2(shell, exit_code, NULL));
+	return (cmd_name);
+}
+
 static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 {
 	t_cmd	*cmd;
 	char	*cmd_name;
-	int		builtins;
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		return (perror("fork"), -1);
+		return (-1);
 	else if (pid != 0)
 		return (pid);
 	restore_signals();
 	dup2(pipefd[1], STDOUT_FILENO);
 	(close(pipefd[0]), close(pipefd[1]));
 	cmd = parse_cmd(cmdtk, shell->arena);
-	if (!cmd)
-		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
-	builtins = try_builtins(cmd, shell);
-	if (builtins >= 0)
-		return (free_tab(env, 0), exit2(shell, builtins, NULL));
-	cmd_name = search_cmd(cmd->name, env);
-	if (!cmd_name)
-		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
+	cmd_name = get_cmd_name(cmd, shell, env);
 	execve(cmd_name, cmd->args, env);
-	perror("minishell");
-	return ((free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL)));
+	if (errno == 13)
+		return (perror(cmd_name), (free_tab(env, 0), exit2(shell, 127, NULL)));
+	return ((free_tab(env, 0), exit2(shell, EXIT_SUCCESS, NULL)));
 }
 
 char	**init_pipex(t_shell *shell, int *pipefd)
