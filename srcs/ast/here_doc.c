@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/20 12:54:13 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 19:22:27 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,26 @@ int	here_doc(char *delimiter)
 	return (fds.read_fd);
 }
 
-/* int	main(void)
+void	delimiter_parse(t_token	*tok, char *dest, bool *mode)
 {
-	here_doc("eof");
-} */
+	int	i;
+
+	i = 0;
+	while (i < tok->len)
+	{
+		if (char_in_set(tok->p[i], "\"\'"))
+		{
+			*mode = false;
+			continue;
+		}
+		*dest = tok->p[i];
+		i++;
+		*dest += 1;
+	}
+}
+
+bool	token_heredoc(t_token *tok, t_arena *arena)
+{
+
+}
+
