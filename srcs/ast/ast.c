@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 12:47:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/21 19:44:14 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	log_cur_token(t_list **tokens)
 	t_token	*tok;
 
 	tok = (*tokens)->content;
-	printf("current token: %s (%s)\n", tok->str, toktype_to_string(tok->type));
+	// printf("current token: %s (%s)\n", tok->str, toktype_to_string(tok->type));
 }
 
 t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *childs[2])

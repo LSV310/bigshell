@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/10 12:38:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 17:37:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,15 @@ int	down_arrow(t_readline *line, t_dlist **history, char *prompt)
 
 void	home_key(t_readline *line)
 {
-	while (line->cursor > 0)
-	{
-		line->cursor--;
-		ft_fprintf(0, "\b");
-	}
+	char	*temp;
+
+	temp = ft_strdup(line->current_line);
+	write_x_times(temp, '\b', line->cursor);
+	line->cursor = 0;
 }
 
 void	end_key(t_readline *line)
 {
-	while (line->cursor < line->end)
-	{
-		ft_fprintf(0, "%c", line->current_line[line->cursor]);
-		line->cursor++;
-	}
+	ft_fprintf(0, &line->current_line[line->cursor]);
+	line->cursor = line->end;
 }

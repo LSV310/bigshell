@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 13:53:38 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 13:57:40 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	set_raw_mode(void);
 void	reset_terminal_mode(void);
 int		read_key(void);
 int		reset_line(t_readline *line, char *prompt);
-int		ft_isprint2(int c);
+void	write_x_times(char *buff, char c, size_t times);
 int		printkey(int key, t_readline *line);
 void	back_space(t_readline *line);
 int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);

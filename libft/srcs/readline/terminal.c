@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:48:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:13:30 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,4 @@ int	read_key(void)
 	return (ch);
 }
 
-int	reset_line(t_readline *line, char *prompt)
-{
-	char	*cpy;
 
-	ft_fprintf(0, "\r%s", prompt);
-	cpy = ft_strdup(line->current_line);
-	if (!cpy)
-		return (0);
-	ft_memset(cpy, ' ', line->cursor);
-	write(STDIN_FILENO, cpy, line->cursor);
-	ft_memset(cpy, '\b', line->cursor);
-	write(STDIN_FILENO, cpy, line->cursor);
-	free(cpy);
-	return (1);
-}

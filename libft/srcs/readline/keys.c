@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:48:17 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/21 17:54:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 int	printkey(int key, t_readline *line)
 {
 	size_t	len;
+	char	*temp;
 
 	if (key == '\n')
 		return (1);
+	if (key == '\t')
+		key = ' ';
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);
 	if (len > 0)
@@ -25,8 +28,9 @@ int	printkey(int key, t_readline *line)
 		ft_memmove(line->current_line + line->cursor + 1,
 			line->current_line + line->cursor, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor + 1);
-		while (len-- > 0)
-			write(STDIN_FILENO, "\b", 1);
+		temp = ft_strdup(line->current_line);
+		write_x_times(temp, '\b', len);
+		free(temp);
 	}
 	line->current_line[line->cursor++] = key;
 	line->end++;
@@ -50,29 +54,25 @@ static void	move_key(t_readline *line, int key)
 void	back_space(t_readline *line)
 {
 	size_t	len;
-	size_t	i;
+	char	*temp;
 
 	if (line->cursor <= 0)
 		return ;
-	i = 0;
 	len = ft_strlen(line->current_line + line->cursor) + 1;
-	while (i++ < len)
-		write(STDIN_FILENO, " ", 1);
-	i = 0;
-	while (i++ < len)
-		write(STDIN_FILENO, "\b", 1);
+	temp = ft_strdup(line->current_line);
+	write_x_times(temp, ' ', len);
+	write_x_times(temp, '\b', len);
 	line->cursor--;
 	line->end--;
-	ft_fprintf(0, "\b \b");
+	write(0, "\b \b", 3);
 	if (len > 1)
 	{
 		ft_memmove(line->current_line + line->cursor,
-			line->current_line + line->cursor + 1, len);
+		line->current_line + line->cursor + 1, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor);
-		i = 0;
-		while (++i < len)
-			write(STDIN_FILENO, "\b", 1);
+		write_x_times(temp, '\b', len - 1);
 	}
+	free(temp);
 	line->current_line[line->end] = '\0';
 }
 
