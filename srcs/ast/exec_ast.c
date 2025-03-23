@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:44:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 15:08:52 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:30:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ bool	exec_ast(t_ast *ast, t_shell *shell)
 		return (exec_ast(ast->left, shell) && exec_ast(ast->right, shell));
 	else if (ast->type == ND_GRP)
 		return (exec_ast(ast->left, shell));
+	else if (ast->type == ND_NULL)
+		return (true);
 	return (false);
 }
