@@ -12,32 +12,58 @@
 
 #include "../../includes/minishell.h"
 
-static bool	is_num(char *nbr)
+static char	*nb_start(char *nbr)
 {
-	if (*nbr == '-' || *nbr == '+')
+	int		i;
+	bool	sign;
+
+	i = 0;
+	sign = false;
+	while (*nbr == 32 || (*nbr >= 9 && *nbr <= 13))
 		nbr++;
-	while (*nbr && ft_isdigit(*nbr))
+	if (nbr[0] == '-' || nbr[0] == '+')
+	{
+		i++;
+		sign = true;
+	}
+	while (ft_isdigit(nbr[i]))
+		i++;
+	if ((i >= 20 && !sign) || (i >= 21 && sign))
+		return (NULL);
+	while (nbr[i] == 32 || (nbr[i] >= 9 && nbr[i] <= 13))
+		i++;
+	if (nbr[i] != 0 || (i == 0 && !sign) || (i == 1 && sign))
+		return (NULL);
+	if (*nbr == '+')
 		nbr++;
-	if (*nbr)
-		return (false);
-	return (true);
+	return (nbr);
 }
 
 static bool	numeric_arg(char *nbr)
 {
 	char	*limit;
+	int		len;
+	int		i;
 
-	while (*nbr == 32 || (*nbr >= 9 && *nbr <= 13))
-		nbr++;
-	if (is_num(nbr) == false)
+	nbr = nb_start(nbr);
+	if (!nbr)
 		return (false);
+	i = 0;
+	while (ft_isdigit(nbr[i]) ||  nbr[i] == '-')
+		i++;
+	if ((i < 20 && *nbr == '-') || (i < 19 && ft_isdigit(*nbr)))
+		return (true);
+	len = 19;
 	if (*nbr == '-')
+	{
+		len = 20;
 		limit = ft_ltoa(LONG_MIN);
+	}
 	else
 		limit = ft_ltoa(LONG_MAX);
 	if (!limit)
 		return (false);
-	if (ft_strcmp(nbr, limit) <= 0)
+	if (ft_strncmp(nbr, limit, len) <= 0)
 		return (free(limit), true);
 	else
 		return (free(limit), false);
@@ -67,17 +93,19 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 {
 	int	code;
 
-	if (args && args[0] && args[1])
-		return (ft_fprintf(2, "exit: too many arguments\n"), 1);
 	if (args && args[0])
 	{
 		if (numeric_arg(args[0]) == false)
 		{
-			ft_fprintf(2, "exit: %s numeric argument required\n", args[0]);
+			ft_fprintf(2, "exit: '%s': numeric argument required\n", args[0]);
 			code = 2;
 		}
 		else
+		{
+			if (args[1])
+				return (ft_fprintf(2, "exit: too many arguments\n"), 1);
 			code = ft_atol(args[0]);
+		}
 	}
 	else
 		code = int_code;

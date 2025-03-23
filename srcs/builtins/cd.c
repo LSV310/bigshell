@@ -45,17 +45,34 @@ static int	go_home(t_map *env, char *cwd)
 	if (!find)
 		return (ft_fprintf(2, "cd: HOME not set\n"), 1);
 	if (chdir(find->value))
-		return (write(2, "cd: ", 4), perror(find->value), errno);
+		return (write(2, "cd: ", 4), perror(find->value), 1);
 	return (update_env(ft_strdup(find->value), env));
+}
+
+static int	check_args(char **args)
+{
+	if (args && args[0])
+	{
+		if (args[0][0] == '-')
+		{
+			ft_fprintf(2, "cd: -%c: invalid option\n", args[0][1]);
+			return (2);
+		}
+	}
+	if (args && args[0] && args[1])
+		return (ft_fprintf(2, "cd: too many arguments\n"), 1);
+	return (0);
 }
 
 int	cd(t_map *env, char **args)
 {
 	char	*cwd;
 	char	*dir;
+	int		valid_args;
 
-	if (args && args[1])
-		return (ft_fprintf(2, "cd: too many arguments\n"), 1);
+	valid_args = check_args(args);
+	if (valid_args)
+		return (valid_args);
 	dir = args[0];
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
@@ -69,7 +86,7 @@ int	cd(t_map *env, char **args)
 	else
 	{
 		if (chdir(dir))
-			return (free(cwd), write(2, "cd: ", 4), perror(dir), errno);
+			return (free(cwd), write(2, "cd: ", 4), perror(dir), 1);
 	}
 	return (update_env(cwd, env));
 }
