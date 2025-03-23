@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_builtins.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/23 13:56:03 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,4 @@ int	try_builtins(t_cmd *cmd, t_shell *shell)
 		return (exit2(shell, EXIT_SUCCESS, &cmd->args[1]));
 	return (-1);
 }
+
