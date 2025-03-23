@@ -15,6 +15,7 @@ SRC			=	arena/arena.c				\
 				ast/ast.c					\
 				ast/exec_ast.c				\
 				ast/here_doc.c				\
+				ast/itoarena.c				\
 				ast/pipeline.c				\
 				builtins/cd.c				\
 				builtins/echo.c				\

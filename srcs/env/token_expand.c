@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:19:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 00:24:04 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	switch_type_tk(t_list **cur, t_list **tks, t_shell *shell)
 		|| token->type == APPEN)
 		ret = expand_redt(*cur, *tks, shell);
 	else if (token->type == HEREDOC)
-		ret = token_heredoc((**cur).content, shell->arena);
+		ret = token_heredoc((**cur).content, shell);
 	else
 		ret = token_fillstr((**cur).content, shell->arena);
 	*cur = (*cur)->next;
