@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 15:22:08 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 00:10:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ char	*env_exp(char *src, t_shell *env)
 	len = sizeof_expand(src, env);
 	expanded = ft_calloc(len, sizeof(char));
 	if (!expanded)
+	{
+		free(src);
 		return (NULL);
+	}
 	fill_expanded(src, expanded, expanded + len, env);
 	free(src);
 	return (expanded);

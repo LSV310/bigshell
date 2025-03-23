@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 15:50:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 00:19:32 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	switch_type_tk(t_list **cur, t_list **tks, t_shell *shell)
 {
 	t_token	*token;
+	int		ret;
 
 	if (!tks || !(*cur))
 		return (false);
@@ -23,15 +24,13 @@ int	switch_type_tk(t_list **cur, t_list **tks, t_shell *shell)
 		return (expand_namet(cur, tks, shell));
 	else if (token->type == REDIN || token->type == REDOUT
 		|| token->type == APPEN)
-	{
-		*cur = (*cur)->next;
-		return (expand_redt(*cur, *tks, shell));
-	}
+		ret = expand_redt(*cur, *tks, shell);
+	else if (token->type == HEREDOC)
+		ret = token_heredoc((**cur).content, shell->arena);
 	else
-	{
-		*cur = (*cur)->next;
-		return (token_fillstr((**cur).content, shell->arena));
-	}
+		ret = token_fillstr((**cur).content, shell->arena);
+	*cur = (*cur)->next;
+	return (ret);
 }
 
 int	expand_lst_token(t_list **tks, t_shell *shell)

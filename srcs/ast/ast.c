@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 15:29:37 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 22:58:09 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ t_ast	*build_ast(t_list *tks, t_arena *arena)
 	if (!root)
 		ft_putstr_fd("bad input caused a parsing error !\n", STDERR_FILENO);
 	if (tok->type != ENDT)
-		ft_printf("last token was (%s) unstead of (ENDT)\n", toktype_to_string(tok->type));
+		ft_printf("token was (%s)\n", toktype_to_string(tok->type));
 	return (root);
 }
