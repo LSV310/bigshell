@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:01:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 15:56:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/23 23:28:28 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	go_home(t_map *env, char *cwd)
 {
 	t_map	*find;
 
-	find = get_env(env, "HOME", 5);
+	find = get_env(env, "HOME", 4);
 	if (!find)
 		return (ft_fprintf(2, "cd: HOME not set\n"), 1);
 	if (chdir(find->value))

@@ -1,0 +1,14 @@
+>
+<
+&
+&&&
+<<
+>>
+<<|>>
+
+
+env | grep SHLVL
+./minishell
+env | grep SHLVL
+exit
+env | grep SHLVL
