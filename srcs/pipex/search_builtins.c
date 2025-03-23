@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 14:02:46 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:08:35 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ bool	is_cmdtk_builtin(t_list *tk)
 			else
 				return (false);
 		}
+		if (!is_cmd_token(token))
+			break ;
 		tk = tk->next;
 	}
+	return (false);
 }
