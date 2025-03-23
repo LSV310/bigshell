@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 18:32:03 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:03:07 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ size_t	strlen_noquotes(const char *p, size_t len)
 {
 	size_t	new_len;
 	size_t	i;
+	char	quote;
 
 	i = 0;
 	new_len = 0;
+	quote = 0;
 	while (i < len && p[i])
 	{
-		if (!char_in_set(p[i], "\"\'"))
+		if (char_in_set(p[i], "\"\'") && !quote)
+			quote = p[i];
+		else if (p[i] == quote)
+			quote = 0;
+		else
 			new_len++;
 		i++;
 	}
@@ -32,12 +38,18 @@ void	strcpy_noquotes(char *dest, const char *src, size_t len)
 {
 	size_t	i;
 	size_t	j;
+	char	quote;
 
 	i = 0;
 	j = 0;
+	quote = 0;
 	while (i < len && src[i])
 	{
-		if (!char_in_set(src[i], "\"\'"))
+		if (char_in_set(src[i], "\"\'") && !quote)
+			quote = src[i];
+		else if (src[i] == quote)
+			quote = 0;
+		else
 			dest[j++] = src[i];
 		i++;
 	}
