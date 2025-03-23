@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 19:45:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/23 14:03:26 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**init_pipex(t_shell *shell, int *pipefd)
 	return (env);
 }
 
-int	pipex(t_list **tks, t_shell *shell)
+int	pipex(t_list **cmd_lst_arr, t_shell *shell)
 {
 	int		pipefd[2];
 	int		i;
@@ -97,12 +97,12 @@ int	pipex(t_list **tks, t_shell *shell)
 	if (!env)
 		return (1);
 	i = 0;
-	while (tks[i])
+	while (cmd_lst_arr[i])
 	{
 		pipe(pipefd);
-		if (!tks[i + 1])
+		if (!cmd_lst_arr[i + 1])
 			dup2(STDOUT_FILENO, pipefd[1]);
-		last_pid = exec_cmd(tks[i], pipefd, shell, env);
+		last_pid = exec_cmd(cmd_lst_arr[i], pipefd, shell, env);
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
 		close(pipefd[1]);

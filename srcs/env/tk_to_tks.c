@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:15:12 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 12:22:45 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:12:28 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena)
 		tmp = get_next_nametk(&lex, arena);
 		if (!tmp)
 			return (NULL);
+		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
 		if (tmp->type == ENDT || tmp->type == INVALID)
 			break ;
-		ft_lstadd_back(&tks, ar_lstnew(tmp, arena));
 	}
 	if (!tks_fillstr(tks, arena))
 		return (NULL);

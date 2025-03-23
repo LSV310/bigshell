@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 13:45:45 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:20:16 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 
 	n = 0;
 	(*i)++;
-	while (cur[*i] && !char_in_set(cur[*i], "\'\"$&|<>()# "))
+	while (cur[*i] && !char_in_set(cur[*i], "\'\"$&|<>()# *[]"))
 	{
 		(*i)++;
 		n++;
@@ -41,7 +41,7 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 
 	n = 0;
 	*src_p += 1;
-	while (**src_p && !char_in_set(**src_p, "\'\"$&|<>()# "))
+	while (**src_p && !char_in_set(**src_p, "\'\"$&|<>()# *[]"))
 	{
 		*src_p += 1;
 		n++;
