@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_builtins.c                                  :+:      :+:    :+:   */
+/*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 14:08:35 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/23 21:28:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	exec_builtins(t_list *cmdtk, t_shell *shell)
+{
+	t_cmd	*cmd;
+	int		builtins;
+
+	cmd = parse_cmd(cmdtk, shell->arena);
+	if (!cmd)
+		return (1);
+	builtins = try_builtins(cmd, shell);
+	update_last_code(shell, builtins);
+	return (builtins);
+}
 
 int	try_builtins(t_cmd *cmd, t_shell *shell)
 {
@@ -31,7 +44,7 @@ int	try_builtins(t_cmd *cmd, t_shell *shell)
 	return (-1);
 }
 
-bool	is_cmdtk_builtin(t_list *tk)
+bool	is_cmd_builtin(t_list *tk)
 {
 	t_token	*token;
 

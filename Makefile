@@ -38,8 +38,9 @@ SRC			=	arena/arena.c				\
 				parser/cmd_arr.c			\
 				parser/parse_cmd.c			\
 				pipex/pipex.c				\
-				pipex/search_builtins.c		\
+				pipex/exec_builtins.c		\
 				pipex/search_cmd.c			\
+				pipex/wait_childs.c			\
 				signals/signals.c			\
 				utils/builtins_utils.c		\
 				utils/wildcards_utils.c		\
