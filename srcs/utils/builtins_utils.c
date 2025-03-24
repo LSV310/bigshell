@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:30:39 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/22 15:55:51 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 17:00:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	var_name_valid(char *var)
 {
 	int	i;
 
-	if (var[0] == '=')
+	if (!ft_isalpha(var[i]) && var[i] != '_')
 		return (false);
 	i = 0;
 	while (var[i] && var[i] != '=')
