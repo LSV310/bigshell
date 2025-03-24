@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:22:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:37:05 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 	return (len);
 }
 
-size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell *shell)
+size_t	write_envar(char *dst_p, char const *endest,
+	const char **src_p, t_shell *shell)
 {
 	size_t		len;
 	size_t		n;
@@ -56,7 +57,8 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 	return (envar_len);
 }
 
-void	fill_expanded(const char *src, char *dest, char const *dest_end, t_shell *env)
+void	fill_expanded(const char *src, char *dest,
+	char const *dest_end, t_shell *env)
 {
 	char			quote;
 

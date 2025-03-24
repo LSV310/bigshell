@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:24:47 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 17:03:07 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:36:37 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	tks_fillstr(t_list *tks, t_arena *arena)
 		if (tok == NULL)
 			return (false);
 		if ((tok->type == NAME || tok->type == REDIN
-			|| tok->type == REDOUT || tok->type == APPEN))
+				|| tok->type == REDOUT || tok->type == APPEN))
 		{
 			if (!token_fillstr(tok, arena))
 				return (false);
