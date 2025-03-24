@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 20:54:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 13:57:19 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:46:26 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	update_last_code(t_shell *shell, int exit_code)
 
 int	get_exit_code(int *status, t_shell *shell)
 {
-	int exit_code;
+	int	exit_code;
 
 	exit_code = 1;
 	if (WIFEXITED(*status))

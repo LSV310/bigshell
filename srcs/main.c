@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:39:11 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:45:16 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	main(void)
 	init_minishell(&minishell);
 	while (1)
 	{
-		minishell.input = ft_readline("\e[0;35mmegashell$> \e[0m", &minishell.history, true);
+		minishell.input = ft_readline("\e[0;35mmegashell$> \e[0m",
+				&minishell.history, true);
 		create_signals();
 		if (!minishell.input)
 			break ;
