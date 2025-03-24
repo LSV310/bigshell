@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 16:41:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 19:49:41 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	delimiter_parse(t_token	*tok, char *dest, bool *exp_mode)
 		if (char_in_set(tok->p[i], "\"\'"))
 		{
 			*exp_mode = false;
+			i++;
 			continue;
 		}
 		*dest = tok->p[i];
@@ -82,6 +83,7 @@ bool	token_heredoc(t_token *tok, t_shell *shell)
 	if (!del)
 		return (false);
 	delimiter_parse(tok, del, &do_exp);
+	ft_printf("del: %s\n", del);
 	tok->str = itoarena(here_doc(del, do_exp, shell), shell->arena);
 	return (true);
 }
