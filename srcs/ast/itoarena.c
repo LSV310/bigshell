@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   itoarena.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 10:32:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 00:13:11 by tgallet          ###   ########.fr       */
+/*   Created: 2025/03/24 00:12:55 by tgallet           #+#    #+#             */
+/*   Updated: 2025/03/24 00:14:04 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 static int	get_size(unsigned int n)
 {
@@ -25,7 +25,7 @@ static int	get_size(unsigned int n)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*itoarena(int n, t_arena *arena)
 {
 	char			*str;
 	unsigned int	nb;
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 		is_negative = 1;
 	}
 	size = get_size(nb) + is_negative;
-	str = malloc(sizeof(char) * (size + 1));
+	str = arena_alloc(sizeof(char) * (size + 1), arena);
 	if (!str)
 		return (NULL);
 	if (is_negative)

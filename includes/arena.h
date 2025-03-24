@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/21 13:06:10 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 00:14:16 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	*arena_calloc(t_arena *arena, size_t size);
 char	*ar_strndup(const char *s, size_t n, t_arena *arena);
 t_list	*arlst_remove_node(t_list **lst, t_list *node);
 void	reset_arena(t_arena **arena);
-
+char	*itoarena(int n, t_arena *arena);
 #endif

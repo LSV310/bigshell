@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 23:25:17 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 10:58:53 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 
-# define ENVN_STOP "\'\"$&|<>()# *[]{}\%=:/"
+# define ENVN_STOP "\'\"$&|<>()# *[]{}\%=\n:/"
 
 typedef struct s_shell
 {
@@ -85,5 +85,7 @@ int		check_first_arg(t_map *env, char **args, int *exit_code);
 bool	var_name_valid(char *var);
 char	*toktype_to_string(t_token_type type);
 void	print_pipeline(t_list **pipeline);
+int		here_doc(char *delimiter, bool expand, t_shell *env);
+bool	token_heredoc(t_token *tok, t_shell *shell);
 
 #endif
