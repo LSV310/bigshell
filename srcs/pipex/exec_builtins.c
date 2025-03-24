@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 21:28:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:59:55 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exec_builtins(t_list *cmdtk, t_shell *shell)
 	int		builtins;
 
 	cmd = parse_cmd(cmdtk, shell->arena);
-	if (!cmd)
+	if (!cmd || !cmd->name)
 		return (1);
 	builtins = try_builtins(cmd, shell);
 	update_last_code(shell, builtins);
@@ -27,6 +27,8 @@ int	exec_builtins(t_list *cmdtk, t_shell *shell)
 
 int	try_builtins(t_cmd *cmd, t_shell *shell)
 {
+	if (!cmd->name)
+		return (-1);
 	if (!ft_strcmp(cmd->name, "echo"))
 		return (echo(&cmd->args[1]));
 	if (!ft_strcmp(cmd->name, "cd"))

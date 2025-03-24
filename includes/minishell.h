@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:38:36 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:41:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 
-# define ENVN_STOP "\'\"$&|<>()# *[]{}\%=\n:/"
+# define ENVN_STOP "\'\"$&|<>()# *[]{}\%\n=:/"
 
 typedef struct s_shell
 {
@@ -65,8 +65,8 @@ int		expand_lst_token(t_list **tks, t_shell *shell);
 bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell);
 bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
 t_shell	*test_env(void);
-t_ast	*build_ast(t_list *tks, t_arena *arena);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
+t_ast	*build_ast(t_list *tks, t_shell *shell);
 bool	exec_ast(t_ast *ast, t_shell *shell);
 
 // pipex

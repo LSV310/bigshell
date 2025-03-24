@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 13:57:51 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:39:11 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	exec_input(char *input, t_shell *shell)
 
 	tks = make_tokens(input, shell);
 	if (!tks)
-		return (false);
-	ast = build_ast(tks, shell->arena);
+		return (modify_var(shell->env, "2"), false);
+	ast = build_ast(tks, shell);
 	if (!ast)
-		return (false);
+		return (modify_var(shell->env, "2"), false);
 	if (!exec_ast(ast, shell))
 		return (false);
 	return (true);
@@ -51,7 +51,7 @@ int	main(void)
 	init_minishell(&minishell);
 	while (1)
 	{
-		minishell.input = ft_readline("minishell$> ", &minishell.history, true);
+		minishell.input = ft_readline("\e[0;35mmegashell$> \e[0m", &minishell.history, true);
 		create_signals();
 		if (!minishell.input)
 			break ;
