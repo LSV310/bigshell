@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 16:41:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:56:28 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 		(*i)++;
 		n++;
 	}
-	if (!n && cur[*i] == '*')
-		n++;
-	if (n == 0)
+	if (!n && (!cur[*i] || cur[*i] == '*'))
 		return (1);
 	envar = get_env_value(shell->env, cur + *i - n, n);
 	len = ft_strlen(envar);
@@ -48,7 +46,7 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 		*src_p += 1;
 		n++;
 	}
-	if (n == 0)
+	if (!n && (!**src_p || **src_p == '*'))
 		return (ft_memmove(dst_p, "$", 1), 1);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
@@ -80,7 +78,7 @@ void	fill_expanded(const char *src, char *dest, char const *dest_end, t_shell *e
 	}
 }
 
-size_t	sizeof_expand(char *str, t_shell *env) // must keep the quotes
+size_t	sizeof_expand(char *str, t_shell *env)
 {
 	size_t			n;
 	int				i;

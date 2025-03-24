@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 11:05:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:51:20 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell)
 
 	tok = (*cur)->content;
 	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
+	ft_printf("res: %s\n", res);
 	res = name_wild(init_lexer(res), shell);
 	new_tks = str_to_name_tks(res, shell->arena);
 	if (new_tks)
