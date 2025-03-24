@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:54:02 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 15:14:18 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:37:20 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	valid_tks(t_list *tks)
 		if (tok->type == ENDT)
 			break ;
 		if (tok->len == 0 && (tok->type == HEREDOC || tok->type == APPEN
-			|| tok->type == REDIN || tok->type == REDOUT))
+				|| tok->type == REDIN || tok->type == REDOUT))
 		{
 			ft_putstr_fd("redirect without arguments\n", 2);
 			return (false);

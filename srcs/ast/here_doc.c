@@ -6,20 +6,20 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:07:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:06:34 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	stdin_to_pipe(int to_write, char *delimiter, bool expand, t_shell *shell)
+void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 {
 	char	*line;
 	t_dlist	*history;
 
 	history = NULL;
 	line = ft_readline("> ", &history, false);
-	while (line && ft_strcmp(line, delimiter) != 0)
+	while (line && ft_strcmp(line, delim) != 0)
 	{
 		if (expand)
 			line = env_exp(line, shell);
@@ -31,7 +31,7 @@ void	stdin_to_pipe(int to_write, char *delimiter, bool expand, t_shell *shell)
 	if (!line)
 	{
 		ft_fprintf(2, "warning: here-document delimited by end-of-file");
-		ft_fprintf(2, "(wanted `%s')\n", delimiter);
+		ft_fprintf(2, "(wanted `%s')\n", delim);
 	}
 	else
 		free(line);
@@ -65,7 +65,7 @@ void	delimiter_parse(t_token	*tok, char *dest, bool *exp_mode)
 		{
 			*exp_mode = false;
 			i++;
-			continue;
+			continue ;
 		}
 		*dest = tok->p[i];
 		i++;

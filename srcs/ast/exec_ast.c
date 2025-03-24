@@ -6,11 +6,30 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:44:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 15:30:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:33:59 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+bool	advance_token(t_list **tokens)
+{
+	t_token	*tok;
+
+	tok = (*tokens)->content;
+	*tokens = (*tokens)->next;
+	tok = (*tokens)->content;
+	if (*tokens)
+	{
+		tok = (*tokens)->content;
+		if (tok->type == ENDT)
+			return (false);
+		else
+			return (true);
+	}
+	else
+		return (false);
+}
 
 bool	exec_ast(t_ast *ast, t_shell *shell)
 {

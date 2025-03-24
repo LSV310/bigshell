@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 16:25:28 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 20:33:53 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *childs[2])
+t_ast	*create_node(t_node_type type,
+	t_list **tokens, t_arena *arena, t_ast *childs[2])
 {
 	t_list	**commands;
 	t_ast	*node;
@@ -34,25 +35,6 @@ t_ast	*create_node(t_node_type type, t_list **tokens,t_arena *arena, t_ast *chil
 	return (node);
 }
 
-static bool advance_token(t_list **tokens)
-{
-	t_token	*tok;
-
-	tok = (*tokens)->content;
-	*tokens = (*tokens)->next;
-	tok = (*tokens)->content;
-	if (*tokens)
-	{
-		tok = (*tokens)->content;
-		if (tok->type == ENDT)
-			return (false);
-		else
-			return (true);
-	}
-	else
-		return (false);
-}
-
 t_ast	*parse_par(t_list **tokens, t_arena *arena)
 {
 	t_ast	*ret;
@@ -68,7 +50,8 @@ t_ast	*parse_par(t_list **tokens, t_arena *arena)
 	return (ret);
 }
 
-t_ast	*parse_logic(t_list **tokens, t_arena *arena, t_ast *left, t_token_type type)
+t_ast	*parse_logic(t_list **tokens, t_arena *arena,
+	t_ast *left, t_token_type type)
 {
 	t_ast	*right;
 	t_token	*tok;
