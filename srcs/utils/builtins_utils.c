@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:30:39 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 17:00:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:22:21 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,27 @@ int	check_first_arg(t_map *env, char **args, int *exit_code)
 	return (1);
 }
 
-bool	var_name_valid(char *var)
+bool	var_name_valid(char *var, int *index, int *exit_code)
 {
 	int	i;
 
-	if (!ft_isalpha(var[i]) && var[i] != '_')
-		return (false);
 	i = 0;
+	if (!ft_isalpha(var[i]) && var[i] != '_')
+	{
+		*exit_code = 1;
+		(*index)++;
+		ft_fprintf(2, "export: `%s': not a valid identifier\n", var);
+		return (false);
+	}
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
+		{
+			*exit_code = 1;
+			(*index)++;
+			ft_fprintf(2, "export: `%s': not a valid identifier\n", var);
 			return (false);
+		}
 		i++;
 	}
 	return (true);

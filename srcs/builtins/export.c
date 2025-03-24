@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:17:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 17:44:27 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:27:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ static t_map	*create_new_var(t_map *env, char *var)
 {
 	t_map	*new;
 
-	if (var_name_valid(var) == false)
-	{
-		ft_fprintf(2, "export: `%s': not a valid identifier\n", var);
-		return (NULL);
-	}
 	new = newmap(NULL, NULL);
 	if (!new)
 		return (NULL);
@@ -88,11 +83,13 @@ int	export(t_map *env, char **args)
 	i = 0;
 	while (args[i])
 	{
+		if (var_name_valid(args[i], &i, &exit_code) == false)
+			continue ;
 		chr = ft_strchr(args[i], '=');
 		find = NULL;
 		if (chr && chr != args[i])
 			find = get_env(env->next, args[i], chr - args[i]);
-		if (chr && !find && !create_new_var(env, args[i]))
+		if (!find && !create_new_var(env, args[i]))
 			exit_code = 1;
 		else if (find && !replace_var(find, args[i], chr))
 			exit_code = 1;
