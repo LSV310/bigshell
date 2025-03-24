@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 11:06:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:04:47 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 		(*i)++;
 		n++;
 	}
+	if (!n && cur[*i] == '*')
+		n++;
 	if (n == 0)
 		return (1);
 	envar = get_env_value(shell->env, cur + *i - n, n);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 12:59:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:04:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 
-# define ENVN_STOP "\'\"$&|<>()# *[]{}\%=\n:/"
+# define ENVN_STOP "\'\"$&|<>()# *[]{}\%\n=:/"
 
 typedef struct s_shell
 {
