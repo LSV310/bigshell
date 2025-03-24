@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 16:50:43 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:22:24 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	switch_type_tk(t_list **cur, t_list **tks, t_shell *shell)
 		return (expand_namet(cur, tks, shell));
 	else if (token->type == REDIN || token->type == REDOUT
 		|| token->type == APPEN)
-		ret = expand_redt(*cur, *tks, shell);
+		ret = expand_redt(*cur, shell);
 	else if (token->type == HEREDOC)
 		ret = token_heredoc((**cur).content, shell);
 	else

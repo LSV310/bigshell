@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:06:34 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:19:11 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	here_doc(char *delimiter, bool expand, t_shell *shell)
 
 void	delimiter_parse(t_token	*tok, char *dest, bool *exp_mode)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	*exp_mode = true;

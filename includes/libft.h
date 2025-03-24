@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:45:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:18:15 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,13 +171,13 @@ void	clear_line(t_readline *line, t_dlist **history, int current);
 void	set_raw(void);
 void	set_dfl(void);
 int		read_key(void);
-int		reset_line(t_readline *line, char *prompt);
+int		reset_line(t_readline *line);
 void	write_x_times(char *buff, char c, size_t times);
 int		printkey(int key, t_readline *line);
 void	back_space(t_readline *line);
 int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
-int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
-int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
+int		up_arrow(t_readline *line, t_dlist **history);
+int		down_arrow(t_readline *line, t_dlist **history);
 void	home_key(t_readline *line);
 void	end_key(t_readline *line);
 char	*history_up(t_dlist **history);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 14:09:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:17:52 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ char	*new_line(t_readline *line, char *hist)
 	return (line->current_line);
 }
 
-int	up_arrow(t_readline *line, t_dlist **history, char *prompt)
+int	up_arrow(t_readline *line, t_dlist **history)
 {
 	char	*next;
 
 	next = history_up(history);
 	if (!next)
 		return (1);
-	if (!reset_line(line, prompt))
+	if (!reset_line(line))
 		return (0);
 	if ((*history)->prev == ft_dlstfirst(*history))
 	{
@@ -51,14 +51,14 @@ int	up_arrow(t_readline *line, t_dlist **history, char *prompt)
 	return (1);
 }
 
-int	down_arrow(t_readline *line, t_dlist **history, char *prompt)
+int	down_arrow(t_readline *line, t_dlist **history)
 {
 	char	*prev;
 
 	prev = history_down(history);
 	if (!prev)
 		return (1);
-	if (!reset_line(line, prompt))
+	if (!reset_line(line))
 		return (0);
 	free(line->current_line);
 	if (!new_line(line, prev))

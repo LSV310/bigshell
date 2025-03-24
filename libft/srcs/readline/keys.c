@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 19:17:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:18:27 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 		return (0);
 	else if (key == 127)
 		back_space(line);
-	else if (history && key == -12 && !up_arrow(line, history, prompt))
+	else if (history && key == -12 && !up_arrow(line, history))
 		return (0);
-	else if (history && key == -13 && !down_arrow(line, history, prompt))
+	else if (history && key == -13 && !down_arrow(line, history))
 		return (0);
 	else if (key == -14 || key == -15)
 		move_key(line, key);

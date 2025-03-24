@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:08:12 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:18:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_ast	*parse_logic(t_list **tokens, t_arena *arena,
 	t_ast *left, t_token_type type)
 {
 	t_ast	*right;
-	t_token	*tok;
 
 	if (!advance_token(tokens))
 		return (NULL);

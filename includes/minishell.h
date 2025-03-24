@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 20:34:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:22:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	lst_insert(t_list *dest, t_list *to_insert);
 int		expand_lst_token(t_list **tks, t_shell *shell);
 bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell);
-bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
-t_shell	*test_env(void);
+bool	expand_redt(t_list *cur, t_shell *shell);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 t_ast	*build_ast(t_list *tks, t_shell *shell);
 bool	exec_ast(t_ast *ast, t_shell *shell);
@@ -85,7 +84,6 @@ void	free_minishell(t_shell *minishell);
 int		check_first_arg(t_map *env, char **args, int *exit_code);
 bool	var_name_valid(char *var, int *index, int *exit_code);
 char	*toktype_to_string(t_token_type type);
-void	print_pipeline(t_list **pipeline);
 int		here_doc(char *delimiter, bool expand, t_shell *env);
 bool	token_heredoc(t_token *tok, t_shell *shell);
 

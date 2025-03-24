@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 19:36:46 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:23:37 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	special_token_cpy(t_lexer *lex, t_token *tok, t_token cpy)
 		|| cpy.type == REDIN || cpy.type == REDOUT)
 	{
 		lex->cur += cpy.len;
-		if (lex->cur - lex->start >= lex->len)
+		if (lex->cur - lex->start >= (long)lex->len)
 		{
 			tok->type = INVALID;
 			return ;
@@ -51,7 +51,7 @@ void	special_token(t_lexer *lex, t_token *tok)
 	int				i;
 
 	i = 0;
-	while (i < sizeof(specials) / sizeof(t_token))
+	while (i < (int)(sizeof(specials) / sizeof(t_token)))
 	{
 		if (ft_strncmp(lex->cur, specials[i].p, ft_strlen(specials[i].p)) == 0)
 			return (special_token_cpy(lex, tok, specials[i]));

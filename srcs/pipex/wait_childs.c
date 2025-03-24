@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 20:54:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 19:44:41 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 21:24:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	update_last_code(t_shell *shell, int exit_code)
 	free(itoa_code);
 }
 
-static int	get_exit_code(int status, t_shell *shell, int is_signaled)
+static int	get_exit_code(int status, int is_signaled)
 {
 	int	exit_code;
 
@@ -73,7 +73,7 @@ int	wait_childs(t_shell *shell, int cmd_amount, int last_pid, char **env)
 			is_signaled = WIFSIGNALED(is_signaled);
 		}
 	}
-	exit_code = get_exit_code(status, shell, is_signaled);
+	exit_code = get_exit_code(status, is_signaled);
 	update_last_code(shell, exit_code);
 	return (exit_code);
 }
