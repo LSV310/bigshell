@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/18 13:06:39 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:05:11 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,18 @@ t_list	*create_token_list(const char *src, t_arena *arena)
 		if (tmp->type == ENDT || tmp->type == INVALID)
 			break ;
 	}
+	return (tks);
+}
+
+t_list	*make_tokens(const char	*line_read, t_shell *env)
+{
+	t_list	*tks;
+
+	tks = create_token_list(line_read, env->arena);
+	if (!tks || !check_tks(tks))
+		return (NULL);
+	if (!expand_lst_token(&tks, env))
+		return (NULL);
+	print_tokens(tks, false);
 	return (tks);
 }
