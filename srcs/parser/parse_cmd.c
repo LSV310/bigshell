@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:20:34 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:04:08 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 	else if (tok->type == REDOUT)
 		replace_fd(open(tok->str, O_TRUNC | O_CREAT | O_WRONLY, 0666), cmd, false);
 	else if (tok->type == HEREDOC)
-		replace_fd(atoi(tok->str), cmd, true);
+		replace_fd(ft_atoi(tok->str), cmd, true);
 	else if (tok->type == APPEN)
 		replace_fd(open(tok->str, O_APPEND | O_CREAT | O_WRONLY, 0666), cmd, false);
 	if (cmd->fdout == -1 || cmd->fdin == -1)

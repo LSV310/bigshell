@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/23 15:56:47 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:05:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*name_wild(t_lexer lex, t_shell *shell)
 	res = ft_strdup("");
 	while (res)
 	{
-		memset(&tok, 0, sizeof(t_token));
+		ft_memset(&tok, 0, sizeof(t_token));
 		fill_token(skip_spaces(&lex), &tok, NAME);
 		tok.str = ft_substr(tok.p, 0, tok.len);
 		if (!tok.str || !tok.len)

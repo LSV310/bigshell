@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:17:35 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:02:09 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 		return (NULL);
 	if (!expand_lst_token(&tks, env))
 		return (NULL);
-	print_tokens(tks, false);
+	//print_tokens(tks, false);
 	return (tks);
 }

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:26:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/22 13:51:24 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:10:20 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static void	create_pwd(t_map *env)
 
 static void	create_default(t_map *env)
 {
-	const char	*new_path =
-		{"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"};
-	t_map	*path;
-	t_map	*shlvl;
-	char	*new_shlvl;
+	const char	*new_path
+		= {"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"};
+	t_map		*path;
+	t_map		*shlvl;
+	char		*new_shlvl;
 
 	path = get_env(env, "PATH", 4);
 	if (!path)

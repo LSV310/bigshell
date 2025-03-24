@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 20:54:01 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 21:00:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 10:59:13 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ int	wait_childs(t_shell *shell, int cmd_amount, int last_pid, char **env)
 	else if (WIFSIGNALED(status))
 		exit_code = (128 + WTERMSIG(status));
 	update_last_code(shell, exit_code);
+	return (exit_code);
 }

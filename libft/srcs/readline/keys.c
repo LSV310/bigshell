@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/22 10:48:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:09:12 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	back_space(t_readline *line)
 	if (len > 1)
 	{
 		ft_memmove(line->current_line + line->cursor,
-		line->current_line + line->cursor + 1, len);
+			line->current_line + line->cursor + 1, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor);
 		write_x_times(temp, '\b', len - 1);
 	}

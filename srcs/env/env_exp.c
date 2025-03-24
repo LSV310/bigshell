@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:10:32 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:06:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 		n++;
 	}
 	if (n == 0)
-		return (ft_memcpy(dst_p, "$", 1), 1);
+		return (ft_memmove(dst_p, "$", 1), 1);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
 		return (0);
-	ft_memcpy(dst_p, envar, envar_len);
+	ft_memmove(dst_p, envar, envar_len);
 	return (envar_len);
 }
 
