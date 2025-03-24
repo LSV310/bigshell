@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:54:02 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 15:04:21 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:14:18 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ bool	check_tks(t_list *tks)
 {
 	if (!valid_tks(tks) || !valid_par(tks))
 		return (false);
+	return (true);
 }

@@ -31,6 +31,7 @@ SRC			=	arena/arena.c				\
 				env/tk_to_tks.c				\
 				env/token_expand.c			\
 				env/token_expand2.c			\
+				lexer/check_tks.c			\
 				lexer/ft_lexer.c			\
 				lexer/is_utils.c			\
 				lexer/token_make_utils.c	\

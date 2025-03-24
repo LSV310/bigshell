@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:22:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:09:19 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	delimiter_parse(t_token	*tok, char *dest, bool *exp_mode)
 		}
 		*dest = tok->p[i];
 		i++;
-		*dest += 1;
+		dest += 1;
 	}
 }
 
