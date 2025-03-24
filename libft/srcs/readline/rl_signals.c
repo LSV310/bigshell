@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 18:02:54 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:06:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
 		ft_printf("\n");
 		return (0);
 	}
-	if (!new_buffer(line, history, sigint_nl))
+	if (!new_buffer(line, history, sigint_nl, prompt))
 		return (0);
-	ft_fprintf(0, "\n%s", prompt);
+	if (isatty(STDIN_FILENO))
+		ft_fprintf(STDIN_FILENO, "\n%s", prompt);
 	return (1);
 }

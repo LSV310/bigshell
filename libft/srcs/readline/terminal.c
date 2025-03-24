@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 11:08:38 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:28:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	set_raw_mode(void)
+void	set_raw(void)
 {
 	struct termios	term;
 
@@ -22,7 +22,7 @@ void	set_raw_mode(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
-void	reset_terminal_mode(void)
+void	set_dfl(void)
 {
 	struct termios	term;
 

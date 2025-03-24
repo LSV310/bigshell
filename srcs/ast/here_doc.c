@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:22:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:27:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	stdin_to_pipe(int to_write, char *delimiter, bool expand, t_shell *shell)
 	while (line && ft_strcmp(line, delimiter) != 0)
 	{
 		write(to_write, line, ft_strlen(line));
+		write(to_write, "\n", 1);
 		free(line);
 		line = ft_readline("> ", &history, false);
 		if (expand)
@@ -68,7 +69,7 @@ void	delimiter_parse(t_token	*tok, char *dest, bool *exp_mode)
 		}
 		*dest = tok->p[i];
 		i++;
-		*dest += 1;
+		dest += 1;
 	}
 }
 

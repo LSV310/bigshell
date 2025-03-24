@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 13:57:40 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:15:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ size_t	ft_mapsize(t_map *map);
 typedef struct s_readline
 {
 	char	*current_line;
+	char	*prompt;
 	size_t	size;
 	size_t	cursor;
 	size_t	end;
@@ -163,11 +164,12 @@ typedef struct s_readline
 extern volatile int	g_sig;
 
 char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
-int		new_buffer(t_readline *line, t_dlist **history, bool use_sigint);
+int		new_buffer(t_readline *line, t_dlist **history, bool sigint,
+					char *prompt);
 int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
 void	clear_line(t_readline *line, t_dlist **history, int current);
-void	set_raw_mode(void);
-void	reset_terminal_mode(void);
+void	set_raw(void);
+void	set_dfl(void);
 int		read_key(void);
 int		reset_line(t_readline *line, char *prompt);
 void	write_x_times(char *buff, char c, size_t times);

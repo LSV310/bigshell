@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/23 21:28:30 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 13:00:41 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		return (-1);
 	else if (pid != 0)
 		return (pid);
-	restore_signals();
+	child_signal();
 	dup2(pipefd[1], STDOUT_FILENO);
 	(close(pipefd[0]), close(pipefd[1]));
 	cmd = parse_cmd(cmdtk, shell->arena);

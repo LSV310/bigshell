@@ -6,20 +6,21 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:48:08 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:25:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	new_buffer(t_readline *line, t_dlist **history, bool use_sigint)
+int	new_buffer(t_readline *line, t_dlist **history, bool sigint, char *prompt)
 {
 	t_dlist	*line_history;
 
 	line->cursor = 0;
 	line->size = 1024;
 	line->end = 0;
-	line->sigint_nl = use_sigint;
+	line->sigint_nl = sigint;
+	line->prompt = prompt;
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
@@ -35,7 +36,7 @@ int	new_buffer(t_readline *line, t_dlist **history, bool use_sigint)
 
 static void	rl_quit(void)
 {
-	reset_terminal_mode();
+	set_dfl();
 	rl_reset_signals();
 }
 
@@ -68,11 +69,12 @@ char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 	int			key;
 	t_readline	line;
 
-	if (!new_buffer(&line, history, use_sigint))
+	if (!new_buffer(&line, history, use_sigint, prompt))
 		return (NULL);
 	rl_init_signals();
-	set_raw_mode();
-	ft_fprintf(0, prompt);
+	set_raw();
+	if (isatty(STDIN_FILENO))
+		ft_fprintf(STDIN_FILENO, "%s", prompt);
 	while (1)
 	{
 		key = read_key();
