@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 11:10:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:46:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static bool	numeric_arg(char *nbr)
 		return (false);
 	if (ft_strncmp(nbr, limit, len) <= 0)
 		return (free(limit), true);
-	else
-		return (free(limit), false);
+	return (free(limit), false);
 }
 
 void	free_minishell(t_shell *minishell)
