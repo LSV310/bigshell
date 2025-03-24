@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:54:02 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:37:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:08:45 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	valid_tks(t_list *tks)
 	{
 		if (!tks || !tks->content)
 		{
-			ft_putstr_fd("tokenization error\n", 2);
+			ft_putstr_fd("Syntax error !\n", 2);
 			return (false);
 		}
 		tok = tks->content;
@@ -49,7 +49,7 @@ bool	valid_tks(t_list *tks)
 		if (tok->len == 0 && (tok->type == HEREDOC || tok->type == APPEN
 				|| tok->type == REDIN || tok->type == REDOUT))
 		{
-			ft_putstr_fd("redirect without arguments\n", 2);
+			ft_putstr_fd("Syntax error !\n", 2);
 			return (false);
 		}
 		tks = tks->next;

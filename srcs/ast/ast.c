@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:33:53 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:08:12 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,17 @@ t_ast	*build_ast(t_list *tks, t_shell *shell)
 	root = parse_expr(&tks, shell->arena);
 	if (!tks || !tks->content)
 	{
-		ft_printf("null lst error\n");
+		ft_fprintf(2, "Syntax error !\n");
 		if (!root)
-			ft_putstr_fd("bad input caused a parsing error !\n", STDERR_FILENO);
+			ft_putstr_fd("Syntax error !\n", STDERR_FILENO);
 		return (root);
 	}
 	tok = tks->content;
 	if (!root)
-		ft_putstr_fd("bad input caused a parsing error !\n", STDERR_FILENO);
+		ft_putstr_fd("Syntax error !\n", STDERR_FILENO);
 	if (tok->type != ENDT)
 	{
-		ft_printf("Syntax error near `%s'\n", tok->str);
+		ft_fprintf(2, "Syntax error near `%s'\n", tok->str);
 		modify_var(shell->env, "2");
 	}
 	return (root);
