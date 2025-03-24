@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:46:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:53:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	exit2(t_shell *minishell, int int_code, char **args)
 	{
 		if (numeric_arg(args[0]) == false)
 		{
-			ft_fprintf(2, "exit: '%s': numeric argument required\n", args[0]);
+			ft_fprintf(2, "exit: `%s': numeric argument required\n", args[0]);
 			code = 2;
 		}
 		else
