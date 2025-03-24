@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:40:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 11:10:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	numeric_arg(char *nbr)
 	if (!nbr)
 		return (false);
 	i = 0;
-	while (ft_isdigit(nbr[i]) ||  nbr[i] == '-')
+	while (ft_isdigit(nbr[i]) || nbr[i] == '-')
 		i++;
 	if ((i < 20 && *nbr == '-') || (i < 19 && ft_isdigit(*nbr)))
 		return (true);

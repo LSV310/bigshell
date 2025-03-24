@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/22 10:48:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:48:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	printkey(int key, t_readline *line)
 
 	if (key == '\n')
 		return (1);
-	if (key == '\t' && isatty(STDIN_FILENO))
+	if ((key == '\t' || key == '\f') && isatty(STDIN_FILENO))
 		return (0);
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);
@@ -68,7 +68,7 @@ void	back_space(t_readline *line)
 	if (len > 1)
 	{
 		ft_memmove(line->current_line + line->cursor,
-		line->current_line + line->cursor + 1, len);
+			line->current_line + line->cursor + 1, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor);
 		write_x_times(temp, '\b', len - 1);
 	}

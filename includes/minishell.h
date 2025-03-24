@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 14:50:58 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:38:36 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 
-# define ENVN_STOP "\'\"$&|<>()# *[]{}\%\n=:/"
+# define ENVN_STOP "\'\"$&|<>()# *[]{}\%=\n:/"
 
 typedef struct s_shell
 {
@@ -77,7 +77,7 @@ t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena);
 
 // signals
 void	create_signals(void);
-void	restore_signals(void);
+void	child_signal(void);
 
 // utils
 void	free_minishell(t_shell *minishell);

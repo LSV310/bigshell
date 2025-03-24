@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 17:37:19 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 14:09:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*new_line(t_readline *line, char *hist)
 	line->cursor = len;
 	line->end = len;
 	line->size = len + 100;
-	ft_fprintf(0, hist);
+	ft_fprintf(0, "%s", hist);
 	return (line->current_line);
 }
 
@@ -77,6 +77,6 @@ void	home_key(t_readline *line)
 
 void	end_key(t_readline *line)
 {
-	ft_fprintf(0, &line->current_line[line->cursor]);
+	ft_fprintf(0, "%s", &line->current_line[line->cursor]);
 	line->cursor = line->end;
 }

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:36:13 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 14:54:28 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:38:59 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,5 @@ t_lexer	*skip_spaces(t_lexer *lex)
 		lex->cur++;
 	return (lex);
 }
+
+

@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 15:23:24 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:38:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 		n++;
 	}
 	if (n == 0)
-		return (ft_memcpy(dst_p, "$", 1), 1);
+		return (ft_memmove(dst_p, "$", 1), 1);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
 		return (0);
-	ft_memcpy(dst_p, envar, envar_len);
+	ft_memmove(dst_p, envar, envar_len);
 	return (envar_len);
 }
 
