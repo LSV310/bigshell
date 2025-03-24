@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_make.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:38:10 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 15:41:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:07:34 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ t_list	*make_tokens(const char	*line_read, t_shell *env)
 		return (NULL);
 	if (!expand_lst_token(&tks, env))
 		return (NULL);
-	print_tokens(tks, false);
+	// print_tokens(tks, false);
 	return (tks);
 }
