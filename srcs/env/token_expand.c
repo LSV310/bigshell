@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:24:04 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:50:43 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	expand_lst_token(t_list **tks, t_shell *shell)
 			break ;
 		if (!switch_type_tk(&cur, tks, shell))
 			return (false);
-		// cur = cur->next; TODO: advance in switch type tk
 	}
 	return (true);
 }

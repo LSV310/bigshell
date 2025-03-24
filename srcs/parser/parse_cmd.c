@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 11:04:08 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 19:36:09 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 	if (tok->type == REDIN)
 		replace_fd(open(tok->str, O_RDONLY), cmd, true);
 	else if (tok->type == REDOUT)
-		replace_fd(open(tok->str, O_TRUNC | O_CREAT | O_WRONLY, 0666), cmd, false);
+		replace_fd(open(tok->str, O_TRUNC | O_CREAT | O_WRONLY, 0644), cmd, false);
 	else if (tok->type == HEREDOC)
 		replace_fd(ft_atoi(tok->str), cmd, true);
 	else if (tok->type == APPEN)
-		replace_fd(open(tok->str, O_APPEND | O_CREAT | O_WRONLY, 0666), cmd, false);
+		replace_fd(open(tok->str, O_APPEND | O_CREAT | O_WRONLY, 0644), cmd, false);
 	if (cmd->fdout == -1 || cmd->fdin == -1)
 		return (0);
 	return (1);
@@ -95,25 +95,25 @@ t_cmd	*parse_cmd(t_list *tks, t_arena *arena)
 	t_cmd	*cmd;
 	t_token	*tok;
 	int		i;
-	t_list	*cur;
 
 	if (!tks)
 		return (NULL);
-	cur = tks;
 	cmd = arena_calloc(arena, sizeof(t_cmd));
-	if (!cmd_args_alloc(cmd, cur, arena))
+	if (!cmd_args_alloc(cmd, tks, arena))
 		return (NULL);
 	i = 0;
-	while (cur && cur->content)
+	while (tks && tks->content)
 	{
-		tok = cur->content;
-		if (!is_cmd_token(tok) || !in_out_token(tok, cmd))
+		tok = tks->content;
+		if (!is_cmd_token(tok))
 			break ;
+		if (!in_out_token(tok, cmd))
+			return (NULL);
 		if (tok->type == NAME && cmd->name == NULL)
 			cmd->name = tok->str;
 		if (tok->type == NAME)
 			cmd->args[i++] = tok->str;
-		cur = cur->next;
+		tks = tks->next;
 	}
 	return (cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 16:04:47 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 18:49:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 		(*i)++;
 		n++;
 	}
-	if (!n && cur[*i] == '*')
-		n++;
-	if (n == 0)
+	if (!n && (!cur[*i] || cur[*i] == '*'))
 		return (1);
 	envar = get_env_value(shell->env, cur + *i - n, n);
 	len = ft_strlen(envar);
-	return (len);
+	return (len + 2);
 }
 
 size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell *shell)
@@ -48,14 +46,16 @@ size_t	write_envar(char *dst_p, char const *endest, const char **src_p, t_shell 
 		*src_p += 1;
 		n++;
 	}
-	if (n == 0)
+	if (!n && (!**src_p || **src_p == '*'))
 		return (ft_memmove(dst_p, "$", 1), 1);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
 	if (dst_p + envar_len >= endest)
 		return (0);
-	ft_memmove(dst_p, envar, envar_len);
-	return (envar_len);
+	ft_memmove(dst_p, "'", 1);
+	ft_memmove(dst_p + 1, envar, envar_len);
+	ft_memmove(dst_p + 1 + envar_len, "'", 1);
+	return (envar_len + 2);
 }
 
 void	fill_expanded(const char *src, char *dest, char const *dest_end, t_shell *env)
@@ -80,7 +80,7 @@ void	fill_expanded(const char *src, char *dest, char const *dest_end, t_shell *e
 	}
 }
 
-size_t	sizeof_expand(char *str, t_shell *env) // must keep the quotes
+size_t	sizeof_expand(char *str, t_shell *env)
 {
 	size_t			n;
 	int				i;
