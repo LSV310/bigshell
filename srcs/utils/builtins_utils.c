@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:30:39 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 17:00:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/24 23:12:35 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ bool	var_name_valid(char *var)
 {
 	int	i;
 
+	i = 0;
 	if (!ft_isalpha(var[i]) && var[i] != '_')
 		return (false);
-	i = 0;
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')
