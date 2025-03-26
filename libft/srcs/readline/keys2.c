@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 21:17:52 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/26 13:44:57 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	home_key(t_readline *line)
 
 	temp = ft_strdup(line->current_line);
 	write_x_times(temp, '\b', line->cursor);
+	free(temp);
 	line->cursor = 0;
 }
 

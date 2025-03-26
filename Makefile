@@ -45,6 +45,7 @@ SRC			=	arena/arena.c				\
 				pipex/wait_childs.c			\
 				signals/signals.c			\
 				utils/builtins_utils.c		\
+				utils/get_prompt.c			\
 				utils/wildcards_utils.c		\
 				utils/wildcards.c			\
 				main.c

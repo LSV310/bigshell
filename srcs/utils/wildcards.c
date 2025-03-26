@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/26 11:52:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ void	finish_cmp(t_list **lst, t_list *elem, char *content, char *chr)
 			str++;
 		chr = ft_strchr(str, '*');
 	}
-	if (*str && ft_strrcmp(content, str))
+	if (*str && ft_strrncmp(content, str, ft_strlen(str)))
 		lst_remove_node(lst, elem, &void_content);
 }
-
 void	compare_str(t_list **lst, t_list *elem, char *str)
 {
 	char	*content;

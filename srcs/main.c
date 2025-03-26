@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 19:36:43 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:51:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ int	init_minishell(t_shell *minishell)
 	return (1);
 }
 
+void	get_input(t_shell *minishell)
+{
+	char	*prompt;
+
+	prompt = get_prompt(minishell->env);
+	if (!prompt)
+	{
+		minishell->input = ft_readline("\e[0;35m$ \e[0m",
+				&minishell->history, true);
+		return ;
+	}
+	minishell->input = ft_readline(prompt, &minishell->history, true);
+	free(prompt);
+}
+
 int	main(void)
 {
 	t_shell	minishell;
@@ -51,8 +66,7 @@ int	main(void)
 	init_minishell(&minishell);
 	while (1)
 	{
-		minishell.input = ft_readline("\e[0;35mmegashell$> \e[0m",
-				&minishell.history, true);
+		get_input(&minishell);
 		create_signals();
 		if (!minishell.input)
 			break ;

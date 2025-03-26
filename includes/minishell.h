@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 21:22:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/26 12:37:41 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	child_signal(void);
 
 // utils
 void	free_minishell(t_shell *minishell);
+char	*get_prompt(t_map *env);
 int		check_first_arg(t_map *env, char **args, int *exit_code);
 bool	var_name_valid(char *var, int *index, int *exit_code);
 char	*toktype_to_string(t_token_type type);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 15:25:42 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/26 15:46:12 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,24 @@ static void	rl_quit(void)
 	rl_reset_signals();
 }
 
-static int	line_too_long(t_readline *line)
+static int	line_too_long(t_readline *line, t_dlist **history)
 {
-	if (line->end + 1 >= line->size)
+	t_dlist	*line_history;
+
+	if (line->end + 1 < line->size)
+		return (1);
+	clear_line(line, history, 0);
+	line->current_line = ft_realloc(line->current_line,
+			line->size * 2, line->size);
+	if (!line->current_line)
+		return (0);
+	line->size *= 2;
+	if (history)
 	{
-		line->current_line = ft_realloc(line->current_line,
-				line->size * 2, line->size);
-		if (!line->current_line)
-			return (0);
-		line->size *= 2;
+		line_history = ft_dlstnew(line->current_line);
+		if (!line_history)
+			return (free(line->current_line), 0);
+		ft_dlstadd_front(history, line_history);
 	}
 	return (1);
 }
@@ -82,7 +91,7 @@ char	*ft_readline(char *prompt, t_dlist **history, bool use_sigint)
 			break ;
 		else if (!other_key(key, &line, prompt, history))
 			return (rl_quit(), NULL);
-		if (!line_too_long(&line))
+		if (!line_too_long(&line, history))
 			return (rl_quit(), NULL);
 	}
 	clear_line(&line, history, 0);
