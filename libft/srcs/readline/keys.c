@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 11:14:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:36:33 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ int	printkey(int key, t_readline *line)
 	return (0);
 }
 
-static void	move_key(t_readline *line, int key)
+void	move_key(t_readline *line, int key)
 {
 	if (key == RARROW && line->cursor < line->end)
 	{
-		ft_fprintf(0, "%c", line->current_line[line->cursor]);
+		ft_fprintf(0, "\033[C");
 		line->cursor++;
 	}
 	else if (key == LARROW && line->cursor > 0)
 	{
+		ft_fprintf(0, "\033[D");
 		line->cursor--;
-		ft_fprintf(0, "\b");
 	}
 }
 
@@ -90,8 +90,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 	{
 		write(0, "\n", 1);
 		ft_printf("exit\n");
-		clear_line(line, history, 1);
-		return (0);
+		return (clear_line(line, history, 1), 0);
 	}
 	else if (key == READ_FAILED && !rl_signal_received(line, history, prompt))
 		return (0);
@@ -109,5 +108,7 @@ int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
 		end_key(line);
 	else if (key == DEL || key == EOF_K)
 		del_key(line);
+	else if (key == CL_ARROW || key == CR_ARROW)
+		move_word(line, key);
 	return (1);
 }

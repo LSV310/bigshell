@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 11:13:48 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 16:09:29 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define HOME -16
 # define END -17
 # define DEL -18
+# define CR_ARROW -19
+# define CL_ARROW -20
 # define DEL_K 127
 
 // libc functions
@@ -196,6 +198,8 @@ int		up_arrow(t_readline *line, t_dlist **history);
 int		down_arrow(t_readline *line, t_dlist **history);
 void	home_key(t_readline *line);
 void	end_key(t_readline *line);
+void	move_key(t_readline *line, int key);
+void	move_word(t_readline *line, int key);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);

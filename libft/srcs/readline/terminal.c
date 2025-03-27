@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 11:13:13 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 15:06:09 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,17 @@ void	set_dfl(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
-int	find_sequence(char *seq)
+static int	ctrl_arrow(char *seq)
+{
+	read(STDIN_FILENO, seq, 3);
+	if (seq[2] == 'C')
+		return (CR_ARROW);
+	if (seq[2] == 'D')
+		return (CL_ARROW);
+	return (INVALID_SEQ);
+}
+
+static int	find_sequence(char *seq)
 {
 	if (seq[1] == 'A')
 		return (UARROW);
@@ -52,7 +62,7 @@ int	find_sequence(char *seq)
 		return (DEL);
 	}
 	else if (seq[1] == '1')
-		read(STDIN_FILENO, &seq[1], 3);
+		return (ctrl_arrow(seq));
 	return (INVALID_SEQ);
 }
 
