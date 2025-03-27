@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 12:28:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 11:13:13 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@ void	set_dfl(void)
 int	find_sequence(char *seq)
 {
 	if (seq[1] == 'A')
-		return (-12);
+		return (UARROW);
 	else if (seq[1] == 'B')
-		return (-13);
+		return (DARROW);
 	else if (seq[1] == 'C')
-		return (-14);
+		return (RARROW);
 	else if (seq[1] == 'D')
-		return (-15);
+		return (LARROW);
 	else if (seq[1] == 'H')
-		return (-16);
+		return (HOME);
 	else if (seq[1] == 'F')
-		return (-17);
+		return (END);
 	else if (seq[1] == '3')
 	{
 		read(STDIN_FILENO, &seq[1], 1);
-		return (-18);
+		return (DEL);
 	}
 	else if (seq[1] == '1')
 		read(STDIN_FILENO, &seq[1], 3);
-	return (0);
+	return (INVALID_SEQ);
 }
 
 int	read_key(void)
@@ -62,12 +62,12 @@ int	read_key(void)
 	char	seq[3];
 
 	if (read(STDIN_FILENO, &ch, 1) != 1)
-		return (-1);
-	if (ch == 27)
+		return (READ_FAILED);
+	if (ch == ESC)
 	{
 		if (read(STDIN_FILENO, &seq[0], 1) != 1
 			|| read(STDIN_FILENO, &seq[1], 1) != 1)
-			return (-1);
+			return (READ_FAILED);
 		if (seq[0] == '[')
 			return (find_sequence(seq));
 	}

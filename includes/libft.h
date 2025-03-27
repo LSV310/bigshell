@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 11:47:08 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 11:13:48 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,24 @@
 # include <signal.h>
 # include <stdbool.h>
 
+// Bases
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"
 # define BASE_16U "0123456789ABCDEF"
+
+// Readline keys
+# define INVALID_SEQ 0
+# define READ_FAILED -1
+# define ESC 27
+# define EOF_K 4
+# define UARROW -12
+# define DARROW -13
+# define RARROW -14
+# define LARROW -15
+# define HOME -16
+# define END -17
+# define DEL -18
+# define DEL_K 127
 
 // libc functions
 int		ft_isalpha(int c);

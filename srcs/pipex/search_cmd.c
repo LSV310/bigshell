@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 14:22:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 17:52:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 10:52:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*search_cmd(char *cmd, char **env, int *exit_code)
 		if (access(cmd, F_OK | X_OK))
 		{
 			*exit_code = 127;
-			if (errno == 20 || errno == 13)
+			if (errno == ENOTDIR || errno == EACCES)
 				*exit_code = 126;
 			return (perror(cmd), NULL);
 		}
