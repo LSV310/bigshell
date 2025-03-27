@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 15:58:30 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/27 17:26:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	(close(pipefd[0]), close(pipefd[1]));
 	cmd = parse_cmd(cmdtk, shell->arena);
 	cmd_name = get_cmd_name(cmd, shell, env);
+	if (shell->std_in)
+		close(shell->std_in);
+	shell->std_in = -1;
 	execve(cmd_name, cmd->args, env);
 	if (errno == 13)
 		return (perror(cmd_name), (free_tab(env, 0), exit2(shell, 127, NULL)));
