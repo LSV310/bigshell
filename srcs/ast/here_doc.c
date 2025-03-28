@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:19:11 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:14:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 {
-	char	*line;
-	t_dlist	*history;
+	char		*line;
+	t_dlist		*history;
+	t_readline	rl_params;
 
 	history = NULL;
-	line = ft_readline("> ", &history, false);
+	init_readline_params(&rl_params);
+	rl_params.history = &history;
+	rl_params.prompt = "> ";
+	line = ft_readline(&rl_params);
 	while (line && ft_strcmp(line, delim) != 0)
 	{
 		if (expand)
@@ -26,15 +30,14 @@ void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 		write(to_write, line, ft_strlen(line));
 		write(to_write, "\n", 1);
 		free(line);
-		line = ft_readline("> ", &history, false);
+		line = ft_readline(&rl_params);
 	}
-	if (!line)
+	if (!line && rl_params.quit_reason == RL_SUCCESS)
 	{
 		ft_fprintf(2, "warning: here-document delimited by end-of-file");
 		ft_fprintf(2, "(wanted `%s')\n", delim);
 	}
-	else
-		free(line);
+	free(line);
 	ft_dlstclear(&history, &free_content);
 }
 

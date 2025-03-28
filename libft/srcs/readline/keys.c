@@ -6,19 +6,22 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 15:36:33 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:27:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	printkey(int key, t_readline *line)
+int	printkey(int key, t_rline *line, t_readline *params)
 {
 	size_t	len;
 	char	*temp;
 
 	if (key == '\n')
+	{
+		params->quit_reason = RL_SUCCESS;
 		return (1);
+	}
 	if ((key == '\t' || key == '\f') && isatty(STDIN_FILENO))
 		return (0);
 	write(STDIN_FILENO, &key, 1);
@@ -37,7 +40,7 @@ int	printkey(int key, t_readline *line)
 	return (0);
 }
 
-void	move_key(t_readline *line, int key)
+void	move_key(t_rline*line, int key)
 {
 	if (key == RARROW && line->cursor < line->end)
 	{
@@ -51,7 +54,7 @@ void	move_key(t_readline *line, int key)
 	}
 }
 
-void	back_space(t_readline *line)
+void	back_space(t_rline*line)
 {
 	size_t	len;
 	char	*temp;
@@ -76,7 +79,7 @@ void	back_space(t_readline *line)
 	line->current_line[line->end] = '\0';
 }
 
-void	del_key(t_readline *line)
+void	del_key(t_rline*line)
 {
 	if (line->cursor == line->end)
 		return ;
@@ -84,22 +87,18 @@ void	del_key(t_readline *line)
 	back_space(line);
 }
 
-int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
+int	other_key(int key, t_rline *line, t_readline *params)
 {
 	if (key == EOF_K && line->end == 0)
-	{
-		write(0, "\n", 1);
-		ft_printf("exit\n");
-		return (clear_line(line, history, 1), 0);
-	}
-	else if (key == READ_FAILED && !rl_signal_received(line, history, prompt))
-		return (0);
+		return (EOF_received(line, params));
+	else if (key == READ_FAILED || key == FINISH_READING)
+		return (rl_signal_received(key, line, params));
 	else if (key == DEL_K)
 		back_space(line);
-	else if (history && key == UARROW && !up_arrow(line, history))
-		return (0);
-	else if (history && key == DARROW && !down_arrow(line, history))
-		return (0);
+	else if (key == UARROW && params->history)
+		return (up_arrow(line, params->history));
+	else if (key == DARROW && params->history)
+		return (down_arrow(line, params->history));
 	else if (key == RARROW || key == LARROW)
 		move_key(line, key);
 	else if (key == HOME)

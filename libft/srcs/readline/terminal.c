@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:13:55 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 15:06:09 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 11:13:04 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,13 @@ int	read_key(void)
 {
 	char	ch;
 	char	seq[3];
+	int		read_val;
 
-	if (read(STDIN_FILENO, &ch, 1) != 1)
+	read_val = read(STDIN_FILENO, &ch, 1);
+	if (read_val == -1)
 		return (READ_FAILED);
+	if (read_val == 0)
+		return (FINISH_READING);
 	if (ch == ESC)
 	{
 		if (read(STDIN_FILENO, &seq[0], 1) != 1

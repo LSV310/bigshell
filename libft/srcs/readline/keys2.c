@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:44:33 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 13:44:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 11:57:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*new_line(t_readline *line, char *hist)
+char	*new_line(t_rline*line, char *hist)
 {
 	int		len;
 
@@ -28,7 +28,7 @@ char	*new_line(t_readline *line, char *hist)
 	return (line->current_line);
 }
 
-int	up_arrow(t_readline *line, t_dlist **history)
+int	up_arrow(t_rline *line, t_dlist **history)
 {
 	char	*next;
 
@@ -51,7 +51,7 @@ int	up_arrow(t_readline *line, t_dlist **history)
 	return (1);
 }
 
-int	down_arrow(t_readline *line, t_dlist **history)
+int	down_arrow(t_rline *line, t_dlist **history)
 {
 	char	*prev;
 
@@ -66,7 +66,7 @@ int	down_arrow(t_readline *line, t_dlist **history)
 	return (1);
 }
 
-void	home_key(t_readline *line)
+void	home_key(t_rline*line)
 {
 	char	*temp;
 
@@ -76,7 +76,7 @@ void	home_key(t_readline *line)
 	line->cursor = 0;
 }
 
-void	end_key(t_readline *line)
+void	end_key(t_rline*line)
 {
 	ft_fprintf(0, "%s", &line->current_line[line->cursor]);
 	line->cursor = line->end;

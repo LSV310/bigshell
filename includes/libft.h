@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 16:09:29 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:29:07 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 // Readline keys
 # define INVALID_SEQ 0
+# define FINISH_READING 0
 # define READ_FAILED -1
 # define ESC 27
 # define EOF_K 4
@@ -169,37 +170,51 @@ void	map_remove_node(t_map **map, t_map *node);
 size_t	ft_mapsize(t_map *map);
 
 // readline
-typedef struct s_readline
+typedef enum rl_quit_reason
+{
+	RL_INVALID,
+	RL_SUCCESS,
+	RL_FINISHED,
+	RL_KILLED
+}	t_rlqreason;
+
+typedef struct s_rline
 {
 	char	*current_line;
-	char	*prompt;
 	size_t	size;
 	size_t	cursor;
 	size_t	end;
-	bool	sigint_nl;
+}	t_rline;
+
+typedef struct s_readline
+{
+	char		*prompt;
+	t_dlist		**history;
+	bool		sigint_nl;
+	bool		autocomplete;
+	t_rlqreason	quit_reason;
 }	t_readline;
 
-extern volatile int	g_sig;
-
-char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
-int		new_buffer(t_readline *line, t_dlist **history, bool sigint,
-			char *prompt);
-int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
-void	clear_line(t_readline *line, t_dlist **history, int current);
+char	*ft_readline(t_readline *params);
+void	init_readline_params(t_readline *params);
+int		new_buffer(t_rline *line, t_readline *params);
+int		rl_signal_received(int key, t_rline *line, t_readline *params);
+void	clear_line(t_rline *line, t_dlist **history, bool free_current);
 void	set_raw(void);
 void	set_dfl(void);
 int		read_key(void);
-int		reset_line(t_readline *line);
+int		reset_line(t_rline *line);
 void	write_x_times(char *buff, char c, size_t times);
-int		printkey(int key, t_readline *line);
-void	back_space(t_readline *line);
-int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
-int		up_arrow(t_readline *line, t_dlist **history);
-int		down_arrow(t_readline *line, t_dlist **history);
-void	home_key(t_readline *line);
-void	end_key(t_readline *line);
-void	move_key(t_readline *line, int key);
-void	move_word(t_readline *line, int key);
+int		printkey(int key, t_rline *line, t_readline *params);
+int		EOF_received(t_rline *line, t_readline *params);
+void	back_space(t_rline *line);
+int		other_key(int key, t_rline *line, t_readline *params);
+int		up_arrow(t_rline *line, t_dlist **history);
+int		down_arrow(t_rline *line, t_dlist **history);
+void	home_key(t_rline *line);
+void	end_key(t_rline *line);
+void	move_key(t_rline *line, int key);
+void	move_word(t_rline *line, int key);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);

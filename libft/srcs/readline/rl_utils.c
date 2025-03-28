@@ -6,13 +6,22 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:13:23 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 21:17:17 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:10:13 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	reset_line(t_readline *line)
+void	init_readline_params(t_readline *params)
+{
+	params->prompt = NULL;
+	params->history = NULL;
+	params->autocomplete = false;
+	params->sigint_nl = false;
+	params->quit_reason = RL_INVALID;
+}
+
+int	reset_line(t_rline*line)
 {
 	char	*cpy;
 

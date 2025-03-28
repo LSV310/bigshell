@@ -6,19 +6,15 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 15:06:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:32:12 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-volatile int	g_sig;
-
-static void	handle_signals(int sig, siginfo_t *info, void *context)
+ void	handle_signals(int sig)
 {
-	g_sig = sig;
-	(void)info;
-	(void)context;
+	(void)sig;
 	return ;
 }
 
@@ -26,38 +22,34 @@ void	rl_init_signals(void)
 {
 	struct sigaction	sa;
 
-	init_sigaction(&sa, handle_signals);
+	init_sighandler(&sa, &handle_signals);
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	rl_reset_signals(void)
 {
-	struct sigaction	sa;
-
-	init_sighandler(&sa, SIG_DFL);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
-int	rl_signal_received(t_readline *line, t_dlist **history, char *prompt)
+int	rl_signal_received(int key, t_rline *line, t_readline *params)
 {
-	bool	sigint_nl;
-
-	if (g_sig == 0)
-		return (0);
-	if (g_sig != SIGINT)
-		return (1);
-	sigint_nl = line->sigint_nl;
-	clear_line(line, history, 1);
-	if (line->sigint_nl == false)
+	if (key == FINISH_READING)
 	{
-		ft_printf("\n");
+		params->quit_reason = RL_FINISHED;
 		return (0);
 	}
-	if (!new_buffer(line, history, sigint_nl, prompt))
+	clear_line(line, params->history, 1);
+	if (params->sigint_nl == false)
+	{
+		ft_printf("\n");
+		params->quit_reason = RL_KILLED;
+		return (0);
+	}
+	if (!new_buffer(line, params))
 		return (0);
 	if (isatty(STDIN_FILENO))
-		ft_fprintf(STDIN_FILENO, "\n%s", prompt);
+		ft_fprintf(STDIN_FILENO, "\n%s", params->prompt);
 	return (1);
 }
