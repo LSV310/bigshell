@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 12:29:07 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:09:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define BASE_16U "0123456789ABCDEF"
 
 // Readline keys
-# define INVALID_SEQ 0
-# define FINISH_READING 0
 # define READ_FAILED -1
+# define FINISH_READING -2
+# define INVALID_SEQ -3
 # define ESC 27
 # define EOF_K 4
 # define UARROW -12

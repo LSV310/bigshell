@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 12:09:14 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:01:16 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	line_too_long(t_rline*line, t_dlist **history)
 
 	if (line->end + 1 < line->size)
 		return (1);
-	clear_line(line, history, 0);
+	clear_line(line, history, false);
 	line->current_line = ft_realloc(line->current_line,
 			line->size * 2, line->size);
 	if (!line->current_line)
@@ -95,7 +95,7 @@ char	*ft_readline(t_readline *params)
 		if (!line_too_long(&line, params->history))
 			return (rl_quit(), NULL);
 	}
-	clear_line(&line, params->history, 0);
+	clear_line(&line, params->history, false);
 	if (!cmd_add_history(params->history, line.current_line))
 		return (rl_quit(), NULL);
 	return (write(0, "\n", 1), rl_quit(), line.current_line);
