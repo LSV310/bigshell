@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 02:55:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:22:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,53 @@ DIR	*search_directory(t_list **lst, t_wildcard_type type)
 	return (dir);
 }
 
-bool	wildcard_cmp(char *content, char *pattern)
+void	finish_cmp(t_list **lst, t_list *elem, char *content, char *chr)
 {
-	if (*pattern == '\0')
+	char	*str;
+	char	*find;
+
+	while (*chr == '*')
+		chr++;
+	str = chr;
+	chr = ft_strchr(str, '*');
+	while (chr)
 	{
-		if (*content == '\0')
-			return (true);
-		return (false);
+		find = ft_strlstr(content, str, chr - str);
+		if (!find)
+		{
+			lst_remove_node(lst, elem, &void_content);
+			return ;
+		}
+		content = find + (chr - str);
+		str = chr;
+		while (str && *str == '*')
+			str++;
+		chr = ft_strchr(str, '*');
 	}
-	else if (*pattern == '*')
-		return ((*content && wildcard_cmp(content + 1, pattern))
-			|| wildcard_cmp(content, pattern + 1));
-	else
-	{
-		if (*pattern == *content)
-			return (wildcard_cmp(content + 1, pattern + 1));
-		else
-			return (false);
-	}
+	if (*str && ft_strrncmp(content, str, ft_strlen(str)))
+		lst_remove_node(lst, elem, &void_content);
 }
 
 void	compare_str(t_list **lst, t_list *elem, char *str)
 {
 	char	*content;
+	char	*chr;
 
 	content = elem->content;
-	if (!wildcard_cmp(content, str))
+	chr = ft_strchr(str, '*');
+	if (!chr)
+	{
+		if (ft_strncmp(str, content, max(ft_strlen(str), ft_strlen(content))))
+			lst_remove_node(lst, elem, &void_content);
+		return ;
+	}
+	else if (ft_strncmp(str, content, chr - str))
+	{
 		lst_remove_node(lst, elem, &void_content);
+		return ;
+	}
+	content += chr - str;
+	finish_cmp(lst, elem, content, chr);
 }
 
 char	*get_expanded(t_list *lst, DIR *dir, char *str)

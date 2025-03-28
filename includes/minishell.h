@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 12:37:41 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 02:07:36 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	expand_redt(t_list *cur, t_shell *shell);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 t_ast	*build_ast(t_list *tks, t_shell *shell);
 bool	exec_ast(t_ast *ast, t_shell *shell);
-bool	advance_token(t_list **tokens);
+t_token	*advance_token(t_list **tokens);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
