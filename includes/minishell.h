@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 02:07:36 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/28 03:13:14 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ bool	var_name_valid(char *var, int *index, int *exit_code);
 char	*toktype_to_string(t_token_type type);
 int		here_doc(char *delimiter, bool expand, t_shell *env);
 bool	token_heredoc(t_token *tok, t_shell *shell);
+void	close_heredocs(t_list *tks);
 
 #endif

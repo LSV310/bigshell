@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 12:51:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 03:15:42 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ bool	exec_input(char *input, t_shell *shell)
 		return (modify_var(shell->env, "2"), false);
 	ast = build_ast(tks, shell);
 	if (!ast)
+	{
+		close_heredocs(tks);
 		return (modify_var(shell->env, "2"), false);
+	}
 	if (!exec_ast(ast, shell))
+	{
+		close_heredocs(tks);
 		return (false);
+	}
+	close_heredocs(tks);
 	return (true);
 }
 

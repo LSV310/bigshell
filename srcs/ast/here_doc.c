@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:19:11 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 03:11:15 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	close_heredocs(t_list *tks)
+{
+	t_token	*token;
+
+	while (tks && tks->content)
+	{
+		token = tks->content;
+		if (token->type == HEREDOC)
+			close(atoi(token->str));
+	}
+}
 
 void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 {
