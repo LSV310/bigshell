@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 17:55:46 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:30:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exec_builtins(t_list *cmdtk, t_shell *shell)
 	cmd = parse_cmd(cmdtk, shell->arena);
 	if (!cmd || !cmd->name)
 		return (1);
-	builtins = try_builtins(cmd, shell);
+	builtins = try_builtins(cmd, shell, NULL);
 	dup2(fdin, STDIN_FILENO);
 	dup2(fdout, STDOUT_FILENO);
 	if (fdin != 0)
@@ -35,7 +35,7 @@ int	exec_builtins(t_list *cmdtk, t_shell *shell)
 	return (builtins);
 }
 
-int	try_builtins(t_cmd *cmd, t_shell *shell)
+int	try_builtins(t_cmd *cmd, t_shell *shell, char **env)
 {
 	if (!cmd->name)
 		return (-1);
@@ -52,7 +52,10 @@ int	try_builtins(t_cmd *cmd, t_shell *shell)
 	if (!ft_strcmp(cmd->name, "env"))
 		return (env2(shell->env, &cmd->args[1]));
 	if (!ft_strcmp(cmd->name, "exit"))
+	{
+		free_tab(env, 0);
 		return (exit2(shell, EXIT_SUCCESS, &cmd->args[1]));
+	}
 	return (-1);
 }
 

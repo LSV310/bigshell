@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:12:00 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:01:20 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:44:03 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	EOF_received(t_rline *line, t_readline *params)
+int	eof_received(t_rline *line, t_readline *params)
 {
 	write(0, "\n", 1);
 	clear_line(line, params->history, true);

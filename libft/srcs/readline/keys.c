@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 12:27:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:30:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	printkey(int key, t_rline *line, t_readline *params)
 	size_t	len;
 	char	*temp;
 
+	if (line->cwd && auto_complete(key, line))
+		return (0);
 	if (key == '\n')
 	{
 		params->quit_reason = RL_SUCCESS;
 		return (1);
 	}
-	if ((key == '\t' || key == '\f') && isatty(STDIN_FILENO))
+	if (key == '\f' && isatty(STDIN_FILENO))
 		return (0);
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);
@@ -32,8 +34,7 @@ int	printkey(int key, t_rline *line, t_readline *params)
 			line->current_line + line->cursor, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor + 1);
 		temp = ft_strdup(line->current_line);
-		write_x_times(temp, '\b', len);
-		free(temp);
+		(write_x_times(temp, '\b', len), free(temp));
 	}
 	line->current_line[line->cursor++] = key;
 	line->end++;
@@ -90,7 +91,7 @@ void	del_key(t_rline*line)
 int	other_key(int key, t_rline *line, t_readline *params)
 {
 	if (key == EOF_K && line->end == 0)
-		return (EOF_received(line, params));
+		return (eof_received(line, params));
 	else if (key == READ_FAILED || key == FINISH_READING)
 		return (rl_signal_received(key, line, params));
 	else if (key == DEL_K)

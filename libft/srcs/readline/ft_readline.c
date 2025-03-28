@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:01:16 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 14:29:51 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ int	new_buffer(t_rline *line, t_readline *params)
 {
 	t_dlist	*line_history;
 
+	if (!params)
+		return (0);
 	if (!params->prompt)
 		params->prompt = "";
 	params->quit_reason = RL_INVALID;
 	line->cursor = 0;
 	line->size = 1024;
 	line->end = 0;
+	line->in_auto = false;
+	line->cwd = NULL;
+	if (params->autocomplete == true)
+		line->cwd = opendir(".");
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
@@ -35,13 +41,15 @@ int	new_buffer(t_rline *line, t_readline *params)
 	return (1);
 }
 
-static void	rl_quit(void)
+static void	rl_quit(t_rline *line, t_readline *params)
 {
 	set_dfl();
 	rl_reset_signals();
+	if (params->autocomplete && line->cwd)
+		closedir(line->cwd);
 }
 
-static int	line_too_long(t_rline*line, t_dlist **history)
+static int	line_too_long(t_rline *line, t_dlist **history)
 {
 	t_dlist	*line_history;
 
@@ -91,12 +99,12 @@ char	*ft_readline(t_readline *params)
 		if (ft_isprint(key) && printkey(key, &line, params))
 			break ;
 		else if (!other_key(key, &line, params))
-			return (rl_quit(), NULL);
+			return (rl_quit(&line, params), NULL);
 		if (!line_too_long(&line, params->history))
-			return (rl_quit(), NULL);
+			return (rl_quit(&line, params), NULL);
 	}
 	clear_line(&line, params->history, false);
 	if (!cmd_add_history(params->history, line.current_line))
-		return (rl_quit(), NULL);
-	return (write(0, "\n", 1), rl_quit(), line.current_line);
+		return (rl_quit(&line, params), NULL);
+	return (write(0, "\n", 1), rl_quit(&line, params), line.current_line);
 }

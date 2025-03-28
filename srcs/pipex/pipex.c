@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/27 17:26:04 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:33:28 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_cmd_name(t_cmd	*cmd, t_shell *shell, char **env)
 
 	if (!cmd || !cmd->name)
 		(free_tab(env, 0), exit2(shell, EXIT_FAILURE, NULL));
-	builtins = try_builtins(cmd, shell);
+	builtins = try_builtins(cmd, shell, env);
 	if (builtins >= 0)
 		(free_tab(env, 0), exit2(shell, builtins, NULL));
 	cmd_name = search_cmd(cmd->name, env, &exit_code);

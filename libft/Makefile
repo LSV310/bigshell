@@ -1,6 +1,6 @@
 AR			= ar rcs
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -ggdb
 
 INLCUDES	= includes/
 SRC_DIR		= srcs/
@@ -88,6 +88,7 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/auto_complete.c	\
 				readline/ft_readline.c		\
 				readline/history.c			\
 				readline/keys.c				\

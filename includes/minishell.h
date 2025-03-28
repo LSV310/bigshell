@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 12:37:41 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:30:05 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ bool	advance_token(t_list **tokens);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
-int		try_builtins(t_cmd *cmd, t_shell *shell);
+int		try_builtins(t_cmd *cmd, t_shell *shell, char **env);
 t_cmd	*parse_cmd(t_list *tks, t_arena *arena);
 t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena);
 
 // signals
-void	create_signals(void);
+void	set_signals(void);
 void	child_signal(void);
 
 // utils

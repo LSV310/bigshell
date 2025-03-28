@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:09:58 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 16:31:56 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <termios.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <dirent.h>
 
 // Bases
 # define BASE_10 "0123456789"
@@ -184,6 +185,8 @@ typedef struct s_rline
 	size_t	size;
 	size_t	cursor;
 	size_t	end;
+	DIR		*cwd;
+	bool	in_auto;
 }	t_rline;
 
 typedef struct s_readline
@@ -206,7 +209,7 @@ int		read_key(void);
 int		reset_line(t_rline *line);
 void	write_x_times(char *buff, char c, size_t times);
 int		printkey(int key, t_rline *line, t_readline *params);
-int		EOF_received(t_rline *line, t_readline *params);
+int		eof_received(t_rline *line, t_readline *params);
 void	back_space(t_rline *line);
 int		other_key(int key, t_rline *line, t_readline *params);
 int		up_arrow(t_rline *line, t_dlist **history);
@@ -218,6 +221,7 @@ void	move_word(t_rline *line, int key);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
+int		auto_complete(int key, t_rline *line);
 void	rl_init_signals(void);
 void	rl_reset_signals(void);
 

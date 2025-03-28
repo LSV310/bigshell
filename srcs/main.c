@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 12:38:39 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:44:26 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_minishell(t_shell *minishell)
 		return (EXIT_FAILURE);
 	minishell->arena = arena_init();
 	if (!minishell->arena)
-	exit2(minishell, 1, NULL);
-	create_signals();
+		exit2(minishell, 1, NULL);
+	set_signals();
 	return (1);
 }
 
@@ -76,7 +76,7 @@ int	main(void)
 	while (1)
 	{
 		get_input(&minishell, &rl_params);
-		create_signals();
+		set_signals();
 		if (!minishell.input)
 			break ;
 		exec_input(&minishell);
