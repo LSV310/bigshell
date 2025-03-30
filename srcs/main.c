@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 16:41:30 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 16:46:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_minishell(t_shell *minishell)
 	return (1);
 }
 
-int	get_input(t_shell *minishell, t_readline *params)
+char	*get_input(t_shell *minishell, t_readline *params)
 {
 	char	*prompt;
 
@@ -48,9 +48,7 @@ int	get_input(t_shell *minishell, t_readline *params)
 		ft_printf("exit\n");
 	if (prompt)
 		free(prompt);
-	if (!minishell->input && params->quit_reason == RL_ALLOC_FAILED)
-		return (1);
-	return (1);
+	return (minishell->input);
 }
 
 bool	exec_input(t_shell *shell)
@@ -88,10 +86,8 @@ int	main(void)
 	while (1)
 	{
 		if (!get_input(&minishell, &rl_params))
-
-		set_signals();
-		if (!minishell.input)
 			break ;
+		set_signals();
 		exec_input(&minishell);
 		reset_arena(&minishell.arena);
 		free(minishell.input);
