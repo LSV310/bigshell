@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   keys3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:12:00 by agruet            #+#    #+#             */
 /*   Updated: 2025/03/30 00:45:15 by agruet           ###   ########.fr       */

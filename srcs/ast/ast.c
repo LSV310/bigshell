@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:18:57 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 02:22:56 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ t_ast	*create_node(t_node_type type,
 	if (tokens)
 	{
 		commands = ptr_arr_pipeline(*tokens, arena);
+		if (!commands)
+		{
+			ft_putstr_fd("syntax error in pipeline\n", 2);
+			return (NULL);
+		}
 		skip_pipeline(tokens);
 	}
 	else
@@ -45,48 +50,57 @@ t_ast	*parse_par(t_list **tokens, t_arena *arena)
 	ret = parse_expr(tokens, arena);
 	tok = (**tokens).content;
 	if (tok->type != RPAR)
+	{
+		ft_putstr_fd("syntax error: \
+			 expected right parenthesis\n", 2);
 		return (NULL);
+	}
 	advance_token(tokens);
 	return (ret);
 }
 
-t_ast	*parse_logic(t_list **tokens, t_arena *arena,
-	t_ast *left, t_token_type type)
+t_ast	*parse_something(t_list **tokens, t_arena *arena)
 {
-	t_ast	*right;
+	t_token	*tok;
 
-	if (!advance_token(tokens))
+	if (!tokens || !*tokens || !(**tokens).content)
 		return (NULL);
-	right = parse_expr(tokens, arena);
-	if (!right)
-		return (NULL);
-	if (type == ORT)
-		return (create_node(ND_OR, NULL, arena, (t_ast *[]){left, right}));
-	else if (type == ANDT)
-		return (create_node(ND_AND, NULL, arena, (t_ast *[]){left, right}));
+	tok = (**tokens).content;
+	if (tok->type == LPAR)
+		return (parse_par(tokens, arena));
+	else if (is_cmd_token(tok))
+		return (create_node(ND_CMD, tokens, arena, (t_ast *[2]){NULL, NULL}));
 	else
+	{
+		ft_fprintf(2, "syntax error near \'%s\'\n", tok->str);
 		return (NULL);
+	}
 }
 
 t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 {
 	t_ast	*left;
 	t_token	*tok;
+	t_ast	*right;
 
-	tok = (**tokens).content;
-	if (tok->type == LPAR)
-		left = parse_par(tokens, arena);
-	else if (is_cmd_token(tok))
-		left = create_node(ND_CMD, tokens, arena, (t_ast *[]){NULL, NULL});
-	else
-		return (create_node(ND_NULL, NULL, arena, (t_ast *[]){NULL, NULL}));
-	if (!left)
-		return (NULL);
-	tok = (**tokens).content;
-	if (tok->type == ENDT || tok->type == RPAR)
-		return (left);
-	else if (tok->type == ORT || tok->type == ANDT)
-		return (parse_logic(tokens, arena, left, tok->type));
+	left = parse_something(tokens, arena);
+	while (tokens && *tokens && (**tokens).content)
+	{
+		tok = (**tokens).content;
+		if (tok->type == ANDT || tok->type == ORT)
+		{
+			advance_token(tokens);
+			right = parse_something(tokens, arena);
+			if (tok->type == ANDT)
+				left = create_node(ND_AND, NULL, arena,
+						(t_ast *[2]){left, right});
+			else
+				left = create_node(ND_OR, NULL, arena,
+						(t_ast *[2]){left, right});
+		}
+		else
+			break ;
+	}
 	return (left);
 }
 

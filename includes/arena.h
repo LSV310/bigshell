@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:24:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:14:16 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:21:54 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@
 
 typedef struct s_chunk	t_chunk;
 
-struct s_chunk {
+struct s_chunk
+{
 	t_chunk		*next;
 	size_t		count;
 	size_t		capacity;
 	uintptr_t	data[];
 };
 
-typedef struct s_arena{
+typedef struct s_arena
+{
 	t_chunk	*begin;
 	t_chunk	*end;
 	int		freed;

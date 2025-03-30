@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 16:30:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 03:13:14 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	expand_redt(t_list *cur, t_shell *shell);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 t_ast	*build_ast(t_list *tks, t_shell *shell);
 bool	exec_ast(t_ast *ast, t_shell *shell);
-bool	advance_token(t_list **tokens);
+t_token	*advance_token(t_list **tokens);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
@@ -87,5 +87,6 @@ bool	var_name_valid(char *var, int *index, int *exit_code);
 char	*toktype_to_string(t_token_type type);
 int		here_doc(char *delimiter, bool expand, t_shell *env);
 bool	token_heredoc(t_token *tok, t_shell *shell);
+void	close_heredocs(t_list *tks);
 
 #endif
