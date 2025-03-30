@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:12:00 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:44:03 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 00:45:15 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	eof_received(t_rline *line, t_readline *params)
 {
 	write(0, "\n", 1);
 	clear_line(line, params->history, true);
-	params->quit_reason = RL_SUCCESS;
+	params->quit_reason = RL_FINISHED;
 	return (0);
 }
 

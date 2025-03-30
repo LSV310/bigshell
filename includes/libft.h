@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 16:31:56 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 00:31:28 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,15 @@ typedef enum rl_quit_reason
 
 typedef struct s_rline
 {
-	char	*current_line;
-	size_t	size;
-	size_t	cursor;
-	size_t	end;
-	DIR		*cwd;
-	bool	in_auto;
+	char			*current_line;
+	size_t			size;
+	size_t			cursor;
+	size_t			end;
+	DIR				*dir;
+	char			searching_dir[512];
+	size_t			tab_index;
+	unsigned char	auto_type;
+	bool			in_auto;
 }	t_rline;
 
 typedef struct s_readline
@@ -221,7 +224,7 @@ void	move_word(t_rline *line, int key);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
-int		auto_complete(int key, t_rline *line);
+int		auto_complete(int key, t_rline *line, t_readline *params);
 void	rl_init_signals(void);
 void	rl_reset_signals(void);
 

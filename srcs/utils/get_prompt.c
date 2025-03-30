@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:17:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/26 13:39:43 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 01:15:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static char	*get_relative_cwd(t_map *env)
 	if (!relative_cwd)
 		return (cwd);
 	free(cwd);
-	join = ft_strjoin("~/", relative_cwd);
+	if (!relative_cwd[0])
+		join = ft_strjoin("~", relative_cwd);
+	else
+		join = ft_strjoin("~/", relative_cwd);
 	if (!join)
 		return (relative_cwd);
 	free(relative_cwd);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 14:29:51 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 00:31:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ int	new_buffer(t_rline *line, t_readline *params)
 	line->cursor = 0;
 	line->size = 1024;
 	line->end = 0;
+	line->tab_index = 0;
 	line->in_auto = false;
-	line->cwd = NULL;
+	line->auto_type = DT_UNKNOWN;
+	ft_memset(line->searching_dir, 0, 512);
+	line->dir = NULL;
 	if (params->autocomplete == true)
-		line->cwd = opendir(".");
+	{
+		line->searching_dir[0] = '.';
+		line->dir = opendir(line->searching_dir);
+	}
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
@@ -45,15 +51,15 @@ static void	rl_quit(t_rline *line, t_readline *params)
 {
 	set_dfl();
 	rl_reset_signals();
-	if (params->autocomplete && line->cwd)
-		closedir(line->cwd);
+	if (params->autocomplete == true && line->dir)
+		closedir(line->dir);
 }
 
 static int	line_too_long(t_rline *line, t_dlist **history)
 {
 	t_dlist	*line_history;
 
-	if (line->end + 1 < line->size)
+	if (line->end + 5 < line->size)
 		return (1);
 	clear_line(line, history, false);
 	line->current_line = ft_realloc(line->current_line,
@@ -96,7 +102,9 @@ char	*ft_readline(t_readline *params)
 	while (1)
 	{
 		key = read_key();
-		if (ft_isprint(key) && printkey(key, &line, params))
+		if (params->autocomplete == true && auto_complete(key, &line, params))
+			continue ;
+		else if (ft_isprint(key) && printkey(key, &line, params))
 			break ;
 		else if (!other_key(key, &line, params))
 			return (rl_quit(&line, params), NULL);

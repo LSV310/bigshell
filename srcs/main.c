@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:44:26 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 01:06:20 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	get_input(t_shell *minishell, t_readline *params)
 
 	prompt = get_prompt(minishell->env);
 	params->prompt = prompt;
-	params->quit_reason = RL_KILLED;
+	if (!prompt)
+		params->prompt = "\e[0;35m$ \e[0m";
+	minishell->input = ft_readline(params);
 	while (params->quit_reason == RL_KILLED)
 	{
+		modify_var(minishell->env, "130");
 		minishell->input = ft_readline(params);
-		if (params->quit_reason == RL_KILLED)
-			modify_var(minishell->env, "130");
 	}
 	if (params->quit_reason == RL_FINISHED && isatty(STDIN_FILENO)
 		&& isatty(STDOUT_FILENO))

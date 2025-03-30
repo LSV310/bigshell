@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 16:30:58 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 00:32:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ int	printkey(int key, t_rline *line, t_readline *params)
 	size_t	len;
 	char	*temp;
 
-	if (line->cwd && auto_complete(key, line))
-		return (0);
 	if (key == '\n')
 	{
 		params->quit_reason = RL_SUCCESS;
 		return (1);
 	}
-	if (key == '\f' && isatty(STDIN_FILENO))
+	if ((key == '\f' || key == '\t') && isatty(STDIN_FILENO))
 		return (0);
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);

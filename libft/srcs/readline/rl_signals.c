@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:01:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 00:52:02 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	rl_signal_received(int key, t_rline *line, t_readline *params)
 		params->quit_reason = RL_KILLED;
 		return (0);
 	}
+	if (line->dir)
+		closedir(line->dir);
 	if (!new_buffer(line, params))
 		return (0);
 	if (isatty(STDIN_FILENO))
