@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:14:51 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 00:30:11 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:28:01 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*get_searching_dir(char *buff, t_rline *line)
+static char	*get_searching_dir(char *buff, t_rline *line)
 {
 	size_t	i;
 	size_t	start;
@@ -39,9 +39,9 @@ char	*get_searching_dir(char *buff, t_rline *line)
 		chr = ft_strchr(line->current_line + i + 1, '/');
 	}
 	return (buff);
- }
+}
 
-int	check_entry(struct dirent *entry, t_rline *line)
+static int	check_entry(struct dirent *entry, t_rline *line)
 {
 	size_t	i;
 
@@ -51,7 +51,8 @@ int	check_entry(struct dirent *entry, t_rline *line)
 	if (entry->d_name[0] == '.')
 		return (0);
 	i = line->tab_index;
-	while (i > 0 && line->current_line[i] != ' ' && line->current_line[i] != '/')
+	while (i > 0 && line->current_line[i] != ' '
+		&& line->current_line[i] != '/')
 		i--;
 	if (line->current_line[i] == ' ' || line->current_line[i] == '/')
 		i++;
@@ -89,7 +90,7 @@ static struct dirent	*get_next_entry(t_rline *line)
 	return (entry);
 }
 
-void	apply_entry(struct dirent *entry, t_rline *line, t_readline *params)
+static void	apply_entry(struct dirent *entry, t_rline *line, t_readline *params)
 {
 	size_t	i;
 	size_t	j;
@@ -97,41 +98,28 @@ void	apply_entry(struct dirent *entry, t_rline *line, t_readline *params)
 	while (line->cursor > 0 && line->cursor > line->tab_index)
 		back_space(line);
 	i = line->tab_index;
-	while (i > 0 && line->current_line[i] != ' ' && line->current_line[i] != '/')
+	while (i > 0 && line->current_line[i] != ' '
+		&& line->current_line[i] != '/')
 		i--;
 	if (line->current_line[i] == ' ' || line->current_line[i] == '/')
 		i++;
 	j = 0;
 	while (entry->d_name[j] && line->current_line[i + j] == entry->d_name[j])
 		j++;
-	if (line->end + j + 5 >= line->size)
-		return ; // realloc and everything
+	line->end += j;
+	if (!line_too_long(line, params->history))
+		return ;
+	line->end -= j;
 	while (entry->d_name[j])
 		printkey(entry->d_name[j++], line, params);
 	line->auto_type = entry->d_type;
-}
-
-int	expand_current(int key, t_rline *line, t_readline *params)
-{
-	line->in_auto = false;
-	if (line->auto_type != DT_DIR)
-		return (0);
-	else if (key == '\n')
-		printkey('/', line, params);
-	if (key == READ_FAILED)
-	{
-		while (line->cursor > 0 && line->cursor > line->tab_index)
-			back_space(line);
-	}
-	line->auto_type = DT_UNKNOWN;
-	return (1);
 }
 
 int	auto_complete(int key, t_rline *line, t_readline *params)
 {
 	struct dirent	*entry;
 
-	if (!isatty(STDIN_FILENO))
+	if (!isatty(STDIN_FILENO) || !line->current_line)
 		return (0);
 	if (key != '\t' && key != '\n' && key != READ_FAILED)
 	{

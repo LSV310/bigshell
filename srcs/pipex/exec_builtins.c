@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 16:30:22 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 16:25:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	exec_builtins(t_list *cmdtk, t_shell *shell)
 {
 	t_cmd	*cmd;
-	int		fdin;
-	int		fdout;
 	int		builtins;
 
-	fdin = dup(STDIN_FILENO);
-	fdout = dup(STDOUT_FILENO);
+	shell->std_in = dup(STDIN_FILENO);
+	shell->std_out = dup(STDOUT_FILENO);
 	cmd = parse_cmd(cmdtk, shell->arena);
 	if (!cmd || !cmd->name)
 		return (1);
 	builtins = try_builtins(cmd, shell, NULL);
-	dup2(fdin, STDIN_FILENO);
-	dup2(fdout, STDOUT_FILENO);
-	if (fdin != 0)
-		close(fdin);
-	if (fdout != 1)
-		close(fdout);
+	dup2(shell->std_in, STDIN_FILENO);
+	dup2(shell->std_out, STDOUT_FILENO);
+	if (shell->std_in != 0)
+		close(shell->std_in);
+	if (shell->std_out != 1)
+		close(shell->std_out);
+	shell->std_in = -1;
+	shell->std_out = -1;
 	update_last_code(shell, builtins);
 	return (builtins);
 }

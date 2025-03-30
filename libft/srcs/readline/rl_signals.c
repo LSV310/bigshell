@@ -6,13 +6,13 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 00:52:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:20:23 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
- void	handle_signals(int sig)
+void	handle_signals(int sig)
 {
 	(void)sig;
 	return ;
@@ -47,7 +47,7 @@ int	rl_signal_received(int key, t_rline *line, t_readline *params)
 		params->quit_reason = RL_KILLED;
 		return (0);
 	}
-	if (line->dir)
+	if (params->autocomplete == true && line->dir)
 		closedir(line->dir);
 	if (!new_buffer(line, params))
 		return (0);

@@ -88,6 +88,7 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/ac_utils.c			\
 				readline/auto_complete.c	\
 				readline/ft_readline.c		\
 				readline/history.c			\

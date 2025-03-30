@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:49:49 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:53:10 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 16:27:46 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ void	free_minishell(t_shell *minishell)
 	{
 		close(minishell->std_in);
 		minishell->std_in = -1;
+	}
+	if (minishell->std_out != -1)
+	{
+		close(minishell->std_out);
+		minishell->std_out = -1;
 	}
 }
 

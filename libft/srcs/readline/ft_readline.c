@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:21:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 00:31:25 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:39:00 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,8 @@ int	new_buffer(t_rline *line, t_readline *params)
 	line->cursor = 0;
 	line->size = 1024;
 	line->end = 0;
-	line->tab_index = 0;
-	line->in_auto = false;
-	line->auto_type = DT_UNKNOWN;
-	ft_memset(line->searching_dir, 0, 512);
-	line->dir = NULL;
 	if (params->autocomplete == true)
-	{
-		line->searching_dir[0] = '.';
-		line->dir = opendir(line->searching_dir);
-	}
+		init_auto_complete(line);
 	line->current_line = ft_calloc(line->size, sizeof(char));
 	if (!line->current_line)
 		return (0);
@@ -51,11 +43,13 @@ static void	rl_quit(t_rline *line, t_readline *params)
 {
 	set_dfl();
 	rl_reset_signals();
+	if (!line->current_line && params->quit_reason == RL_INVALID)
+		params->quit_reason = RL_ALLOC_FAILED;
 	if (params->autocomplete == true && line->dir)
 		closedir(line->dir);
 }
 
-static int	line_too_long(t_rline *line, t_dlist **history)
+int	line_too_long(t_rline *line, t_dlist **history)
 {
 	t_dlist	*line_history;
 

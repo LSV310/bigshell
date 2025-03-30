@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 00:31:28 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:29:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,8 @@ typedef enum rl_quit_reason
 	RL_INVALID,
 	RL_SUCCESS,
 	RL_FINISHED,
-	RL_KILLED
+	RL_KILLED,
+	RL_ALLOC_FAILED
 }	t_rlqreason;
 
 typedef struct s_rline
@@ -211,6 +212,7 @@ void	set_dfl(void);
 int		read_key(void);
 int		reset_line(t_rline *line);
 void	write_x_times(char *buff, char c, size_t times);
+int		line_too_long(t_rline *line, t_dlist **history);
 int		printkey(int key, t_rline *line, t_readline *params);
 int		eof_received(t_rline *line, t_readline *params);
 void	back_space(t_rline *line);
@@ -225,6 +227,8 @@ char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
 int		auto_complete(int key, t_rline *line, t_readline *params);
+void	init_auto_complete(t_rline *line);
+int		expand_current(int key, t_rline *line, t_readline *params);
 void	rl_init_signals(void);
 void	rl_reset_signals(void);
 
