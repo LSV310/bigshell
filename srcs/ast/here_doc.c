@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/31 16:41:27 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/31 17:20:29 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 		free(line);
 		line = ft_readline(&rl_params);
 	}
-	if (!line && rl_params.quit_reason == RL_SUCCESS)
+	if (!line && rl_params.quit_reason == RL_FINISHED)
 	{
 		ft_fprintf(2, "warning: here-document delimited by end-of-file");
 		ft_fprintf(2, "(wanted `%s')\n", delim);
