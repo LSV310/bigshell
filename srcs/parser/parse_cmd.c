@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/28 03:18:50 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/31 16:51:12 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	cmd_args_alloc(t_cmd *cmd, t_list *tks, t_arena *arena)
 	return (1);
 }
 
-void	replace_fd(int fd, t_cmd *cmd, bool is_in, t_token_type tok_type)
+void	replace_fd(int fd, t_cmd *cmd, bool is_in)
 {
 	if (is_in)
 	{
@@ -61,8 +61,7 @@ void	replace_fd(int fd, t_cmd *cmd, bool is_in, t_token_type tok_type)
 		if (fd >= 0)
 		{
 			dup2(fd, STDIN_FILENO);
-			if (tok_type != HEREDOC)
-				close(fd);
+			close(fd);
 		}
 	}
 	else
@@ -79,17 +78,17 @@ void	replace_fd(int fd, t_cmd *cmd, bool is_in, t_token_type tok_type)
 int	in_out_token(t_token *tok, t_cmd *cmd)
 {
 	if (tok->type == REDIN)
-		replace_fd(open(tok->str, O_RDONLY), cmd, true, tok->type);
+		replace_fd(open(tok->str, O_RDONLY), cmd, true);
 	else if (tok->type == REDOUT)
 		replace_fd(
 			open(tok->str, O_TRUNC | O_CREAT | O_WRONLY, 0644),
-			cmd, false, tok->type);
+			cmd, false);
 	else if (tok->type == HEREDOC)
-		replace_fd(ft_atoi(tok->str), cmd, true, tok->type);
+		replace_fd(ft_atoi(tok->str), cmd, true);
 	else if (tok->type == APPEN)
 		replace_fd(
 			open(tok->str, O_APPEND | O_CREAT | O_WRONLY, 0644),
-			cmd, false, tok->type);
+			cmd, false);
 	if (cmd->fdout == -1 || cmd->fdin == -1)
 		return (0);
 	return (1);
