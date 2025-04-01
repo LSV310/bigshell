@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:17:31 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 01:15:35 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/01 13:44:58 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_prompt(t_map *env)
 	cwd = get_relative_cwd(env);
 	if (!cwd)
 		return (NULL);
-	join = ft_strjoin("\e[0;35m", cwd);
+	join = ft_strjoin("\e[1;35m", cwd);
 	free(cwd);
 	if (!join)
 		return (NULL);

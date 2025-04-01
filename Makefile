@@ -57,22 +57,26 @@ NAME		= minishell
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@printf "                          \r\e[1;35mMinishell Compiled\e[0m\n"
 
 $(LIBFT):
-	make -sC $(LIBFT_DIR)
+	@make -sC $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\e[1;32mCompiling %s\e[0m" $(notdir $<)
+	@printf "                                            \r"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@printf "\e[1;36mCleaning files\e[0m\n"
+	@rm -rf $(OBJ_DIR)
 	@make clean -sC $(LIBFT_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
-	make fclean -sC $(LIBFT_DIR)
+	@rm -rf $(NAME)
+	@make fclean -sC $(LIBFT_DIR)
 
 re: fclean all
 

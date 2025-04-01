@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/31 16:19:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/01 13:44:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_input(t_shell *minishell, t_readline *params)
 	prompt = get_prompt(minishell->env);
 	params->prompt = prompt;
 	if (!prompt)
-		params->prompt = "\e[0;35m$ \e[0m";
+		params->prompt = "\e[1;35m$ \e[0m";
 	minishell->input = ft_readline(params);
 	while (params->quit_reason == RL_KILLED && !minishell->input)
 	{

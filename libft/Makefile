@@ -104,15 +104,17 @@ OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= libft.a
 
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
+	@printf "                          \r\e[1;32mLibft Compiled\e[0m\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@printf "\e[1;32mCompiling %s\e[0m" $(notdir $<)
+	@printf "                                            \r"
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
