@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:19:49 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/03 18:52:22 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ size_t	size_envar(const char *cur, size_t *i, t_shell *shell)
 	{
 		(*i)++;
 		n++;
+	}
+	if (n == 0 && cur[*i] == '?')
+	{
+		n++;
+		(*i)++;
 	}
 	if (!n && (!cur[*i] || cur[*i] == '*'))
 		return (1);
@@ -45,6 +50,11 @@ size_t	write_envar(char *dst_p, char const *endest,
 	{
 		*src_p += 1;
 		n++;
+	}
+	if (n == 0 && **src_p == '?')
+	{
+		n++;
+		*src_p += 1;
 	}
 	if (!n && (!**src_p || **src_p == '*'))
 		return (ft_memmove(dst_p, "$", 1), 1);
