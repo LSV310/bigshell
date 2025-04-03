@@ -1,8 +1,0 @@
-✔ allocate cmd into arena @done (3/21/2025, 1:07:14 PM)
-✔ function to reset arena after each command @done (3/21/2025, 1:07:13 PM)
-✔ AST exec @done (3/21/2025, 1:21:15 PM)
-✔ handle dollar without anything after @done (3/21/2025, 6:06:39 PM)
-☐ Heredocs
-    ☐ variable expension
-    ☐ quote cases
-☐ /dev/full

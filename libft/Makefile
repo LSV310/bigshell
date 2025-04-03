@@ -1,6 +1,6 @@
 AR			= ar rcs
 CC			= cc
-CFLAGS		= -ggdb #-Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -ggdb
 
 INLCUDES	= includes/
 SRC_DIR		= srcs/
@@ -45,6 +45,7 @@ SRC			=	libc/ft_atoi.c				\
 				libc/ft_strncmp.c			\
 				libc/ft_strnstr.c			\
 				libc/ft_strrchr.c			\
+				libc/ft_strrncmp.c			\
 				libc/ft_strrcmp.c			\
 				libc/ft_strstr_tab.c		\
 				libc/ft_strtrim.c			\
@@ -87,10 +88,13 @@ SRC			=	libc/ft_atoi.c				\
 				maths/max.c					\
 				maths/min.c					\
 				maths/q_rsqrt.c				\
+				readline/ac_utils.c			\
+				readline/auto_complete.c	\
 				readline/ft_readline.c		\
 				readline/history.c			\
 				readline/keys.c				\
 				readline/keys2.c			\
+				readline/keys3.c			\
 				readline/rl_signals.c		\
 				readline/rl_utils.c			\
 				readline/terminal.c			\
@@ -100,15 +104,17 @@ OBJ			= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 
 NAME		= libft.a
 
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
+	@printf "                          \r\e[1;32mLibft Compiled\e[0m\n"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@printf "\e[1;32mCompiling %s\e[0m" $(notdir $<)
+	@printf "                                            \r"
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

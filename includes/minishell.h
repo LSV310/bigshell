@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 20:34:41 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/30 16:20:24 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_shell
 	t_arena	*arena;
 	char	*input;
 	int		std_in;
+	int		std_out;
 }	t_shell;
 
 // builtins
@@ -63,30 +64,30 @@ t_list	*str_to_name_tks(const char *src, t_arena *arena);
 void	lst_insert(t_list *dest, t_list *to_insert);
 int		expand_lst_token(t_list **tks, t_shell *shell);
 bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell);
-bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell);
-t_shell	*test_env(void);
+bool	expand_redt(t_list *cur, t_shell *shell);
 t_ast	*parse_expr(t_list **tokens, t_arena *arena);
 t_ast	*build_ast(t_list *tks, t_shell *shell);
 bool	exec_ast(t_ast *ast, t_shell *shell);
-bool	advance_token(t_list **tokens);
+t_token	*advance_token(t_list **tokens);
 
 // pipex
 int		pipex(t_list **tks, t_shell *shell);
-int		try_builtins(t_cmd *cmd, t_shell *shell);
+int		try_builtins(t_cmd *cmd, t_shell *shell, char **env);
 t_cmd	*parse_cmd(t_list *tks, t_arena *arena);
 t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena);
 
 // signals
-void	create_signals(void);
+void	set_signals(void);
 void	child_signal(void);
 
 // utils
 void	free_minishell(t_shell *minishell);
+char	*get_prompt(t_map *env);
 int		check_first_arg(t_map *env, char **args, int *exit_code);
-bool	var_name_valid(char *var);
+bool	var_name_valid(char *var, int *index, int *exit_code);
 char	*toktype_to_string(t_token_type type);
-void	print_pipeline(t_list **pipeline);
 int		here_doc(char *delimiter, bool expand, t_shell *env);
 bool	token_heredoc(t_token *tok, t_shell *shell);
+void	close_heredocs(t_list *tks);
 
 #endif

@@ -6,29 +6,31 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:44:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 20:33:59 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:09:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	advance_token(t_list **tokens)
+t_token	*advance_token(t_list **tokens)
 {
 	t_token	*tok;
 
-	tok = (*tokens)->content;
 	*tokens = (*tokens)->next;
 	tok = (*tokens)->content;
 	if (*tokens)
 	{
 		tok = (*tokens)->content;
 		if (tok->type == ENDT)
-			return (false);
+			return (NULL);
 		else
-			return (true);
+			return (tok);
 	}
 	else
-		return (false);
+	{
+		ft_putstr_fd("parsing error: NULL token\n", STDERR_FILENO);
+		return (NULL);
+	}
 }
 
 bool	exec_ast(t_ast *ast, t_shell *shell)

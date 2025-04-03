@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:51:53 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 18:11:37 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:21:40 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*process_wildcard(t_token *tok, char *res, t_shell *shell)
+char	*process_wildcard(t_token *tok, char *res)
 {
 	char	*wild;
 	char	*new_res;
@@ -29,7 +29,7 @@ char	*process_wildcard(t_token *tok, char *res, t_shell *shell)
 	return (new_res);
 }
 
-char	*name_wild(t_lexer lex, t_shell *shell)
+char	*name_wild(t_lexer lex)
 {
 	t_token	tok;
 	char	*res;
@@ -47,7 +47,7 @@ char	*name_wild(t_lexer lex, t_shell *shell)
 			free(tok.str);
 			break ;
 		}
-		res = process_wildcard(&tok, res, shell);
+		res = process_wildcard(&tok, res);
 	}
 	free((char *)lex.start);
 	return (res);
@@ -62,7 +62,7 @@ bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell)
 
 	tok = (*cur)->content;
 	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
-	res = name_wild(init_lexer(res), shell);
+	res = name_wild(init_lexer(res));
 	new_tks = str_to_name_tks(res, shell->arena);
 	if (new_tks)
 	{
@@ -78,7 +78,7 @@ bool	expand_namet(t_list **cur, t_list **tks, t_shell *shell)
 	return (true);
 }
 
-char	*red_wild(char *src, t_shell *shell, t_token_type t_type)
+char	*red_wild(char *src)
 {
 	char	*res;
 
@@ -92,15 +92,14 @@ char	*red_wild(char *src, t_shell *shell, t_token_type t_type)
 	return (res);
 }
 
-bool	expand_redt(t_list *cur, t_list *tks, t_shell *shell)
+bool	expand_redt(t_list *cur, t_shell *shell)
 {
 	char	*res;
 	t_token	*tok;
-	t_list	*new_tks;
 
 	tok = cur->content;
 	res = env_exp(ft_substr(tok->p, 0, tok->len), shell);
-	res = red_wild(res, shell, tok->type);
+	res = red_wild(res);
 	if (!res)
 		return (false);
 	tok->p = res;

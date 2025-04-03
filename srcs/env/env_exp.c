@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:37:05 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/24 21:19:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	size_envar(const char *cur, int *i, t_shell *shell)
+size_t	size_envar(const char *cur, size_t *i, t_shell *shell)
 {
 	size_t		len;
 	size_t		n;
@@ -35,7 +35,6 @@ size_t	size_envar(const char *cur, int *i, t_shell *shell)
 size_t	write_envar(char *dst_p, char const *endest,
 	const char **src_p, t_shell *shell)
 {
-	size_t		len;
 	size_t		n;
 	const char	*envar;
 	size_t		envar_len;
@@ -83,7 +82,7 @@ void	fill_expanded(const char *src, char *dest,
 size_t	sizeof_expand(char *str, t_shell *env)
 {
 	size_t			n;
-	int				i;
+	size_t			i;
 	char			quote;
 	const size_t	strlen = ft_strlen(str);
 

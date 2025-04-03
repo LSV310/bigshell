@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:45:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:29:06 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,29 @@
 # include <termios.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <dirent.h>
 
+// Bases
 # define BASE_10 "0123456789"
 # define BASE_16L "0123456789abcdef"
 # define BASE_16U "0123456789ABCDEF"
+
+// Readline keys
+# define READ_FAILED -1
+# define FINISH_READING -2
+# define INVALID_SEQ -3
+# define ESC 27
+# define EOF_K 4
+# define UARROW -12
+# define DARROW -13
+# define RARROW -14
+# define LARROW -15
+# define HOME -16
+# define END -17
+# define DEL -18
+# define CR_ARROW -19
+# define CL_ARROW -20
+# define DEL_K 127
 
 // libc functions
 int		ft_isalpha(int c);
@@ -46,6 +65,7 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strrcmp(const char *s1, const char *s2);
+int		ft_strrncmp(const char *s1, const char *s2, int n);
 int		ft_str_equals(const char *s1, const char *s2);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -151,38 +171,64 @@ void	map_remove_node(t_map **map, t_map *node);
 size_t	ft_mapsize(t_map *map);
 
 // readline
+typedef enum rl_quit_reason
+{
+	RL_INVALID,
+	RL_SUCCESS,
+	RL_FINISHED,
+	RL_KILLED,
+	RL_ALLOC_FAILED
+}	t_rlqreason;
+
+typedef struct s_rline
+{
+	char			*current_line;
+	size_t			size;
+	size_t			cursor;
+	size_t			end;
+	DIR				*dir;
+	char			searching_dir[512];
+	size_t			tab_index;
+	unsigned char	auto_type;
+	bool			in_auto;
+}	t_rline;
+
 typedef struct s_readline
 {
-	char	*current_line;
-	char	*prompt;
-	size_t	size;
-	size_t	cursor;
-	size_t	end;
-	bool	sigint_nl;
+	char		*prompt;
+	t_dlist		**history;
+	bool		sigint_nl;
+	bool		autocomplete;
+	t_rlqreason	quit_reason;
 }	t_readline;
 
-extern volatile int	g_sig;
-
-char	*ft_readline(char *prompt, t_dlist **history, bool use_signals);
-int		new_buffer(t_readline *line, t_dlist **history, bool sigint,
-			char *prompt);
-int		rl_signal_received(t_readline *line, t_dlist **history, char *prompt);
-void	clear_line(t_readline *line, t_dlist **history, int current);
+char	*ft_readline(t_readline *params);
+void	init_readline_params(t_readline *params);
+int		new_buffer(t_rline *line, t_readline *params);
+int		rl_signal_received(int key, t_rline *line, t_readline *params);
+void	clear_line(t_rline *line, t_dlist **history, bool free_current);
 void	set_raw(void);
 void	set_dfl(void);
 int		read_key(void);
-int		reset_line(t_readline *line, char *prompt);
+int		reset_line(t_rline *line);
 void	write_x_times(char *buff, char c, size_t times);
-int		printkey(int key, t_readline *line);
-void	back_space(t_readline *line);
-int		other_key(int key, t_readline *line, char *prompt, t_dlist **hist);
-int		up_arrow(t_readline *line, t_dlist **history, char *prompt);
-int		down_arrow(t_readline *line, t_dlist **history, char *prompt);
-void	home_key(t_readline *line);
-void	end_key(t_readline *line);
+int		line_too_long(t_rline *line, t_dlist **history);
+int		printkey(int key, t_rline *line, t_readline *params);
+int		eof_received(t_rline *line, t_readline *params);
+void	back_space(t_rline *line);
+int		other_key(int key, t_rline *line, t_readline *params);
+int		up_arrow(t_rline *line, t_dlist **history);
+int		down_arrow(t_rline *line, t_dlist **history);
+void	home_key(t_rline *line);
+void	end_key(t_rline *line);
+void	move_key(t_rline *line, int key);
+void	move_word(t_rline *line, int key);
 char	*history_up(t_dlist **history);
 char	*history_down(t_dlist **history);
 int		cmd_add_history(t_dlist **history, char *cmd);
+int		auto_complete(int key, t_rline *line, t_readline *params);
+void	init_auto_complete(t_rline *line);
+int		expand_current(int key, t_rline *line, t_readline *params);
 void	rl_init_signals(void);
 void	rl_reset_signals(void);
 

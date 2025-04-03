@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:46:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/11 13:26:19 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:17:26 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WILDCARDS_H
 
 # include "minishell.h"
-# include <dirent.h>
 
 typedef enum WILDCARD
 {

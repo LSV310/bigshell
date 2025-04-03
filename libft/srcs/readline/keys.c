@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 19:17:30 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:32:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	printkey(int key, t_readline *line)
+int	printkey(int key, t_rline *line, t_readline *params)
 {
 	size_t	len;
 	char	*temp;
 
 	if (key == '\n')
+	{
+		params->quit_reason = RL_SUCCESS;
 		return (1);
-	if ((key == '\t' || key == '\f') && isatty(STDIN_FILENO))
+	}
+	if ((key == '\f' || key == '\t') && isatty(STDIN_FILENO))
 		return (0);
 	write(STDIN_FILENO, &key, 1);
 	len = ft_strlen(line->current_line + line->cursor);
@@ -29,29 +32,28 @@ int	printkey(int key, t_readline *line)
 			line->current_line + line->cursor, len);
 		ft_fprintf(0, "%s", line->current_line + line->cursor + 1);
 		temp = ft_strdup(line->current_line);
-		write_x_times(temp, '\b', len);
-		free(temp);
+		(write_x_times(temp, '\b', len), free(temp));
 	}
 	line->current_line[line->cursor++] = key;
 	line->end++;
 	return (0);
 }
 
-static void	move_key(t_readline *line, int key)
+void	move_key(t_rline*line, int key)
 {
-	if (key == -14 && line->cursor < line->end)
+	if (key == RARROW && line->cursor < line->end)
 	{
-		ft_fprintf(0, "%c", line->current_line[line->cursor]);
+		ft_fprintf(0, "\033[C");
 		line->cursor++;
 	}
-	else if (key == -15 && line->cursor > 0)
+	else if (key == LARROW && line->cursor > 0)
 	{
+		ft_fprintf(0, "\033[D");
 		line->cursor--;
-		ft_fprintf(0, "\b");
 	}
 }
 
-void	back_space(t_readline *line)
+void	back_space(t_rline*line)
 {
 	size_t	len;
 	char	*temp;
@@ -76,7 +78,7 @@ void	back_space(t_readline *line)
 	line->current_line[line->end] = '\0';
 }
 
-void	del_key(t_readline *line)
+void	del_key(t_rline*line)
 {
 	if (line->cursor == line->end)
 		return ;
@@ -84,30 +86,27 @@ void	del_key(t_readline *line)
 	back_space(line);
 }
 
-int	other_key(int key, t_readline *line, char *prompt, t_dlist **history)
+int	other_key(int key, t_rline *line, t_readline *params)
 {
-	if (key == 4 && line->end == 0)
-	{
-		write(0, "\n", 1);
-		ft_printf("exit\n");
-		clear_line(line, history, 1);
-		return (0);
-	}
-	else if (key == -1 && !rl_signal_received(line, history, prompt))
-		return (0);
-	else if (key == 127)
+	if (key == EOF_K && line->end == 0)
+		return (eof_received(line, params));
+	else if (key == READ_FAILED || key == FINISH_READING)
+		return (rl_signal_received(key, line, params));
+	else if (key == DEL_K)
 		back_space(line);
-	else if (history && key == -12 && !up_arrow(line, history, prompt))
-		return (0);
-	else if (history && key == -13 && !down_arrow(line, history, prompt))
-		return (0);
-	else if (key == -14 || key == -15)
+	else if (key == UARROW && params->history)
+		return (up_arrow(line, params->history));
+	else if (key == DARROW && params->history)
+		return (down_arrow(line, params->history));
+	else if (key == RARROW || key == LARROW)
 		move_key(line, key);
-	else if (key == -16)
+	else if (key == HOME)
 		home_key(line);
-	else if (key == -17)
+	else if (key == END)
 		end_key(line);
-	else if (key == -18 || key == 4)
+	else if (key == DEL || key == EOF_K)
 		del_key(line);
+	else if (key == CL_ARROW || key == CR_ARROW)
+		move_word(line, key);
 	return (1);
 }

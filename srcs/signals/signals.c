@@ -6,26 +6,30 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 16:06:02 by agruet           ###   ########.fr       */
+/*   Updated: 2025/03/30 01:01:28 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	create_signals(void)
+static void	handle(int sig)
 {
-	struct sigaction	sa;
+	if (sig == SIGQUIT)
+		ft_printf("Quit (core dumped)");
+	ft_printf("\n");
+	return ;
+}
 
-	init_sighandler(&sa, SIG_IGN);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+void	set_signals(void)
+{
+	signal(SIGINT, &handle);
+	signal(SIGQUIT, &handle);
+	signal(SIGPIPE, &handle);
 }
 
 void	child_signal(void)
 {
-	struct sigaction	sa;
-
-	init_sighandler(&sa, SIG_DFL);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
 }
