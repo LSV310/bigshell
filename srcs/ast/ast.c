@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/31 17:44:11 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:27:21 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ t_ast	*build_ast(t_list *tks, t_shell *shell)
 		return (NULL);
 	tok = tks->content;
 	if (tok->type == ENDT)
-		return (create_node(ND_NULL, NULL,
-			shell->arena, (t_ast *[2]){NULL, NULL}));
+		return (NULL);
 	root = parse_expr(&tks, shell->arena);
 	tok = tks->content;
 	if (!root)
