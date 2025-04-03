@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 15:29:06 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/01 15:58:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ void	ft_dlst_shift_up(t_dlist **lst, t_dlist *node);
 void	ft_dlst_shift_down(t_dlist **lst, t_dlist *node);
 t_dlist	*ft_strstr_dlst(t_dlist *lst, char *str);
 void	ft_dlstprint(t_dlist *lst);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // maps
 typedef struct s_map
