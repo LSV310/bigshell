@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/03 16:17:23 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:14:45 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		close(shell->std_in);
 	shell->std_in = -1;
 	execve(cmd_name, cmd->args, env);
-	if (errno == 13)
+	ft_fprintf(2, "%d\n", errno);
+	if (errno == 8)
 		return (perror(cmd_name), (free_tab(env, 0), exit2(shell, 127, NULL)));
 	return ((free_tab(env, 0), exit2(shell, EXIT_SUCCESS, NULL)));
 }

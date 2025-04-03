@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:44:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 02:09:10 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:21:53 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ t_token	*advance_token(t_list **tokens)
 
 bool	exec_ast(t_ast *ast, t_shell *shell)
 {
+	if (!ast)
+		return (false);
 	if (ast->type == ND_CMD)
 		return (!pipex(ast->cmds, shell));
-	if (ast->type == ND_OR)
+	else if (ast->type == ND_OR)
 		return (exec_ast(ast->left, shell) || exec_ast(ast->right, shell));
 	else if (ast->type == ND_AND)
 		return (exec_ast(ast->left, shell) && exec_ast(ast->right, shell));
