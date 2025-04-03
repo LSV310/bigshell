@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 00:31:09 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/03 16:17:23 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 	dup2(pipefd[1], STDOUT_FILENO);
 	(close(pipefd[0]), close(pipefd[1]));
 	cmd = parse_cmd(cmdtk, shell->arena);
+	close_heredocs(shell->tk_head);
 	cmd_name = get_cmd_name(cmd, shell, env);
 	if (shell->std_in)
 		close(shell->std_in);
