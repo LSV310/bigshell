@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:30:39 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/24 18:22:21 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:15:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,7 @@ bool	var_name_valid(char *var, int *index, int *exit_code)
 
 	i = 0;
 	if (!ft_isalpha(var[i]) && var[i] != '_')
-	{
-		*exit_code = 1;
-		(*index)++;
-		ft_fprintf(2, "export: `%s': not a valid identifier\n", var);
 		return (false);
-	}
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')

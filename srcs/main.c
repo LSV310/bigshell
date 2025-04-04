@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/01 13:44:10 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/03 16:20:19 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,23 @@ char	*get_input(t_shell *minishell, t_readline *params)
 
 bool	exec_input(t_shell *shell)
 {
-	t_list	*tks;
 	t_ast	*ast;
 
-	tks = make_tokens(shell->input, shell);
-	if (!tks)
+	shell->tk_head = make_tokens(shell->input, shell);
+	if (!shell->tk_head)
 		return (modify_var(shell->env, "2"), false);
-	ast = build_ast(tks, shell);
+	ast = build_ast(shell->tk_head, shell);
 	if (!ast)
 	{
-		close_heredocs(tks);
+		close_heredocs(shell->tk_head);
 		return (modify_var(shell->env, "2"), false);
 	}
 	if (!exec_ast(ast, shell))
 	{
-		close_heredocs(tks);
+		close_heredocs(shell->tk_head);
 		return (false);
 	}
-	close_heredocs(tks);
+	close_heredocs(shell->tk_head);
 	return (true);
 }
 
@@ -83,7 +82,7 @@ int	main(void)
 	init_readline_params(&rl_params);
 	rl_params.history = &minishell.history;
 	rl_params.autocomplete = true;
-	while (1)
+	while (minishell.arena)
 	{
 		if (!get_input(&minishell, &rl_params))
 			break ;
@@ -91,6 +90,7 @@ int	main(void)
 		exec_input(&minishell);
 		reset_arena(&minishell.arena);
 		free(minishell.input);
+		minishell.tk_head = NULL;
 		minishell.input = NULL;
 	}
 	exit2(&minishell, 0, NULL);
