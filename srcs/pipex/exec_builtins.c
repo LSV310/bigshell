@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:11:37 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 16:25:19 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/04 11:12:35 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	try_builtins(t_cmd *cmd, t_shell *shell, char **env)
 	if (!ft_strcmp(cmd->name, "exit"))
 	{
 		free_tab(env, 0);
-		return (exit2(shell, EXIT_SUCCESS, &cmd->args[1]));
+		return (exit2(shell, ft_atoi(shell->env->value), &cmd->args[1]));
 	}
 	return (-1);
 }

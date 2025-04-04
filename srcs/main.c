@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/03 16:20:19 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/04 11:09:22 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int	main(void)
 		minishell.tk_head = NULL;
 		minishell.input = NULL;
 	}
-	exit2(&minishell, 0, NULL);
+	exit2(&minishell, ft_atoi(minishell.env->value), NULL);
 	return (EXIT_SUCCESS);
 }

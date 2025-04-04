@@ -65,7 +65,7 @@ $(LIBFT):
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	@printf "\e[1;32mCompiling %s\e[0m" $(notdir $<)
+	@printf "\e[1;35mCompiling %s\e[0m" $(notdir $<)
 	@printf "                                            \r"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
