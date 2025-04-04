@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/03 17:25:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:25:32 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ static pid_t	exec_cmd(t_list *cmdtk, int *pipefd, t_shell *shell, char **env)
 		close(shell->std_in);
 	shell->std_in = -1;
 	execve(cmd_name, cmd->args, env);
-	if (errno == 13)
-		return (perror(cmd_name), (free_tab(env, 0), exit2(shell, 127, NULL)));
-	return ((free_tab(env, 0), exit2(shell, EXIT_SUCCESS, NULL)));
+	free_tab(env, 0);
+	if (errno == ENOEXEC)
+		return (exit2(shell, EXIT_SUCCESS, NULL));
+	perror(cmd_name);
+	return (exit2(shell, 126, NULL));
 }
 
 char	**init_pipex(t_shell *shell, int *pipefd)
