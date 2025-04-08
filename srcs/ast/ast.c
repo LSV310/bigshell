@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/08 15:41:26 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:44:49 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ t_ast	*parse_par(t_list **tokens, t_arena *arena)
 	if (!advance_token(tokens))
 		return (NULL);
 	ret = parse_expr(tokens, arena);
+	if (!ret)
+		return (NULL);
 	tok = (**tokens).content;
 	if (tok->type != RPAR)
 	{
 		ft_putstr_fd("syntax error: \
-			 expected right parenthesis\n", 2);
+expected right parenthesis\n", 2);
 		return (NULL);
 	}
 	advance_token(tokens);
