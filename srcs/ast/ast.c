@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/03 17:27:21 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:41:26 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ t_ast	*parse_something(t_list **tokens, t_arena *arena)
 	else if (is_cmd_token(tok))
 		return (create_node(ND_CMD, tokens, arena, (t_ast *[2]){NULL, NULL}));
 	else
-	{
-		ft_fprintf(2, "syntax error near \'%s\'\n", tok->str);
 		return (NULL);
-	}
 }
 
 t_ast	*parse_expr(t_list **tokens, t_arena *arena)
@@ -84,7 +81,7 @@ t_ast	*parse_expr(t_list **tokens, t_arena *arena)
 	t_ast	*right;
 
 	left = parse_something(tokens, arena);
-	while (tokens && *tokens && (**tokens).content)
+	while (tokens && *tokens && (**tokens).content && left)
 	{
 		tok = (**tokens).content;
 		if (tok->type == ANDT || tok->type == ORT)
@@ -116,11 +113,10 @@ t_ast	*build_ast(t_list *tks, t_shell *shell)
 		return (NULL);
 	root = parse_expr(&tks, shell->arena);
 	tok = tks->content;
-	if (!root)
-		ft_putstr_fd("Syntax error !\n", STDERR_FILENO);
-	if (tok->type != ENDT)
+	if (!tks || !tks->content || !root
+		|| ((t_token *)tks->content)->type != ENDT)
 	{
-		ft_fprintf(2, "Syntax error near `%s'\n", tok->str);
+		ft_fprintf(2, "Syntax error !\n");
 		modify_var(shell->env, "2");
 	}
 	return (root);
