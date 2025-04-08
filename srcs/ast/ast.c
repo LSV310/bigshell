@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 23:41:03 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/08 15:44:49 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:12:06 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,14 @@
 t_ast	*create_node(t_node_type type,
 	t_list **tokens, t_arena *arena, t_ast *childs[2])
 {
-	t_list	**commands;
 	t_ast	*node;
 
-	if (tokens)
-	{
-		commands = ptr_arr_pipeline(*tokens, arena);
-		if (!commands)
-		{
-			ft_putstr_fd("syntax error in pipeline\n", 2);
-			return (NULL);
-		}
-		skip_pipeline(tokens);
-	}
-	else
-		commands = NULL;
-	node = arena_alloc(sizeof(t_ast), arena);
+	node = arena_calloc(arena, sizeof(t_ast));
 	if (!node)
 		return (NULL);
 	node->type = type;
-	node->cmds = commands;
+	if (!tokens_to_pipeline(tokens, arena, node))
+		return (NULL);
 	node->left = childs[0];
 	node->right = childs[1];
 	return (node);
