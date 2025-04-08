@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:49 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/08 16:57:38 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:08:24 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ bool	valid_pipeline(t_list *tks, bool after_pipe)
 t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena)
 {
 	t_list	*ptrs;
+	t_token	*tk;
 
 	ptrs = NULL;
+	while (tks && tks->content && !is_cmd_token(tks->content))
+		tks = tks->next;
 	while (tks && tks->content && ((t_token *)tks->content)->type != ENDT)
 	{
 		if (tks && (!ptrs || (tks->content != ft_lstlast(ptrs)->content))
@@ -68,7 +71,8 @@ t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena)
 			ft_lstadd_back(&ptrs, ar_lstnew(tks, arena));
 		while (tks && tks->content && is_cmd_token(tks->content))
 			tks = tks->next;
-		if (!tks || !tks->content || (*(t_token *) tks->content).type != PIPE)
+		tk = tks->content;
+		if (!tk || tk->type != PIPE)
 			break ;
 		else
 			tks = tks->next;
