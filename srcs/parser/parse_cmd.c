@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/08 15:35:22 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/09 12:47:29 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 			cmd, false);
 	if (cmd->fdout == -1 || cmd->fdin == -1)
 	{
-		ft_putstr_fd("redirection error !\n", STDERR_FILENO);
+		perror(tok->str);
 		return (0);
 	}
 	return (1);
