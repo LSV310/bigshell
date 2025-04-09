@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/03 18:52:22 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:40:28 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	size_envar(const char *cur, size_t *i, t_shell *shell)
 		n++;
 		(*i)++;
 	}
-	if (!n && (!cur[*i] || cur[*i] == '*'))
+	if (!n)
 		return (1);
 	envar = get_env_value(shell->env, cur + *i - n, n);
 	len = ft_strlen(envar);
@@ -56,7 +56,7 @@ size_t	write_envar(char *dst_p, char const *endest,
 		n++;
 		*src_p += 1;
 	}
-	if (!n && (!**src_p || **src_p == '*'))
+	if (!n)
 		return (ft_memmove(dst_p, "$", 1), 1);
 	envar = get_env_value(shell->env, *src_p - n, n);
 	envar_len = ft_strlen(envar);
