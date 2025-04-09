@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:49 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 20:39:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:11:09 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ void	**flaten_tlistp(t_list *lst, t_arena *arena)
 	}
 	ft_lstclear(&lst, void_content);
 	return (ptrs);
+}
+
+t_list	*skip_cmd(t_list *tks)
+{
+	while (tks && tks->content && is_cmd_token(tks->content))
+		tks = tks->next;
+	return (tks);
+}
+
+bool	valid_pipeline(t_list *tks, bool after_pipe)
+{
+	t_token	*tk;
+
+	if (!tks)
+		return (false);
+	tk = tks->content;
+	if (is_cmd_token(tk))
+		return (valid_pipeline(skip_cmd(tks), false));
+	else if (tk->type == PIPE)
+		return (valid_pipeline(tks->next, true));
+	else
+		return (!after_pipe);
 }
 
 t_list	**ptr_arr_pipeline(t_list *tks, t_arena *arena)

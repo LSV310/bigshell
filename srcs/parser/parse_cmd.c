@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:31 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/31 16:51:12 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:35:22 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int	in_out_token(t_token *tok, t_cmd *cmd)
 			open(tok->str, O_APPEND | O_CREAT | O_WRONLY, 0644),
 			cmd, false);
 	if (cmd->fdout == -1 || cmd->fdin == -1)
+	{
+		ft_putstr_fd("redirection error !\n", STDERR_FILENO);
 		return (0);
+	}
 	return (1);
 }
 

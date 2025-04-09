@@ -6,11 +6,28 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:27:21 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/06 19:28:19 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:10:36 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+bool	tokens_to_pipeline(t_list **tks, t_arena *arena, t_ast *node)
+{
+	if (!tks)
+	{
+		node->cmds = NULL;
+		return (true);
+	}
+	if (is_cmd_token((**tks).content) && valid_pipeline(*tks, false))
+	{
+		node->cmds = ptr_arr_pipeline(*tks, arena);
+		skip_pipeline(tks);
+		return (true);
+	}
+	else
+		return (false);
+}
 
 int	count_cmd(t_list *tks)
 {

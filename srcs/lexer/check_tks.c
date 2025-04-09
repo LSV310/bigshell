@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:54:02 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:08:45 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/08 15:17:36 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ bool	valid_tks(t_list *tks)
 
 bool	check_tks(t_list *tks)
 {
-	if (!valid_tks(tks) || !valid_par(tks))
+	if (!valid_tks(tks))
 		return (false);
+	if (!valid_par(tks))
+	{
+		ft_putstr_fd("Parenthesis error !\n", 2);
+		return (false);
+	}
 	return (true);
 }
