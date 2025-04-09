@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 10:44:29 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/04 11:18:31 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:16:21 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ bool	exec_input(t_shell *shell)
 
 	shell->tk_head = make_tokens(shell->input, shell);
 	if (!shell->tk_head)
-		return (modify_var(shell->env, "2"), false);
+	{
+		modify_var(shell->env, "2");
+		return (false);
+	}
 	ast = build_ast(shell->tk_head, shell);
 	if (!ast)
 	{
 		close_heredocs(shell->tk_head);
-		return (modify_var(shell->env, "2"), false);
+		return (false);
 	}
 	if (!exec_ast(ast, shell))
 	{

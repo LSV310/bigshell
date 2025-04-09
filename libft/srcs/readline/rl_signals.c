@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 15:20:23 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:11:17 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	rl_signal_received(int key, t_rline *line, t_readline *params)
 	clear_line(line, params->history, true);
 	if (params->sigint_nl == false)
 	{
-		ft_printf("\n");
+		ft_fprintf(0, "\n");
 		params->quit_reason = RL_KILLED;
 		return (0);
 	}
