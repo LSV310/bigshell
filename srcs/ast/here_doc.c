@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/03 16:58:46 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:02:55 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 	char		*line;
 	t_dlist		*history;
 	t_readline	rl_params;
+	size_t		size;
 
 	history = NULL;
 	init_readline_params(&rl_params);
 	rl_params.history = &history;
 	rl_params.prompt = "> ";
 	line = ft_readline(&rl_params);
-	while (line && ft_strcmp(line, delim) != 0)
+	size = ft_strlen(line);
+	while (line && ft_strcmp(line, delim) != 0 && size < 60000)
 	{
 		if (expand)
 			line = env_exp(line, shell);
-		write(to_write, line, ft_strlen(line));
-		write(to_write, "\n", 1);
+		ft_fprintf(to_write, "%s\n", line);
 		free(line);
 		line = ft_readline(&rl_params);
+		size += ft_strlen(line);
 	}
 	if (!line && rl_params.quit_reason == RL_FINISHED)
 		ft_fprintf(2, "warning: here-document delimited by end-of-file \

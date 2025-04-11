@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:28:41 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/04 16:25:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/11 14:28:49 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,8 @@ int	pipex(t_list **cmd_arr, t_shell *shell)
 	if (!env)
 		return (1);
 	i = 0;
-	while (cmd_arr[i])
+	while (cmd_arr[i] && pipe(pipefd) != -1)
 	{
-		pipe(pipefd);
 		if (!cmd_arr[i + 1])
 			dup2(STDOUT_FILENO, pipefd[1]);
 		last_pid = exec_cmd(cmd_arr[i], pipefd, shell, env);
