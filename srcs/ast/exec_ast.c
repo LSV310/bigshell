@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:44:38 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/03 17:26:20 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/14 17:41:19 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@ bool	exec_ast(t_ast *ast, t_shell *shell)
 	if (!ast || ast->type == ND_NULL)
 		return (false);
 	if (ast->type == ND_CMD)
+	{
+		if (!expand_lst_token(ast->cmds, shell))
+		{
+			ft_fprintf(2, "Invalid expand !\n");
+			return (false);
+		}
 		return (!pipex(ast->cmds, shell));
+	}
 	else if (ast->type == ND_OR)
 		return (exec_ast(ast->left, shell) || exec_ast(ast->right, shell));
 	else if (ast->type == ND_AND)

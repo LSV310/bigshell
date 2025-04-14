@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:07:44 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 21:22:24 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:45:15 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	expand_lst_token(t_list **tks, t_shell *shell)
 	while (cur && cur->content)
 	{
 		token = cur->content;
-		if (token->type == ENDT)
+		if (token->type == ENDT || token->type == ANDT || token->type == ORT)
 			break ;
 		if (!switch_type_tk(&cur, tks, shell))
 			return (false);
