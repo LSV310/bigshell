@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:38:11 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/30 01:01:28 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:51:27 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ void	set_signals(void)
 {
 	signal(SIGINT, &handle);
 	signal(SIGQUIT, &handle);
-	signal(SIGPIPE, &handle);
+	signal(SIGPIPE, SIG_IGN);
 }
 
 void	child_signal(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	signal(SIGPIPE, SIG_DFL);
 }
