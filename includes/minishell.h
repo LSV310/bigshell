@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:32:24 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/09 15:36:51 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:44:09 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*toktype_to_string(t_token_type type);
 int		here_doc(char *delimiter, bool expand, t_shell *env);
 bool	token_heredoc(t_token *tok, t_shell *shell);
 void	close_heredocs(t_list *tks);
-bool	tokens_to_pipeline(t_list **tokens, t_arena *arena, t_ast *node);
+bool	tokens_to_pipeline(t_list **tokens, t_ast *node);
 bool	valid_pipeline(t_list *tks, bool after_pipe);
 
 #endif

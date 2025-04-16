@@ -6,7 +6,7 @@
 /*   By: tgallet <tgallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:20:14 by tgallet           #+#    #+#             */
-/*   Updated: 2025/03/24 00:23:13 by tgallet          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:37:10 by tgallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ struct s_ast
 	t_node_type	type;
 	t_ast		*left;
 	t_ast		*right;
-	t_list		**cmds;
+	t_list		*pipeline_start;
 };
 
 t_list	*str_to_name_tks(const char *src, t_arena *arena);
