@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:51:52 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:32 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/16 12:11:43 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_map	*get_env(t_map *env, const char *var, size_t len)
 	current = env;
 	while (current)
 	{
-		if (!ft_strncmp(current->key, var, max(len, ft_strlen(current->key))))
+		if (!ft_strncmp(current->key, var,
+				ft_max(len, ft_strlen(current->key))))
 		{
 			if (current->key[len] == 0)
 				return (current);

@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:54:10 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/01 15:58:49 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/16 12:09:42 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,69 @@ void	shift_elem_down(char **tab, char *elem);
 
 // maths
 double	q_rsqrt(double number);
-int		max(int a, int b);
-int		min(int a, int b);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
 
 // printf
+# define PRINTF_BUFF_SIZE 1024
+# define AVAILABLE_PRINTF_CONVERT "cspdiuxXf%"
+
+typedef enum printf_flags
+{
+	INVALID_FLAG = -1,
+	NO_FLAGS = 0,
+	LEFT_JUSTIFY = 1 << 0,
+	PAD_ZEROS = 1 << 1,
+	PRECISION = 1 << 2,
+	ALTERNATIVE_FORM = 1 << 3,
+	SHOW_SIGN = 1 << 4,
+	SPACE_POSITIVE = 1 << 5,
+	LONG_NUMBER = 1 << 6
+}	t_pflags;
+
+typedef struct s_printf
+{
+	va_list		ap;
+	char		*str;
+	char		buff[PRINTF_BUFF_SIZE];
+	size_t		buff_size;
+	size_t		buff_pos;
+	size_t		current;
+	size_t		str_len;
+	int			fd;
+	int			len;
+	t_pflags	flags;
+	int			padding;
+	int			precision;
+}	t_printf;
+
 int		ft_printf(const char *s, ...);
 int		ft_fprintf(int fd, const char *s, ...);
-int		ft_putchar_len_fd(int c, int fd);
-int		ft_putstr_len_fd(char *s, int fd);
-int		ft_putnbr_base_fd(unsigned int n, char *base, int base_len, int fd);
-int		ft_putnbr_base_len_fd(int n, char *base, int base_len, int fd);
-int		ft_putnbr_double_fd(double n, int accuracy, int fd);
-int		ft_printptr_fd(unsigned long long ptr, int fd);
-int		ft_putnbr_long_fd(long n, int fd);
+int		write_to_buff(t_printf *ft_print, char *to_write, size_t size);
+int		flush_printf(t_printf *ft_print);
+int		parse_flags(t_printf *ft_print, char *str, size_t current);
+void	start_conversion(t_printf *ft_print, char *str, va_list ap);
+void	write_char(t_printf *ft_print, int c);
+void	write_str(t_printf *ft_print, char *str);
+void	write_ptr(t_printf *ft_print, unsigned long long ptr);
+void	write_int(t_printf *ft_print, int n, char *base, int base_len);
+void	write_uint(t_printf *ft_print, unsigned int nb, char *base, int b_len);
+void	write_long(t_printf *ft_print, long n, char *base, int base_len);
+void	write_ulong(t_printf *ft_print, unsigned long nb, char *base, int len);
+void	write_double(t_printf *ft_print, double n);
+int		calc_str_size(t_printf *ft_print, char *str);
+int		calc_int_size(t_printf *ft_print, int n, int base_len);
+int		calc_uint_size(t_printf *ft_print, unsigned int nb, int base_len);
+int		calc_long_size(t_printf *ft_print, long nb, int base_len);
+int		calc_ulong_size(t_printf *ft_print, unsigned long nb, int base_len);
+int		calc_llong_size(t_printf *ft_print, unsigned long long ptr);
+int		calc_double_size(t_printf *ft_print, double n, int precision, bool dot);
+int		apply_numeric_flag(t_printf *ft_print, int len,
+			char *base, bool is_neg);
+int		write_padding(t_printf *ft_print, int padding, int c);
+int		write_sharp(t_printf *ft_print, char *base);
+int		write_sign(t_printf *ft_print, bool is_neg);
+int		write_null(t_printf *ft_print);
 
 // linked lists
 typedef struct s_list

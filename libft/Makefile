@@ -80,13 +80,19 @@ SRC			=	libc/ft_atoi.c				\
 				data/ft_maps.c				\
 				data/ft_maps2.c				\
 				data/ft_strstr_dlst.c		\
-				printf/ft_printf.c			\
+				printf/buffer.c				\
+				printf/calc_padding.c		\
+				printf/calc_padding2.c		\
+				printf/convertion.c			\
 				printf/ft_fprintf.c			\
-				printf/ft_printf_utils.c	\
-				printf/ft_printf_utils2.c	\
+				printf/ft_printf.c			\
+				printf/parse_flags.c		\
+				printf/write_converts.c		\
+				printf/write_converts2.c	\
+				printf/write_flags.c		\
 				readfile/get_next_line.c	\
-				maths/max.c					\
-				maths/min.c					\
+				maths/ft_max.c				\
+				maths/ft_min.c				\
 				maths/q_rsqrt.c				\
 				readline/ac_utils.c			\
 				readline/auto_complete.c	\

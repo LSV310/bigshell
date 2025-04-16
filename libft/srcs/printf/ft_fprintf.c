@@ -5,78 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 13:02:03 by agruet            #+#    #+#             */
-/*   Updated: 2025/01/22 11:08:11 by agruet           ###   ########.fr       */
+/*   Created: 2025/04/01 16:03:13 by agruet            #+#    #+#             */
+/*   Updated: 2025/04/10 18:08:25 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	print_normal_chars(const char *s, int *current, int fd)
+static void	init_struct(t_printf *ft_print, int fd, char *str)
 {
-	int	start;
-	int	len;
-
-	start = *current;
-	while (s[*current] && s[*current] != '%')
-		(*current)++;
-	len = *current - start;
-	write(fd, &s[start], len);
-	return (len);
+	ft_print->str = str;
+	ft_print->str_len = ft_strlen(ft_print->str);
+	ft_print->buff_size = PRINTF_BUFF_SIZE;
+	ft_print->buff_pos = 0;
+	ft_memset(ft_print->buff, 0, ft_print->buff_size);
+	ft_print->current = 0;
+	ft_print->fd = fd;
+	ft_print->len = 0;
+	ft_print->flags = NO_FLAGS;
+	ft_print->padding = 0;
+	ft_print->precision = 0;
 }
 
-static int	get_conversion(char c, va_list ap, int fd)
+int	ft_fprintf(int fd, const char *str, ...)
 {
-	if (c == 'c')
-		return (ft_putchar_len_fd(va_arg(ap, int), fd));
-	else if (c == 's')
-		return (ft_putstr_len_fd(va_arg(ap, char *), fd));
-	else if (c == 'p')
-		return (ft_printptr_fd(va_arg(ap, unsigned long long), fd));
-	else if (c == 'd' || c == 'i')
-		return (ft_putnbr_base_len_fd(va_arg(ap, int), BASE_10, 10, fd));
-	else if (c == 'u')
-		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_10, 10, fd));
-	else if (c == 'l')
-		return (ft_putnbr_long_fd(va_arg(ap, long), fd));
-	else if (c == 'x')
-		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_16L, 16, fd));
-	else if (c == 'X')
-		return (ft_putnbr_base_fd(va_arg(ap, unsigned int), BASE_16U, 16, fd));
-	else if (c == '%')
-		return (ft_putchar_len_fd('%', fd));
-	else if (c == 'f')
-		return (ft_putnbr_double_fd(va_arg(ap, double), 9, fd));
-	else if (c == 0)
-		return (0);
-	else
-		return (ft_putchar_len_fd('%', fd) + ft_putchar_len_fd(c, fd));
-}
+	t_printf	ft_print;
+	size_t		count;
 
-int	ft_fprintf(int fd, const char *s, ...)
-{
-	va_list	ap;
-	int		len;
-	int		current;
-
-	if (!s)
+	if (!str)
 		return (-1);
-	va_start(ap, s);
-	current = 0;
-	len = 0;
-	while (s[current])
+	init_struct(&ft_print, fd, (char *)str);
+	va_start(ft_print.ap, str);
+	while (ft_print.current < ft_print.str_len && ft_print.len >= 0)
 	{
-		if (s[current] == '%')
-		{
-			len += get_conversion(s[current + 1], ap, fd);
-			if (s[current + 1])
-				current += 2;
-			else
-				current += 1;
-		}
+		if (str[ft_print.current] == '%')
+			start_conversion(&ft_print, ft_print.str, ft_print.ap);
 		else
-			len += print_normal_chars(s, &current, fd);
+		{
+			count = ft_print.current;
+			while (count < ft_print.str_len && str[count] != '%')
+				count++;
+			write_to_buff(&ft_print, ft_print.str + ft_print.current,
+				count - ft_print.current);
+			ft_print.current = count;
+		}
 	}
-	va_end(ap);
-	return (len);
+	if (ft_print.len >= 0)
+		flush_printf(&ft_print);
+	va_end(ft_print.ap);
+	return (ft_print.len);
 }
