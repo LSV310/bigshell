@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 11:23:42 by agruet            #+#    #+#             */
-/*   Updated: 2025/04/17 14:34:05 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/17 17:18:31 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,7 @@ char	*get_expanded(t_list *lst, DIR *dir, char *str)
 
 	if (!lst)
 		return (free_wildcards(lst, dir), ft_strdup(str));
-	current = lst;
-	count = 0;
-	while (current)
-	{
-		count += ft_strlen(current->content) + 1;
-		current = current->next;
-	}
+	count = get_wc_expand_size(lst);
 	result = ft_calloc(count + 1, sizeof(char));
 	if (!result)
 		return (free_wildcards(lst, dir), NULL);
@@ -115,6 +109,7 @@ char	*get_expanded(t_list *lst, DIR *dir, char *str)
 		ft_strlcat(result, " ", ft_strlen(result) + 2);
 		current = current->next;
 	}
+	result[count - 1] = 0;
 	return (free_wildcards(lst, dir), result);
 }
 

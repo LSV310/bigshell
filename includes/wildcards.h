@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:46:20 by agruet            #+#    #+#             */
-/*   Updated: 2025/03/28 13:17:26 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/17 17:20:10 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef enum WILDCARD
 char	*get_wildcards(char *str, t_wildcard_type type, bool single_result);
 bool	type_corresponding(struct dirent *entry, t_wildcard_type type);
 void	free_wildcards(t_list *lst, DIR *dir);
+int		get_wc_expand_size(t_list *lst);
 
 #endif
