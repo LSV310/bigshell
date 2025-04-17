@@ -6,7 +6,7 @@
 /*   By: agruet <agruet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 05:12:16 by tgallet           #+#    #+#             */
-/*   Updated: 2025/04/11 16:02:55 by agruet           ###   ########.fr       */
+/*   Updated: 2025/04/17 13:50:39 by agruet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	stdin_to_pipe(int to_write, char *delim, bool expand, t_shell *shell)
 	}
 	if (!line && rl_params.quit_reason == RL_FINISHED)
 		ft_fprintf(2, "warning: here-document delimited by end-of-file \
-			(wanted '%s')\n", delim);
+(wanted '%s')\n", delim);
 	free(line);
 	ft_dlstclear(&history, &free_content);
 }
